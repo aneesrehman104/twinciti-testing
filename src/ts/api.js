@@ -2,7 +2,7 @@ import axios from "axios";
 import { AxiosInstance } from "axios";
 import { getCookie } from "cookies-next";
 
-export const backEndURLWithAuth: AxiosInstance = axios.create({
+export const backEndURLWithAuth  = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
   headers: {
     Authorization: `Bearer ${getCookie("accessToken")}`,
@@ -19,17 +19,17 @@ export const backEndURLWithoutAuth = axios.create({
   withCredentials: true,
 });
 
-export const postApiWithoutAuth = async (url: string, body: object) => {
+export const postApiWithoutAuth = async (url, body) => {
   try {
     const result = await backEndURLWithoutAuth.post(url, body);
     return result.data;
-  } catch (error: any) {
+  } catch (error) {
     return error.response.data;
   }
 };
 
-export const postApiWithAuth = async (url: string, body: any) => {
-  backEndURLWithAuth.interceptors.request.use((config: any) => {
+export const postApiWithAuth = async (url, body) => {
+  backEndURLWithAuth.interceptors.request.use((config) => {
     return config;
   });
   try {
@@ -39,12 +39,12 @@ export const postApiWithAuth = async (url: string, body: any) => {
       },
     });
     return result.data;
-  } catch (error: any) {
+  } catch (error) {
     return error.response.data;
   }
 };
-export const postApiWithAuthStream = async (url: string, body: any) => {
-  backEndURLWithAuth.interceptors.request.use((config: any) => {
+export const postApiWithAuthStream = async (url, body) => {
+  backEndURLWithAuth.interceptors.request.use((config) => {
     return config;
   });
   try {
@@ -55,24 +55,24 @@ export const postApiWithAuthStream = async (url: string, body: any) => {
       responseType: "stream",
     });
     return result.data;
-  } catch (error: any) {
+  } catch (error) {
     return error.response.data;
   }
 };
 
 // GET request without authentication
-export const getApiWithoutAuth = async (url: string) => {
+export const getApiWithoutAuth = async (url) => {
   try {
     const result = await backEndURLWithoutAuth.get(url);
     return result.data;
-  } catch (error: any) {
+  } catch (error) {
     return error.response.data;
   }
 };
 
 // GET request with authentication
-export const getApiWithAuth = async (url: string) => {
-  backEndURLWithAuth.interceptors.request.use((config: any) => {
+export const getApiWithAuth = async (url) => {
+  backEndURLWithAuth.interceptors.request.use((config) => {
     return config;
   });
   try {
@@ -82,24 +82,24 @@ export const getApiWithAuth = async (url: string) => {
       },
     });
     return result;
-  } catch (error: any) {
+  } catch (error) {
     return error.response;
   }
 };
 
 // DELETE request without authentication
-export const deleteApiWithoutAuth = async (url: string) => {
+export const deleteApiWithoutAuth = async (url) => {
   try {
     const result = await backEndURLWithoutAuth.delete(url);
     return result;
-  } catch (error: any) {
+  } catch (error) {
     return error.response.data;
   }
 };
 
 // DELETE request with authentication
-export const deleteApiWithAuth = async (url: string) => {
-  backEndURLWithAuth.interceptors.request.use((config: any) => {
+export const deleteApiWithAuth = async (url) => {
+  backEndURLWithAuth.interceptors.request.use((config) => {
     return config;
   });
   try {
@@ -109,23 +109,23 @@ export const deleteApiWithAuth = async (url: string) => {
       },
     });
     return result.data;
-  } catch (error: any) {
+  } catch (error) {
     return error.response.data;
   }
 };
 // PATCH request without authentication
-export const patchApiWithoutAuth = async (url: string, body: object) => {
+export const patchApiWithoutAuth = async (url, body) => {
   try {
     const result = await backEndURLWithoutAuth.patch(url, body);
     return result.data;
-  } catch (error: any) {
+  } catch (error) {
     return error.response.data;
   }
 };
 
 // PATCH request with authentication
-export const patchApiWithAuth = async (url: string, body: any) => {
-  backEndURLWithAuth.interceptors.request.use((config: any) => {
+export const patchApiWithAuth = async (url, body) => {
+  backEndURLWithAuth.interceptors.request.use((config) => {
     return config;
   });
   try {
@@ -135,23 +135,23 @@ export const patchApiWithAuth = async (url: string, body: any) => {
       },
     });
     return result.data;
-  } catch (error: any) {
+  } catch (error) {
     return error.response.data;
   }
 };
 // PUT request without authentication
-export const putApiWithoutAuth = async (url: string, body: object) => {
+export const putApiWithoutAuth = async (url, body) => {
   try {
     const result = await backEndURLWithoutAuth.put(url, body);
     return result;
-  } catch (error: any) {
+  } catch (error) {
     return error.response.data;
   }
 };
 
 // PUT request with authentication
-export const putApiWithAuth = async (url: string, body: any) => {
-  backEndURLWithAuth.interceptors.request.use((config: any) => {
+export const putApiWithAuth = async (url, body) => {
+  backEndURLWithAuth.interceptors.request.use((config) => {
     return config;
   });
   try {
@@ -161,7 +161,7 @@ export const putApiWithAuth = async (url: string, body: any) => {
       },
     });
     return result.data;
-  } catch (error: any) {
+  } catch (error) {
     return error.response.data;
   }
 };

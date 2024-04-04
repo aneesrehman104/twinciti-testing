@@ -1,6 +1,6 @@
 .navbarHeight {
   height: 88px;
-  background: rgba(25, 25, 32, 1);
+  background: black !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,9 +8,8 @@
 
 .btnGradient {
   background: linear-gradient(black, black) padding-box,
-    linear-gradient(45deg, slateblue, coral) border-box;
+  linear-gradient(94.25deg, #FF8473 3.46%, #B784FF 49.4%, #2EB0FB 97.06%) border-box;
   border: 1px solid transparent;
-  border-radius: 12px;
 }
 
 .btnGradientInner {
