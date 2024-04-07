@@ -1,0 +1,21 @@
+.menuStyleItem {
+  border-radius: 16px;
+  color: rgba(255, 255, 255, 1) !important;
+  font-weight: 600;
+  font-size: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: .5rem;
+}
+
+.menuStyle {
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    background: linear-gradient(180deg, #191920 0%, #1c1b21 100%) !important;
+    cursor: pointer;
+    padding: 0px .5rem;
+  }
+  

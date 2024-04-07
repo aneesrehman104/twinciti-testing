@@ -1,6 +1,6 @@
 .navbarHeight {
   height: 88px;
-  background: black !important;
+  background: #16151A !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,12 +24,13 @@
 
 }
 .topLeftSide {
-  max-width: 401px;
-  min-width: 380px;
+  width: auto;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  height: 48px;
+  height: auto;
   border-radius: 40px;
   display: flex;
+  padding: 5px;
+  gap: 5px;
   align-items: center;
 }
 .menuItemStyleAuthenticated {

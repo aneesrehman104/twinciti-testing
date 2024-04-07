@@ -12,16 +12,17 @@ const SiderComponent = ({
   onBreakpoint,
 }) => {
   return (
-    <Sider
-      collapsed={isCollapsed}
-      collapsedWidth="0"
-      onBreakpoint={onBreakpoint}
-      onCollapse={collapsedHandle}
-      style={{ background: "black" }}
-      width={"280px"}
-    >
-      {children}
-    </Sider>
+      <Sider
+          collapsed={isCollapsed}
+          collapsedWidth="0"
+          onBreakpoint={onBreakpoint}
+          onCollapse={collapsedHandle}
+          style={{ background: '#16151A' }}
+          width={'23%'}
+          // width={'280px'}
+      >
+          {children}
+      </Sider>
   );
 };
 

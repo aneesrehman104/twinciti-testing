@@ -33,34 +33,6 @@
 .inputStyle ::placeholder {
   color: rgba(255, 255, 255, 0.7) !important;
 }
-.menuStyle {
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  background: linear-gradient(180deg, #191920 0%, #1c1b21 100%) !important;
-  min-height: 64px;
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center; */
-  padding: 10px;
-  margin-top: 15px;
-  cursor: pointer;
-}
-.menuStyleItem {
-  border-radius: 16px;
-  /* border: 1px solid rgba(255, 255, 255, 0.2) !important; */
-  /* background: linear-gradient(180deg, #191920 0%, #1c1b21 100%) !important; */
-  color: rgba(255, 255, 255, 1) !important;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
-  /* height: 64px; */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* padding: 10px; */
-  /* margin-top: 15px; */
-  cursor: pointer;
-}
 
 .menuInnerStyle {
   display: flex;
@@ -71,4 +43,8 @@
   line-height: 16px;
   height: 45px;
   border-top: 0.5px solid rgba(255, 255, 255, 0.2);
+}
+
+
+.contentStyle {
 }
