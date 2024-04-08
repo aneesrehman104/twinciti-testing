@@ -9,26 +9,63 @@
 }
 
 .buttonPrimary {
-    background: linear-gradient(94.25deg, rgba(255, 132, 115, 0.92) 3.46%, rgba(183, 132, 255, 0.92) 49.4%, rgba(46, 176, 251, 0.92) 97.06%);
+    background: linear-gradient(
+        94.25deg,
+        rgba(255, 132, 115, 0.92) 3.46%,
+        rgba(183, 132, 255, 0.92) 49.4%,
+        rgba(46, 176, 251, 0.92) 97.06%
+    );
     border-radius: 24px;
+    width: 118px;
 }
 
 .buttonDark {
-    background: linear-gradient(360deg, rgba(255, 255, 255, 0.0001) 0%, rgba(255, 255, 255, 0.0372203) 100%);
+    background: linear-gradient(
+        360deg,
+        rgba(255, 255, 255, 0.0001) 0%,
+        rgba(255, 255, 255, 0.0372203) 100%
+    );
     border-radius: 24px;
-    border: 0.5px solid #FFFFFF33
+    border: 0.5px solid #ffffff33;
+    width: 127px;
 }
 
 .buttonSecondary {
     opacity: 0px;
-    background: #B784FF1A;
-    border: 0.5px solid #B784FF66;
-    color: #B784FF;
+    background: #b784ff1a;
+    border: 0.5px solid #b784ff66;
+    color: #b784ff;
+}
+.btnGradient {
+    background: linear-gradient(black, black) padding-box,
+        linear-gradient(94.25deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+            border-box;
+    border: 1px solid transparent;
+    border-radius: 24px;
 }
 
 .buttonDefault {
-    background: linear-gradient(94.25deg, rgba(255, 132, 115, 0.4) 3.46%, rgba(183, 132, 255, 0.4) 49.4%, rgba(46, 176, 251, 0.4) 97.06%);
+    background: linear-gradient(
+        94.25deg,
+        rgba(255, 132, 115, 0.4) 3.46%,
+        rgba(183, 132, 255, 0.4) 49.4%,
+        rgba(46, 176, 251, 0.4) 97.06%
+    );
     /* border: 0.5px solid; */
-    border-image-source: linear-gradient(94.25deg, #FF8473 3.46%, #B784FF 49.4%, #2EB0FB 97.06%);
+    border-image-source: linear-gradient(
+        94.25deg,
+        #ff8473 3.46%,
+        #b784ff 49.4%,
+        #2eb0fb 97.06%
+    );
     border-radius: 1rem;
+    height: 28px;
+}
+
+.buttonDefaultActive {
+    background: linear-gradient(180deg, #191920 0%, #1c1b21 100%);
+    border: 0.5px solid rgba(124, 225, 183, 1);
+    border-radius: 1rem;
+    height: 28px;
+    color: rgba(124, 225, 183, 1);
 }

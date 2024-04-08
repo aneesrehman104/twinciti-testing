@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './MenuButton.module.css';
 
 const convertToSpace = (string) => string.replace(/-/g, ' ');
 
-const MenuButton = ({ label, iconURL, isOpen, setIsOpen, categories }) => {
+const MenuButton = ({
+    label,
+    iconURL,
+    isOpen,
+    setIsOpen,
+    categories,
+    selectedCategory,
+    selectedCategoryId,
+}) => {
     return (
         <div className={styles.menuStyle}>
-            <div className={styles.menuStyleItem}>
+            <div
+                className={styles.menuStyleItem}
+                onClick={() => setIsOpen(label)}
+            >
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Image
                         alt="Icon"
@@ -17,7 +28,7 @@ const MenuButton = ({ label, iconURL, isOpen, setIsOpen, categories }) => {
                     />
                     <p style={{ textTransform: 'uppercase' }}>{label}</p>
                 </div>
-                <div onClick={() => setIsOpen(label)}>
+                <div>
                     <Image
                         alt="Icon"
                         height={16}
@@ -31,6 +42,7 @@ const MenuButton = ({ label, iconURL, isOpen, setIsOpen, categories }) => {
                 categories.length > 0 &&
                 categories.map((category, index) => (
                     <div
+                        key={index}
                         style={{
                             display: 'flex',
                             alignItems: 'center',
@@ -40,6 +52,7 @@ const MenuButton = ({ label, iconURL, isOpen, setIsOpen, categories }) => {
                                     ? '0px'
                                     : '10px',
                         }}
+                        onClick={() => selectedCategory(category)}
                     >
                         <div
                             style={{
@@ -52,12 +65,16 @@ const MenuButton = ({ label, iconURL, isOpen, setIsOpen, categories }) => {
                                 borderRadius: '10px 10px 0px 10px',
                                 width: '25%',
                                 marginTop: '-8px',
+                                background:
+                                    selectedCategoryId === category.label
+                                        ? 'url(/active-bg.svg)'
+                                        : 'transparent',
                             }}
                         >
                             <Image
                                 alt="/searchIcon.svg"
                                 height={24}
-                                src={category.iconUrl ?? '/searchIcon.svg'}
+                                src={'/modelImage.svg'}
                                 width={24}
                             />
                         </div>
@@ -71,6 +88,10 @@ const MenuButton = ({ label, iconURL, isOpen, setIsOpen, categories }) => {
                                 borderRadius: '0px 10px 10px 0px',
                                 width: '80%',
                                 textTransform: 'capitalize',
+                                background:
+                                    selectedCategoryId === category.label
+                                        ? 'url(/active-bg.svg)'
+                                        : 'transparent',
                             }}
                         >
                             {convertToSpace(category.label)}

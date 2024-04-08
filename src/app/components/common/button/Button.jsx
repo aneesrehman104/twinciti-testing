@@ -1,4 +1,5 @@
 import styles from './Button.module.css';
+import Image from 'next/image';
 
 const ButtonComponent = ({
     label,
@@ -7,7 +8,7 @@ const ButtonComponent = ({
     disabled,
     variant,
     showEllips = false,
-    height = '28px',
+    height = '32px',
 }) => {
     const defaultStyle =
         variant === 'primary'
@@ -16,35 +17,33 @@ const ButtonComponent = ({
             ? styles.buttonSecondary
             : variant === 'dark'
             ? styles.buttonDark
+            : variant === 'defaultActive'
+            ? styles.buttonDefaultActive
             : styles.buttonDefault;
     return (
-        <button
-            className={`${styles.buttonWrapper} ${defaultStyle}`}
-            onClick={onClick}
-            type={htmlType}
-            disabled={disabled}
-            title={label}
-            aria-label={label}
-            style={{ height }}
-        >
-            {showEllips && (
-                <svg
-                    width="6"
-                    height="6"
-                    viewBox="0 0 6 6"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <circle
-                        cx="3"
-                        cy="3"
-                        r="3"
-                        fill={variant === 'default' ? '#fff' : '#B784FF'}
+        <div className={variant === 'default' ? styles.btnGradient : null}>
+            <button
+                className={`${styles.buttonWrapper} ${defaultStyle}`}
+                onClick={onClick}
+                type={htmlType}
+                disabled={disabled}
+                title={label}
+                aria-label={label}
+                style={{ height }}
+            >
+                {showEllips ? <>&#x25cf;&ensp;</> : null}
+                {label}
+                {/* <sup>
+                    <Image
+                        src="/Z.svg"
+                        alt="model"
+                        width={15}
+                        height={15}
+                        style={{ marginTop: -25 }}
                     />
-                </svg>
-            )}
-            {label}
-        </button>
+                </sup> */}
+            </button>
+        </div>
     );
 };
 

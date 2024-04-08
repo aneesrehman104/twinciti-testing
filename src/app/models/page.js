@@ -1,11 +1,10 @@
-import React from 'react'
-
-const page = () => {
-  return (
-    <div>
-    model Hub
-    </div>
-  )
+'use client';
+import { Provider } from 'react-redux';
+import MainLayout from '../components/layoutComponents/mainLayout/mainLayout';
+export default function ModelHub() {
+    return (
+        // <Provider store={true}>
+        <MainLayout />
+        // </Provider>
+    );
 }
-
-export default page

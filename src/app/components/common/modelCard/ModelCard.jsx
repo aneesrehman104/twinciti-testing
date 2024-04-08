@@ -4,11 +4,24 @@ import styles from './ModelCard.module.css';
 
 import ButtonComponent from '../button/Button';
 
-const ModelCard = ({ active = false }) => {
+const ModelCard = ({
+    active = false,
+    modelName,
+    description,
+    defaultActive,
+    modified_task_name,
+    downloads,
+}) => {
+    const formatNumber = (num) => {
+        if (num < 1000) {
+            return num.toString();
+        } else if (num < 1e6) {
+            return `${(num / 1e3).toFixed(0)}k`;
+        }
+        return `${(num / 1e6).toFixed(1)}M`;
+    };
     return (
-        <div
-            className={active ? styles.cardWrapperGradient : styles.cardWrapper}
-        >
+        <div className={styles.cardWrapper}>
             <div className={styles.card}>
                 <div className={styles.cardHeader}>
                     <div className={styles.cardTitleImage}>
@@ -19,11 +32,15 @@ const ModelCard = ({ active = false }) => {
                             height={40}
                             className={styles.modelImage}
                         />
-                        <p>bert-base-arabic-camelbert-da-sentiment</p>
+                        <p>{modelName}</p>
                     </div>
                     <div className={styles.cardActions}>
                         <Image
-                            src="/3dicons.svg"
+                            src={
+                                active
+                                    ? '/selectedModel.svg'
+                                    : '/unselectedModel.svg'
+                            }
                             alt="model"
                             width={40}
                             height={40}
@@ -32,13 +49,7 @@ const ModelCard = ({ active = false }) => {
                     </div>
                 </div>
                 <div className={styles.cardBody}>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Facilis harum dignissimos cumque necessitatibus
-                        similique aperiam, animi ipsum distinctio doloremque
-                        voluptates voluptatum neque possimus, nesciunt iste
-                        consectetur atque architecto, iure sint?
-                    </p>
+                    <p>{description}</p>
                     <div className={styles.cardInfoWrapper}>
                         <p className={styles.cardTextInfoWrapper}>
                             <Image
@@ -47,7 +58,7 @@ const ModelCard = ({ active = false }) => {
                                 width={16}
                                 alt="message-text-icon"
                             />
-                            <span>Text Generation</span>
+                            <span>{modified_task_name}</span>
                         </p>
                         <p className={styles.cardTextInfoWrapper}>
                             <Image
@@ -56,19 +67,31 @@ const ModelCard = ({ active = false }) => {
                                 width={16}
                                 alt="download-icon"
                             />
-                            <span>122</span>
+                            <span>{formatNumber(downloads)}</span>
                         </p>
                     </div>
                 </div>
                 <div
                     style={{
-                        background: 'url(/active-bg.svg)',
+                        background: active
+                            ? 'url(/active-bg.svg)'
+                            : 'transparent',
                         height: '100%',
                         border: '.5px solid #ffffff00 ',
                     }}
                 >
                     <div className={styles.cardFooter}>
-                        <ButtonComponent label="Active" variant="secondary" />
+                        <ButtonComponent
+                            label="Active"
+                            variant={
+                                active
+                                    ? 'default'
+                                    : defaultActive
+                                    ? 'defaultActive'
+                                    : 'secondary'
+                            }
+                            showEllips
+                        />
                     </div>
                 </div>
             </div>
