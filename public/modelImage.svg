@@ -1,0 +1,16 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="24" height="24" rx="6" fill="url(#paint0_linear_228_9264)"/>
+<g opacity="0.7">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.6667 9.33325V14.6666H9.33337V9.33325H14.6667Z" stroke="white" stroke-opacity="0.7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.44666 17.3268C5.71999 18.1068 6.46667 18.6667 7.33333 18.6667C8.43333 18.6667 9.33333 17.7667 9.33333 16.6667V14.6667H7.33333" stroke="white" stroke-opacity="0.7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.33337 9.33325V7.33325C9.33337 6.23325 8.43337 5.33325 7.33337 5.33325C6.23337 5.33325 5.33337 6.23325 5.33337 7.33325C5.33337 8.43325 6.23337 9.33325 7.33337 9.33325H9.33337Z" stroke="white" stroke-opacity="0.7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16.6666 9.33325C17.7666 9.33325 18.6666 8.43325 18.6666 7.33325C18.6666 6.23325 17.7666 5.33325 16.6666 5.33325C15.5666 5.33325 14.6666 6.23325 14.6666 7.33325V9.33325H16.6666Z" stroke="white" stroke-opacity="0.7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.6666 16.6667C18.6666 15.5667 17.7666 14.6667 16.6666 14.6667H14.6666V16.6667C14.6666 17.7667 15.5666 18.6667 16.6666 18.6667C17.7666 18.6667 18.6666 17.7667 18.6666 16.6667Z" stroke="white" stroke-opacity="0.7" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_228_9264" x1="26.1509" y1="24" x2="26.1509" y2="0" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.0376992"/>
+<stop offset="0.999291" stop-color="white" stop-opacity="0.0995914"/>
+</linearGradient>
+</defs>
+</svg>

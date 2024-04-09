@@ -1,0 +1,60 @@
+.navbarHeight {
+  height: 88px;
+  background: #16151A !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btnGradient {
+  background: linear-gradient(black, black) padding-box,
+  linear-gradient(94.25deg, #FF8473 3.46%, #B784FF 49.4%, #2EB0FB 97.06%) border-box;
+  border: 1px solid transparent;
+}
+
+.btnGradientInner {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+      360deg,
+      rgba(255, 255, 255, 0.0001) 0%,
+      rgba(255, 255, 255, 0.198579) 100%
+    ),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+
+}
+.topLeftSide {
+  width: auto;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  height: auto;
+  border-radius: 40px;
+  display: flex;
+  padding: 5px;
+  gap: 5px;
+  align-items: center;
+}
+.menuItemStyleAuthenticated {
+  height: 50px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: var(--font-poppins) !important;
+
+  color: white !important;
+}
+.menuStyleAuthenticated {
+  background-color: rgba(49, 51, 56, 1) !important;
+  border: 1px solid rgba(73, 73, 73, 1);
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+.dividerAuthenticated {
+  border: 1px solid rgba(63, 65, 71, 1);
+  background: rgba(63, 65, 71, 1);
+  display: flex;
+  justify-content: center;
+  margin: 0px;
+}
