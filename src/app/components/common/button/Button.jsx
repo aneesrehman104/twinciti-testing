@@ -28,20 +28,10 @@ const ButtonComponent = ({
                 type={htmlType}
                 disabled={disabled}
                 title={label}
-                aria-label={label}
                 style={{ height }}
             >
                 {showEllips ? <>&#x25cf;&ensp;</> : null}
                 {label}
-                {/* <sup>
-                    <Image
-                        src="/Z.svg"
-                        alt="model"
-                        width={15}
-                        height={15}
-                        style={{ marginTop: -25 }}
-                    />
-                </sup> */}
             </button>
         </div>
     );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Input, Spin, Form } from 'antd';
+import { Row, Col, Input, Spin, Form, Badge } from 'antd';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -15,7 +15,7 @@ import { URLs } from '../../utils/apiUrl';
 
 const ModelHub = () => {
     const searchParams = useSearchParams();
-
+    const [selectedModels, setSelectedModels] = useState([]);
     const [modelsList, setModelsList] = useState({ records: [], total: 0 });
     const [showSpinner, setShowSpinner] = useState(false);
     const [filterData, setFilterData] = useState('');
@@ -46,6 +46,17 @@ const ModelHub = () => {
             setShowSpinner(false);
         }
     };
+
+    const selectedModelsHandler = (model, index) => {
+        const data = selectedModels.find((item) => item._id === model._id);
+        setSelectedModels((pre) => {
+            if (data && data._id === model._id) {
+                return pre.filter((item) => item._id !== data._id);
+            } else {
+                return [...pre, model];
+            }
+        });
+    };
     return (
         <div>
             <Row gutter={[12, 12]}>
@@ -62,11 +73,13 @@ const ModelHub = () => {
                             gap: '1rem',
                         }}
                     >
-                        <ButtonComponent
-                            variant="dark"
-                            height="48px"
-                            label="Selected Model"
-                        />
+                        <Badge count={selectedModels.length}>
+                            <ButtonComponent
+                                variant="dark"
+                                height="48px"
+                                label="Selected Model"
+                            />
+                        </Badge>
                         <ButtonComponent
                             variant="primary"
                             height="48px"
@@ -133,23 +146,36 @@ const ModelHub = () => {
                         No data Found
                     </h2>
                 ) : (
-                    modelsList?.records?.map((category, index) => (
-                        <Col
-                            span={24}
-                            lg={8}
-                            key={category._id}
-                            {...console.log(category)}
-                        >
+                    modelsList?.records?.map((model, index) => (
+                        <Col span={24} lg={8} key={model._id}>
                             <ModelCard
-                                // active={category.isUsed}
-                                iconUrl={category.iconUrl}
-                                modelName={category.model_name}
-                                description={category.readme_content}
-                                taskName={category.modified_task_name}
-                                defaultActive={category.isUsed}
-                                modified_task_name={category.modified_task_name}
-                                _id={category._id}
-                                downloads={category.downloads}
+                                active={
+                                    selectedModels.findIndex(
+                                        (item) => item._id === model._id,
+                                    ) !== -1
+                                }
+                                iconUrl={model.iconUrl}
+                                modelName={model.model_name}
+                                description={model.readme_content}
+                                taskName={model.modified_task_name}
+                                defaultActive={model.isUsed}
+                                modified_task_name={model.modified_task_name}
+                                _id={model._id}
+                                downloads={model.downloads}
+                                dorpdownOption={[
+                                    {
+                                        key: 0,
+                                        label: 'Add to new chat',
+                                        onClick: () =>
+                                            selectedModelsHandler(model, index),
+                                    },
+                                    {
+                                        key: 1,
+                                        label: 'Add to existing chat',
+                                        onClick: () =>
+                                            selectedModelsHandler(model, index),
+                                    },
+                                ]}
                             />
                         </Col>
                     ))
