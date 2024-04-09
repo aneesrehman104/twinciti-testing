@@ -3,7 +3,7 @@ import { Dropdown, Menu } from 'antd';
 import styles from './DropdownMenu.module.css';
 
 const DropdownMenu = ({
-    children,
+    innerData,
     items = [],
     placement = 'bottomRight',
     onOpenChange,
@@ -32,7 +32,7 @@ const DropdownMenu = ({
             trigger={[trigger]}
             open={open}
         >
-            {children}
+            {innerData}
         </Dropdown>
     );
 };

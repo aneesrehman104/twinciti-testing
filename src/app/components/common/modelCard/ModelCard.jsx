@@ -50,7 +50,7 @@ const ModelCard = ({
                                 onOpenChange={openHandler}
                                 open={open}
                                 items={dorpdownOption}
-                                children={
+                                innerData={
                                     <Image
                                         src={
                                             active
