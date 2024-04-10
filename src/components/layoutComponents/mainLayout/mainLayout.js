@@ -5,11 +5,11 @@ import { Layout, Input, Row, Col, Skeleton } from 'antd';
 import SiderComponent from '../sidebarLayout/sidebarLayout';
 import Image from 'next/image';
 import NavbarLayout from '../navbarLayout/navbarLayout';
-import ModelHub from '../../../../screens/modelHub/ModelHub';
+import ModelHub from '../../../screens/modelHub/ModelHub';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useDebounce } from 'use-debounce';
-import { getApiWithoutAuth } from '../../../../utils/api';
-import { URLs } from '../../../../utils/apiUrl';
+import { getApiWithoutAuth } from '../../../utils/api';
+import { URLs } from '../../../utils/apiUrl';
 
 import styles from './mainLayoutStyle.module.css';
 
@@ -28,7 +28,7 @@ const layoutStyle = {
     minHeight: '100vh',
 };
 
-const MainLayout = () => {
+const MainLayout = ({ children }) => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [showSpinnerCategory, setShowSpinnerCategory] = useState(false);
@@ -178,9 +178,7 @@ const MainLayout = () => {
             </SiderComponent>
             <Layout>
                 <NavbarLayout />
-                <ContentLayout>
-                    <ModelHub />
-                </ContentLayout>
+                <ContentLayout>{children}</ContentLayout>
             </Layout>
         </Layout>
     );
