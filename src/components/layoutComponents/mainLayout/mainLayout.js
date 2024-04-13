@@ -5,7 +5,6 @@ import { Layout, Input, Row, Col, Skeleton } from 'antd';
 import SiderComponent from '../sidebarLayout/sidebarLayout';
 import Image from 'next/image';
 import NavbarLayout from '../navbarLayout/navbarLayout';
-import ModelHub from '../../../screens/modelHub/ModelHub';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useDebounce } from 'use-debounce';
 import { getApiWithoutAuth } from '../../../utils/api';

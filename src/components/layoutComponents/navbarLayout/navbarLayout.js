@@ -1,9 +1,9 @@
-"use client";
-import React, { useState } from "react";
-import Image from "next/image";
-import { Avatar, Divider, Dropdown, Layout, Menu } from "antd";
-import { useRouter } from "next/navigation";
-import styles from "./navbarStyle.module.css";
+'use client';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { Avatar, Divider, Dropdown, Layout, Menu } from 'antd';
+import { usePathname, useRouter } from 'next/navigation';
+import styles from './navbarStyle.module.css';
 const { Header } = Layout;
 
 const navbarArray = [
@@ -29,8 +29,20 @@ const navbarArray = [
 
 const NavbarLayout = () => {
     const router = useRouter();
-    const [selectedNav, setSelectedNav] = useState('models');
+    const pathname = usePathname();
+    const [selectedNav, setSelectedNav] = useState(pathname);
     const [isLogin, setIsLogin] = useState(true);
+
+    useEffect(() => {
+        const currentRoute = pathname;
+        const matchedNavItem = navbarArray.find(
+            (item) => item.route === currentRoute,
+        );
+        if (matchedNavItem) {
+            setSelectedNav(matchedNavItem.key);
+        }
+    }, [pathname]);
+
     const menu = (
         <Menu className={styles.menuStyleAuthenticated}>
             <Menu.Item
@@ -66,7 +78,9 @@ const NavbarLayout = () => {
                                     ? styles.btnGradient
                                     : ''
                             }
-                            onClick={() => setSelectedNav(item.key)}
+                            onClick={() => {
+                                router.push(item.route);
+                            }}
                             style={{
                                 height: 40,
                                 width: 138,
