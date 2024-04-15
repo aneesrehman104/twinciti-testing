@@ -10,31 +10,12 @@
     height: 200px;
     cursor: pointer;
 }
-
-.cardWrapperGradient {
-    position: relative;
-}
-
-.cardWrapperGradient::before {
-    content: '';
-    width: 100%;
-    height: 200px;
-    position: absolute;
-    inset: 0;
-    bottom: 0px;
-    top: -12px;
+.btnGradient {
+    background: linear-gradient(black, black) padding-box,
+        linear-gradient(94.25deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+            border-box;
+    border: 1px solid transparent;
     border-radius: 16px;
-    padding: 1px;
-    background: linear-gradient(
-        94.25deg,
-        #ff8473 3.46%,
-        #b784ff 49.4%,
-        #2eb0fb 97.06%
-    );
-    -webkit-mask: linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
 }
 
 .card {

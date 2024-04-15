@@ -13,6 +13,7 @@ const ModelCard = ({
     downloads,
     dorpdownOption,
     selectedModelsHandler,
+    showRemove,
 }) => {
     const [open, setOpen] = React.useState(false);
 
@@ -28,12 +29,8 @@ const ModelCard = ({
     const openHandler = () => setOpen(!open);
 
     return (
-        <>
-            <div
-                className={
-                    !active ? styles.cardWrapper : styles.cardWrapperGradient
-                }
-            >
+        <div className={active ? styles.btnGradient : null}>
+            <div className={styles.cardWrapper}>
                 <div className={styles.card}>
                     <div className={styles.cardHeader}>
                         <div className={styles.cardTitleImage}>
@@ -49,31 +46,47 @@ const ModelCard = ({
                         <div className={styles.cardActions}>
                             <DropdownMenu
                                 onOpenChange={openHandler}
-                                open={open}
-                                items={[
-                                    {
-                                        key: 0,
-                                        label: 'Add to new chat',
-                                        onClick: () => {
-                                            selectedModelsHandler(
-                                                dorpdownOption.model,
-                                                dorpdownOption.index,
-                                            );
-                                            setOpen(false);
-                                        },
-                                    },
-                                    {
-                                        key: 1,
-                                        label: 'Add to existing chat',
-                                        onClick: () => {
-                                            selectedModelsHandler(
-                                                dorpdownOption.model,
-                                                dorpdownOption.index,
-                                            );
-                                            setOpen(false);
-                                        },
-                                    },
-                                ]}
+                                open={showRemove ? open : active ? false : open}
+                                items={
+                                    showRemove
+                                        ? [
+                                              {
+                                                  key: 0,
+                                                  label: 'Remove',
+                                                  onClick: () => {
+                                                      selectedModelsHandler(
+                                                          dorpdownOption.model,
+                                                          dorpdownOption.index,
+                                                      );
+                                                      setOpen(false);
+                                                  },
+                                              },
+                                          ]
+                                        : [
+                                              {
+                                                  key: 0,
+                                                  label: 'Add to new chat',
+                                                  onClick: () => {
+                                                      selectedModelsHandler(
+                                                          dorpdownOption.model,
+                                                          dorpdownOption.index,
+                                                      );
+                                                      setOpen(false);
+                                                  },
+                                              },
+                                              {
+                                                  key: 1,
+                                                  label: 'Add to existing chat',
+                                                  onClick: () => {
+                                                      selectedModelsHandler(
+                                                          dorpdownOption.model,
+                                                          dorpdownOption.index,
+                                                      );
+                                                      setOpen(false);
+                                                  },
+                                              },
+                                          ]
+                                }
                                 innerData={
                                     <Image
                                         src={
@@ -84,7 +97,7 @@ const ModelCard = ({
                                         alt="model"
                                         width={40}
                                         height={40}
-                                        onClick={openHandler}
+                                        // onClick={openHandler}
                                         className={styles.modelImage}
                                     />
                                 }
@@ -139,7 +152,7 @@ const ModelCard = ({
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

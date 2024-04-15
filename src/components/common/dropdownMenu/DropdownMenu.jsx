@@ -10,6 +10,7 @@ const DropdownMenu = ({
     open,
     trigger = 'click',
 }) => {
+    console.log('===open', open);
     const menu = (
         <Menu className={styles.menuStyleAuthenticated}>
             {items.map((item, index) => (

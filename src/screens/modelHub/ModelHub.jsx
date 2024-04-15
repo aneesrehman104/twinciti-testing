@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Input, Spin, Form, Badge, Modal, Pagination } from 'antd';
+import {
+    Row,
+    Col,
+    Input,
+    Spin,
+    Form,
+    Badge,
+    Modal,
+    Pagination,
+    message,
+} from 'antd';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -80,14 +90,22 @@ const ModelHub = () => {
     };
 
     const selectedModelsHandler = (model, index) => {
-        const data = selectedModels.find((item) => item._id === model._id);
-        setSelectedModels((pre) => {
-            if (data && data._id === model._id) {
-                return pre.filter((item) => item._id !== data._id);
-            } else {
-                return [...pre, model];
-            }
-        });
+        console.log('======selectedModels', selectedModels, '====', model);
+        if (
+            selectedModels.length > 0 &&
+            selectedModels[0]?.pipeline_tag !== model.pipeline_tag
+        ) {
+            message.info('Select same Category ');
+        } else {
+            const data = selectedModels.find((item) => item._id === model._id);
+            setSelectedModels((pre) => {
+                if (data && data._id === model._id) {
+                    return pre.filter((item) => item._id !== data._id);
+                } else {
+                    return [...pre, model];
+                }
+            });
+        }
     };
     return (
         <>
@@ -264,6 +282,7 @@ const ModelHub = () => {
                                         selectedModelsHandler={
                                             selectedModelsHandler
                                         }
+                                        showRemove
                                     />
                                 </Col>
                             ))}

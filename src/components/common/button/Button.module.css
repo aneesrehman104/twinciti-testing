@@ -17,6 +17,7 @@
     );
     border-radius: 24px;
     width: 118px;
+    cursor: pointer;
 }
 
 .buttonDark {
@@ -28,6 +29,7 @@
     border-radius: 24px;
     border: 0.5px solid #ffffff33;
     width: 127px;
+    cursor: pointer;
 }
 
 .buttonSecondary {
@@ -35,6 +37,7 @@
     background: #b784ff1a;
     border: 0.5px solid #b784ff66;
     color: #b784ff;
+    cursor: pointer;
 }
 .btnGradient {
     background: linear-gradient(black, black) padding-box,
@@ -42,6 +45,7 @@
             border-box;
     border: 1px solid transparent;
     border-radius: 24px;
+    cursor: pointer;
 }
 
 .buttonDefault {
@@ -51,7 +55,6 @@
         rgba(183, 132, 255, 0.4) 49.4%,
         rgba(46, 176, 251, 0.4) 97.06%
     );
-    /* border: 0.5px solid; */
     border-image-source: linear-gradient(
         94.25deg,
         #ff8473 3.46%,
@@ -60,6 +63,7 @@
     );
     border-radius: 1rem;
     height: 28px;
+    cursor: pointer;
 }
 
 .buttonDefaultActive {
@@ -68,4 +72,5 @@
     border-radius: 1rem;
     height: 28px;
     color: rgba(124, 225, 183, 1);
+    cursor: pointer;
 }
