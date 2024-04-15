@@ -112,3 +112,59 @@ a {
 .ant-layout-header {
     padding: 0px 0px;
 }
+
+.ant-modal .ant-modal-content {
+    background: linear-gradient(180deg, #191920 0%, #1c1b21 100%) !important;
+    background-color: linear-gradient(
+        180deg,
+        #191920 0%,
+        #1c1b21 100%
+    ) !important;
+    color: white !important;
+}
+.ant-modal-header {
+    background: linear-gradient(180deg, #191920 0%, #1c1b21 100%) !important;
+    background-color: linear-gradient(
+        180deg,
+        #191920 0%,
+        #1c1b21 100%
+    ) !important;
+}
+.ant-modal-title {
+    color: white !important;
+}
+.ant-modal-close {
+    color: white !important;
+}
+
+.ant-pagination .ant-pagination-item {
+    background: transparent !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+.ant-pagination .ant-pagination-item a {
+    color: white !important;
+}
+.ant-pagination .ant-pagination-item-active a {
+    color: white !important;
+    background: linear-gradient(
+        94.25deg,
+        rgba(255, 132, 115, 0.92) 3.46%,
+        rgba(183, 132, 255, 0.92) 49.4%,
+        rgba(46, 176, 251, 0.92) 97.06%
+    ) !important;
+}
+.ant-pagination
+    .ant-pagination-jump-prev
+    .ant-pagination-item-container
+    .ant-pagination-item-ellipsis,
+.ant-pagination
+    .ant-pagination-jump-next
+    .ant-pagination-item-container
+    .ant-pagination-item-ellipsis {
+    color: white !important;
+}
+.ant-pagination .ant-pagination-prev .ant-pagination-item-link {
+    color: white !important;
+    background: transparent !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}

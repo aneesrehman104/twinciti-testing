@@ -12,6 +12,7 @@ const ModelCard = ({
     modified_task_name,
     downloads,
     dorpdownOption,
+    selectedModelsHandler,
 }) => {
     const [open, setOpen] = React.useState(false);
 
@@ -49,7 +50,30 @@ const ModelCard = ({
                             <DropdownMenu
                                 onOpenChange={openHandler}
                                 open={open}
-                                items={dorpdownOption}
+                                items={[
+                                    {
+                                        key: 0,
+                                        label: 'Add to new chat',
+                                        onClick: () => {
+                                            selectedModelsHandler(
+                                                dorpdownOption.model,
+                                                dorpdownOption.index,
+                                            );
+                                            setOpen(false);
+                                        },
+                                    },
+                                    {
+                                        key: 1,
+                                        label: 'Add to existing chat',
+                                        onClick: () => {
+                                            selectedModelsHandler(
+                                                dorpdownOption.model,
+                                                dorpdownOption.index,
+                                            );
+                                            setOpen(false);
+                                        },
+                                    },
+                                ]}
                                 innerData={
                                     <Image
                                         src={

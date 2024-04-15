@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Input, Spin, Form, Badge } from 'antd';
+import { Row, Col, Input, Spin, Form, Badge, Modal, Pagination } from 'antd';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useDebounce } from 'use-debounce';
+import { CloseCircleOutlined } from '@ant-design/icons';
 
 const ModelCard = dynamic(() =>
     import('../../components/common/modelCard/ModelCard'),
@@ -16,10 +17,36 @@ import { URLs } from '../../utils/apiUrl';
 const ModelHub = () => {
     const searchParams = useSearchParams();
     const [selectedModels, setSelectedModels] = useState([]);
+    const [showSelectedModal, setShowSelectedModal] = useState(false);
     const [modelsList, setModelsList] = useState({ records: [], total: 0 });
     const [showSpinner, setShowSpinner] = useState(false);
     const [filterData, setFilterData] = useState('');
     const [filterDataSearch] = useDebounce(filterData, 600);
+    const [currentPageData, setCurrentPageData] = useState({});
+
+    const [current, setCurrent] = useState(3);
+    const onChange = async (page) => {
+        console.log(page);
+        setCurrent(page);
+        setCurrentPageData({ ...currentPageData, page: page });
+        setShowSpinner(true);
+        const searchParams1 = new URLSearchParams(window.location.search);
+        const category = searchParams1.get('category');
+
+        const response = await getApiWithoutAuth(
+            `${URLs.ApiGetModel}?q=${filterData}&filter=${
+                category !== null ? category : ''
+            }&page=${page}`,
+        );
+        console.log('=============myres', response);
+        if (response.success) {
+            setModelsList(response.data);
+            setCurrentPageData(response.data);
+            setShowSpinner(false);
+        } else {
+            setShowSpinner(false);
+        }
+    };
     const checkCategory = () => {
         const searchParams1 = new URLSearchParams(window.location.search);
         const category = searchParams1.get('category');
@@ -29,9 +56,13 @@ const ModelHub = () => {
             getModelsById('');
         }
     };
+
     useEffect(() => {
         checkCategory();
     }, [searchParams, filterDataSearch]);
+    useEffect(() => {
+        console.log('=============selectedModels', selectedModels);
+    }, [selectedModels]);
 
     const getModelsById = async (selectedCategoryItem) => {
         setShowSpinner(true);
@@ -41,6 +72,7 @@ const ModelHub = () => {
         console.log('=============myres', response);
         if (response.success) {
             setModelsList(response.data);
+            setCurrentPageData(response.data);
             setShowSpinner(false);
         } else {
             setShowSpinner(false);
@@ -58,7 +90,7 @@ const ModelHub = () => {
         });
     };
     return (
-        <div>
+        <>
             <Row gutter={[12, 12]}>
                 <Col span={16}>
                     <h1 className={styles.modelHubTitle}>
@@ -78,6 +110,7 @@ const ModelHub = () => {
                                 variant="dark"
                                 height="48px"
                                 label="Selected Model"
+                                onClick={() => setShowSelectedModal(true)}
                             />
                         </Badge>
                         <ButtonComponent
@@ -118,7 +151,21 @@ const ModelHub = () => {
                             display: 'flex',
                             justifyContent: 'flex-end',
                         }}
-                    ></div>
+                    >
+                        <Pagination
+                            style={{ color: 'red' }}
+                            current={currentPageData.page}
+                            onChange={onChange}
+                            total={currentPageData.total}
+                            defaultPageSize={20}
+                            // showTotal={(total, range) =>
+                            //     `${range[0]}-${range[1]} of ${total} items`
+                            // }
+                            showSizeChanger={false}
+                            pageSizeOptions={[20]}
+                            pageSize={20}
+                        />
+                    </div>
                 </Col>
                 {showSpinner ? (
                     <div
@@ -146,42 +193,85 @@ const ModelHub = () => {
                         No data Found
                     </h2>
                 ) : (
-                    modelsList?.records?.map((model, index) => (
-                        <Col span={24} lg={8} key={model._id}>
-                            <ModelCard
-                                active={
-                                    selectedModels.findIndex(
-                                        (item) => item._id === model._id,
-                                    ) !== -1
-                                }
-                                iconUrl={model.iconUrl}
-                                modelName={model.model_name}
-                                description={model.readme_content}
-                                taskName={model.modified_task_name}
-                                defaultActive={model.isUsed}
-                                modified_task_name={model.modified_task_name}
-                                _id={model._id}
-                                downloads={model.downloads}
-                                dorpdownOption={[
-                                    {
-                                        key: 0,
-                                        label: 'Add to new chat',
-                                        onClick: () =>
-                                            selectedModelsHandler(model, index),
-                                    },
-                                    {
-                                        key: 1,
-                                        label: 'Add to existing chat',
-                                        onClick: () =>
-                                            selectedModelsHandler(model, index),
-                                    },
-                                ]}
-                            />
-                        </Col>
-                    ))
+                    <Row gutter={[12, 12]}>
+                        {modelsList?.records?.map((model, index) => (
+                            <Col span={24} lg={8} key={model._id}>
+                                <ModelCard
+                                    active={
+                                        selectedModels.findIndex(
+                                            (item) => item._id === model._id,
+                                        ) !== -1
+                                    }
+                                    iconUrl={model.iconUrl}
+                                    modelName={model.model_name}
+                                    description={model.readme_content}
+                                    taskName={model.modified_task_name}
+                                    defaultActive={model.isUsed}
+                                    modified_task_name={
+                                        model.modified_task_name
+                                    }
+                                    _id={model._id}
+                                    downloads={model.downloads}
+                                    dorpdownOption={{ model, index }}
+                                    selectedModelsHandler={
+                                        selectedModelsHandler
+                                    }
+                                />
+                            </Col>
+                        ))}
+                    </Row>
                 )}
             </Row>
-        </div>
+            <Modal
+                onCancel={() => setShowSelectedModal(false)}
+                title={'Selected Models'}
+                open={showSelectedModal}
+                width={700}
+                closeIcon={<CloseCircleOutlined />}
+                footer={null}
+            >
+                <Row gutter={[24, 10]}>
+                    {selectedModels?.length === 0 ? (
+                        <h2
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                height: '50vh',
+                                width: '100%',
+                            }}
+                            className={styles.modelHubTitle}
+                        >
+                            You have not selected any model.
+                        </h2>
+                    ) : (
+                        <Row gutter={[24, 10]}>
+                            {selectedModels?.map((model, index) => (
+                                <Col span={10} key={model._id}>
+                                    <ModelCard
+                                        active={true}
+                                        iconUrl={model.iconUrl}
+                                        modelName={model.model_name}
+                                        description={model.readme_content}
+                                        taskName={model.modified_task_name}
+                                        defaultActive={model.isUsed}
+                                        modified_task_name={
+                                            model.modified_task_name
+                                        }
+                                        _id={model._id}
+                                        downloads={model.downloads}
+                                        dorpdownOption={{ model, index }}
+                                        selectedModelsHandler={
+                                            selectedModelsHandler
+                                        }
+                                    />
+                                </Col>
+                            ))}
+                        </Row>
+                    )}
+                </Row>
+            </Modal>
+        </>
     );
 };
 
