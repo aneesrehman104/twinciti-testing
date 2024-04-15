@@ -6,10 +6,10 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useDebounce } from 'use-debounce';
 
 const ModelCard = dynamic(() =>
-    import('../../app/components/common/modelCard/ModelCard'),
+    import('../../components/common/modelCard/ModelCard'),
 );
 import styles from './ModelHub.module.css';
-import ButtonComponent from '../../app/components/common/button/Button';
+import ButtonComponent from '../../components/common/button/Button';
 import { getApiWithoutAuth } from '../../utils/api';
 import { URLs } from '../../utils/apiUrl';
 

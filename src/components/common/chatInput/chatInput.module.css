@@ -1,0 +1,25 @@
+.inputFieldMention {
+  font-size: 12px;
+  font-family: var(--font-poppins) !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24.167px;
+  color: #c4c4c4;
+  height: 50px;
+  border-radius: 8px;
+  border: 1px solid #3f4147;
+  margin-top: 4px;
+  background: rgba(43, 45, 49, 1) !important;
+  display: flex;
+  align-items: flex-start !important;
+  height: auto;
+  max-height: 300px;
+  padding: 0 10px;
+  width: 100%;
+  line-break: anywhere;
+}
+.inputFieldMention:hover
+  .inputFieldMention:focus
+  .inputFieldMention:focus-within {
+  border: none !important;
+}
