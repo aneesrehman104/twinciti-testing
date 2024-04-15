@@ -1,0 +1,18 @@
+.menuStyleAuthenticated {
+    background-color: rgb(30, 32, 35) !important;
+    border: 1px solid rgba(73, 73, 73, 1);
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.menuItemStyleAuthenticated {
+    margin: 0.3rem;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: var(--font-poppins) !important;
+    cursor: pointer;
+    color: white !important;
+}
