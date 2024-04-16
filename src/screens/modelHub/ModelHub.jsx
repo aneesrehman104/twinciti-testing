@@ -21,7 +21,7 @@ const ModelCard = dynamic(() =>
 );
 import styles from './ModelHub.module.css';
 import ButtonComponent from '../../components/common/button/Button';
-import { getApiWithoutAuth } from '../../utils/api';
+import { getApiWithoutAuth, postApiWithAuth } from '../../utils/api';
 import { URLs } from '../../utils/apiUrl';
 
 const ModelHub = () => {
@@ -107,6 +107,39 @@ const ModelHub = () => {
             });
         }
     };
+
+    const callApiForNoRoom = async () => {
+        if (selectedModels?.length > 0) {
+            const response = await postApiWithAuth(`${URLs.ChatRoom}`, {
+                model: selectedModels?.map((obj) => obj._id),
+            });
+            if (response.success) {
+                const searchParams1 = new URLSearchParams(
+                    window.location.search,
+                );
+                const category = searchParams1.get('category');
+                let setCategory = '';
+                if (category == null) {
+                    setCategory = selectedModels[0]?.pipeline_tag;
+                } else {
+                    setCategory = category;
+                }
+                const params = new URLSearchParams(searchParams.toString());
+                params.set('chatId', response.data.room._id);
+                params.set('category', setCategory);
+                router.push(`/${setCategory}` + '?' + params.toString());
+                // dispatch(removeAllModels());
+            } else {
+                message.open({
+                    type: 'error',
+                    content: `${response.message}`,
+                    duration: 2,
+                });
+            }
+        } else {
+            message.info('Select atleast 1 modal ');
+        }
+    };
     return (
         <>
             <Row gutter={[12, 12]}>
@@ -135,10 +168,13 @@ const ModelHub = () => {
                             variant="primary"
                             height="48px"
                             label="Start Chat"
+                            onClick={() => {
+                                callApiForNoRoom();
+                            }}
                         />
                     </div>
                 </Col>
-                <Col span={12}>
+                <Col span={8}>
                     <div className={styles.btnGradient}>
                         <Form
                             autoComplete="false"
@@ -163,7 +199,7 @@ const ModelHub = () => {
                         </Form>
                     </div>
                 </Col>
-                <Col span={12}>
+                <Col span={16}>
                     <div
                         style={{
                             display: 'flex',
@@ -211,9 +247,9 @@ const ModelHub = () => {
                         No data Found
                     </h2>
                 ) : (
-                    <Row gutter={[12, 12]}>
+                    <Row gutter={[36, 20]}>
                         {modelsList?.records?.map((model, index) => (
-                            <Col span={24} lg={8} key={model._id}>
+                            <Col span={24} lg={8} sm={12} key={model._id}>
                                 <ModelCard
                                     active={
                                         selectedModels.findIndex(
@@ -263,7 +299,7 @@ const ModelHub = () => {
                             You have not selected any model.
                         </h2>
                     ) : (
-                        <Row gutter={[24, 10]}>
+                        <Row gutter={[36, 20]}>
                             {selectedModels?.map((model, index) => (
                                 <Col span={10} key={model._id}>
                                     <ModelCard

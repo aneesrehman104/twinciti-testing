@@ -105,7 +105,7 @@ const ModelCard = ({
                         </div>
                     </div>
                     <div className={styles.cardBody}>
-                        <p>{description}</p>
+                        <p style={{ width: '90%' }}>{description}</p>
                         <div className={styles.cardInfoWrapper}>
                             <p className={styles.cardTextInfoWrapper}>
                                 <Image

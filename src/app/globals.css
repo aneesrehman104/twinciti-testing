@@ -147,11 +147,15 @@ a {
 .ant-pagination .ant-pagination-item-active a {
     color: white !important;
     background: linear-gradient(
-        94.25deg,
-        rgba(255, 132, 115, 0.92) 3.46%,
-        rgba(183, 132, 255, 0.92) 49.4%,
-        rgba(46, 176, 251, 0.92) 97.06%
+        360deg,
+        rgba(255, 255, 255, 0.0376992) 0%,
+        rgba(255, 255, 255, 0.0995914) 99.93%
     ) !important;
+    border-radius: 5px !important;
+    border-top: 1px solid rgba(183, 132, 255, 0.92) !important;
+    border-left: 1px solid rgba(183, 132, 255, 0.92) !important;
+    border-bottom: 1px solid rgba(255, 132, 115, 0.92) !important;
+    border-right: 1px solid rgba(255, 132, 115, 0.92) !important;
 }
 .ant-pagination
     .ant-pagination-jump-prev
@@ -163,7 +167,8 @@ a {
     .ant-pagination-item-ellipsis {
     color: white !important;
 }
-.ant-pagination .ant-pagination-prev .ant-pagination-item-link {
+.ant-pagination .ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination .ant-pagination-next .ant-pagination-item-link {
     color: white !important;
     background: transparent !important;
     border-color: rgba(255, 255, 255, 0.12) !important;
