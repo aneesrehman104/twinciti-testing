@@ -163,3 +163,38 @@ export const putApiWithAuth = async (url, body) => {
         return error.response.data;
     }
 };
+
+export const postStreamApiWithAuth = async (url, body, options) => {
+    try {
+        const result = await fetch(url, {
+            method: 'post',
+            headers: {
+                Accept: 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${getCookie('accessToken')}`,
+            },
+            body: JSON.stringify(body),
+            ...options,
+        });
+        return result;
+    } catch (error) {
+        return error?.response?.data || {};
+    }
+};
+
+export const getStreamApiWithAuth = async (url, options) => {
+    try {
+        const result = await fetch(url, {
+            method: 'get',
+            headers: {
+                Accept: 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${getCookie('accessToken')}`,
+            },
+            ...options,
+        });
+        return result;
+    } catch (error) {
+        return error?.response?.data || {};
+    }
+};
