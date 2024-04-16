@@ -132,7 +132,7 @@ const ModelHub = () => {
     };
     return (
         <>
-            <Row gutter={[12, 12]}>
+            <Row gutter={[12, 12]} align="bottom">
                 <Col span={16}>
                     <h1 className={styles.modelHubTitle}>
                         Models {modelsList?.total}
