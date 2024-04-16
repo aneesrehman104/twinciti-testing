@@ -56,7 +56,6 @@ const ModelCard = ({
                                                   onClick: () => {
                                                       selectedModelsHandler(
                                                           dorpdownOption.model,
-                                                          dorpdownOption.index,
                                                       );
                                                       setOpen(false);
                                                   },
@@ -69,7 +68,6 @@ const ModelCard = ({
                                                   onClick: () => {
                                                       selectedModelsHandler(
                                                           dorpdownOption.model,
-                                                          dorpdownOption.index,
                                                       );
                                                       setOpen(false);
                                                   },
@@ -80,7 +78,6 @@ const ModelCard = ({
                                                   onClick: () => {
                                                       selectedModelsHandler(
                                                           dorpdownOption.model,
-                                                          dorpdownOption.index,
                                                       );
                                                       setOpen(false);
                                                   },

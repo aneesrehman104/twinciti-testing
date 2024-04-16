@@ -33,11 +33,7 @@ const ModelHub = () => {
     const [filterData, setFilterData] = useState('');
     const [filterDataSearch] = useDebounce(filterData, 600);
     const [currentPageData, setCurrentPageData] = useState({});
-
-    const [current, setCurrent] = useState(3);
     const onChange = async (page) => {
-        console.log(page);
-        setCurrent(page);
         setCurrentPageData({ ...currentPageData, page: page });
         setShowSpinner(true);
         const searchParams1 = new URLSearchParams(window.location.search);
@@ -48,7 +44,6 @@ const ModelHub = () => {
                 category !== null ? category : ''
             }&page=${page}`,
         );
-        console.log('=============myres', response);
         if (response.success) {
             setModelsList(response.data);
             setCurrentPageData(response.data);
@@ -70,16 +65,12 @@ const ModelHub = () => {
     useEffect(() => {
         checkCategory();
     }, [searchParams, filterDataSearch]);
-    useEffect(() => {
-        console.log('=============selectedModels', selectedModels);
-    }, [selectedModels]);
 
     const getModelsById = async (selectedCategoryItem) => {
         setShowSpinner(true);
         const response = await getApiWithoutAuth(
             `${URLs.ApiGetModel}?q=${filterData}&filter=${selectedCategoryItem}`,
         );
-        console.log('=============myres', response);
         if (response.success) {
             setModelsList(response.data);
             setCurrentPageData(response.data);
@@ -89,8 +80,7 @@ const ModelHub = () => {
         }
     };
 
-    const selectedModelsHandler = (model, index) => {
-        console.log('======selectedModels', selectedModels, '====', model);
+    const selectedModelsHandler = (model) => {
         if (
             selectedModels.length > 0 &&
             selectedModels[0]?.pipeline_tag !== model.pipeline_tag

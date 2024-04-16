@@ -74,13 +74,10 @@ const MainLayout = ({ children }) => {
         fetchCategories();
     }, []);
     const selectedCategory = (selectedCategoryItem) => {
-        // dispatch(removeAllModels());
-        console.log('===========selectedCategoryItem', selectedCategoryItem);
         if (selectedCategoryId === selectedCategoryItem.label) {
             router.push('/models');
         } else {
             setSelectedCategoryId(selectedCategoryItem.label);
-            // setCollapse(false);
             const params = new URLSearchParams(searchParams.toString());
             params.set('category', selectedCategoryItem.label);
             router.push('/models' + '?' + params.toString());
