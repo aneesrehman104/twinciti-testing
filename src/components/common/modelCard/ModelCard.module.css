@@ -17,6 +17,7 @@
             border-box;
     border: 1px solid transparent;
     border-radius: 16px;
+    width: fit-content;
 }
 
 .card {

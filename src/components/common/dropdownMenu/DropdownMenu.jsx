@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown, Menu, Divider } from 'antd';
 import styles from './DropdownMenu.module.css';
 
 const DropdownMenu = ({
@@ -20,6 +20,7 @@ const DropdownMenu = ({
                     >
                         {item.label}
                     </div>
+                    <Divider className={styles.dividerAuthenticated} />
                 </React.Fragment>
             ))}
         </Menu>
