@@ -151,11 +151,8 @@ a {
         rgba(255, 255, 255, 0.0376992) 0%,
         rgba(255, 255, 255, 0.0995914) 99.93%
     ) !important;
-    border-radius: 5px !important;
-    border-top: 1px solid rgba(183, 132, 255, 0.92) !important;
-    border-left: 1px solid rgba(183, 132, 255, 0.92) !important;
-    border-bottom: 1px solid rgba(255, 132, 115, 0.92) !important;
-    border-right: 1px solid rgba(255, 132, 115, 0.92) !important;
+    border-radius: 6px !important;
+    border: 0.5px solid #ff8473 !important;
 }
 .ant-pagination
     .ant-pagination-jump-prev

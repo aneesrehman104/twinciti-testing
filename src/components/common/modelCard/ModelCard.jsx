@@ -12,7 +12,8 @@ const ModelCard = ({
     modified_task_name,
     downloads,
     dorpdownOption,
-    selectedModelsHandler,
+    addSelectedModel,
+    removeSelectedModel,
     showRemove,
 }) => {
     const [open, setOpen] = React.useState(false);
@@ -54,7 +55,7 @@ const ModelCard = ({
                                                   key: 0,
                                                   label: 'Remove',
                                                   onClick: () => {
-                                                      selectedModelsHandler(
+                                                      removeSelectedModel(
                                                           dorpdownOption.model,
                                                       );
                                                       setOpen(false);
@@ -66,7 +67,7 @@ const ModelCard = ({
                                                   key: 0,
                                                   label: 'Add to new chat',
                                                   onClick: () => {
-                                                      selectedModelsHandler(
+                                                      addSelectedModel(
                                                           dorpdownOption.model,
                                                       );
                                                       setOpen(false);
