@@ -15,6 +15,7 @@ const ModelCard = ({
     addSelectedModel,
     removeSelectedModel,
     showRemove,
+    addToExisting,
 }) => {
     const [open, setOpen] = React.useState(false);
 
@@ -77,7 +78,7 @@ const ModelCard = ({
                                                   key: 1,
                                                   label: 'Add to existing chat',
                                                   onClick: () => {
-                                                      selectedModelsHandler(
+                                                      addToExisting(
                                                           dorpdownOption.model,
                                                       );
                                                       setOpen(false);

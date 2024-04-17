@@ -33,6 +33,7 @@ import {
     getApiWithoutAuth,
     postApiWithAuth,
     getApiWithAuth,
+    putApiWithAuth,
 } from '../../utils/api';
 import { URLs } from '../../utils/apiUrl';
 
@@ -47,6 +48,16 @@ const ModelHub = () => {
     const [filterData, setFilterData] = useState('');
     const [filterDataSearch] = useDebounce(filterData, 600);
     const [currentPageData, setCurrentPageData] = useState({});
+    const [selectedModelId, setSelectedModelId] = useState();
+    const [showExistingChatModal, setShowExistingChatModal] = useState(false);
+    const [chatRoomList, setChatRoomList] = useState([]);
+    const [showChatSpinner, setShowChatSpinner] = useState(false);
+    const [filterDataChat, setFilterDataChat] = useState('');
+    const [selectedChatRecord, setselectedChatRecord] = useState({
+        description: '',
+        name: '',
+        _id: '',
+    });
     const logoutUser = () => {
         deleteCookie('accessToken');
         deleteCookie('user');
@@ -123,6 +134,10 @@ const ModelHub = () => {
     const removeSelectedModel = (selectedModelItem) => {
         dispatch(removeModel(selectedModelItem));
     };
+    const saveModalExisting = (selectedModelItem) => {
+        setSelectedModelId(selectedModelItem);
+        setShowExistingChatModal(true);
+    };
     useEffect(() => {
         const data = modelInfo?.modelInfo?.map((item) => {
             return {
@@ -169,6 +184,53 @@ const ModelHub = () => {
             }
         } else {
             message.info('Select atleast 1 modal ');
+        }
+    };
+
+    const searchChatRoom = async () => {
+        setShowChatSpinner(true);
+        const res = await getApiWithAuth(
+            `${URLs.ChatRoom}?search=${filterDataChat}`,
+        );
+        if (res.data.success) {
+            setChatRoomList(res.data.data.records);
+            setShowChatSpinner(false);
+        } else {
+            message.open({
+                type: 'error',
+                content: `${res.data.message}`,
+                duration: 2,
+            });
+            setShowChatSpinner(false);
+        }
+    };
+
+    const checkModel = async (saveThisModel, chatId) => {
+        saveModelInBackend(saveThisModel, 'add', chatId);
+    };
+
+    const modelSaveInChat = async () => {
+        checkModel(selectedModelId, selectedChatRecord._id);
+    };
+    const saveModelInBackend = async (saveThisModel, action, chatId) => {
+        if (chatId !== '') {
+            const response = await putApiWithAuth(
+                `${URLs.ChatRoom}/${chatId}?action=${action}`,
+                { modelId: saveThisModel._id },
+            );
+            if (response.success) {
+                const params = new URLSearchParams(searchParams.toString());
+                params.set('chatId', chatId);
+                router.push('/' + '?' + params.toString());
+            } else {
+                message.open({
+                    type: 'error',
+                    content: `${response.message}`,
+                    duration: 2,
+                });
+            }
+        } else {
+            message.info('Select atleast 1 chat ');
         }
     };
     return (
@@ -306,6 +368,7 @@ const ModelHub = () => {
                                     dorpdownOption={{ model, index }}
                                     addSelectedModel={addSelectedModel}
                                     removeSelectedModel={removeSelectedModel}
+                                    addToExisting={saveModalExisting}
                                 />
                             </Col>
                         ))}
@@ -358,6 +421,138 @@ const ModelHub = () => {
                         ))}
                     </Row>
                 )}
+            </Modal>
+
+            <Modal
+                title={'Select Existing Chat'}
+                onCancel={() => setShowExistingChatModal(false)}
+                open={showExistingChatModal}
+                width={700}
+                closeIcon={<CloseCircleOutlined />}
+                footer={null}
+            >
+                <div style={{ width: '100%' }}>
+                    <Row gutter={[24, 24]}>
+                        <Col span={10}>
+                            <div className={styles.btnGradient}>
+                                <Form
+                                    autoComplete="false"
+                                    onFinish={() => searchChatRoom()}
+                                >
+                                    <Input
+                                        className={styles.inputStyle}
+                                        placeholder="Search Chat"
+                                        prefix={
+                                            <Image
+                                                alt="/searchIcon.svg"
+                                                height={16}
+                                                src="/searchIcon.svg"
+                                                style={{ marginRight: '5px' }}
+                                                width={16}
+                                                onClick={() => searchChatRoom()}
+                                            />
+                                        }
+                                        value={filterDataChat}
+                                        onChange={(e) =>
+                                            setFilterDataChat(e.target.value)
+                                        }
+                                    />
+                                </Form>
+                            </div>
+                            <div style={{ height: '30vh', overflowY: 'auto' }}>
+                                {showChatSpinner ? (
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        <Spin />
+                                    </div>
+                                ) : chatRoomList?.length !== 0 ? (
+                                    chatRoomList.map((item) => (
+                                        <div
+                                            className={
+                                                item._id ===
+                                                selectedChatRecord._id
+                                                    ? styles.selectedChartBorder
+                                                    : styles.notSelectedChartBorder
+                                            }
+                                            key={item.id}
+                                            onClick={() =>
+                                                setselectedChatRecord(item)
+                                            }
+                                        >
+                                            <div
+                                                className={styles.hideExtraText}
+                                            >
+                                                {item.name.split('/')[1]}
+                                            </div>
+                                            <div
+                                                style={{
+                                                    height: '100%',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                }}
+                                            ></div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div
+                                        className={styles.modelHubTitle}
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            height: '20vh',
+                                            width: '100%',
+                                        }}
+                                    >
+                                        No data Found
+                                    </div>
+                                )}
+                            </div>
+                        </Col>
+                        <Col span={14}>
+                            <div className={styles.categoryStyle}>
+                                Description
+                            </div>
+                            <div
+                                style={{
+                                    marginTop: 20,
+                                    minHeight: 100,
+                                    fontSize: '12px',
+                                    fontStyle: 'normal',
+                                    fontWeight: 400,
+                                    lineHeight: '20.167px',
+                                    color: '#c4c4c4 !important',
+                                    borderRadius: '8px',
+                                    background: 'transparent',
+                                    paddingLeft: 10,
+                                    paddingRight: 10,
+                                    maxHeight: 150,
+                                    overflowY: 'auto',
+                                }}
+                            >
+                                {selectedChatRecord.description}
+                            </div>
+                            <div
+                                style={{
+                                    marginTop: 30,
+                                    display: 'flex',
+                                    justifyContent: 'end',
+                                }}
+                            >
+                                <ButtonComponent
+                                    variant="primary"
+                                    height="48px"
+                                    label="Save"
+                                    onClick={() => modelSaveInChat()}
+                                />
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
             </Modal>
         </>
     );
