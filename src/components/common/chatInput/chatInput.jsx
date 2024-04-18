@@ -61,7 +61,6 @@ const ChatInput = ({
                         onBlur={() => {
                             setIsHover(false);
                         }}
-                        disabled={disabled}
                         onKeyDown={handleKeyDown}
                         a11ySuggestionsListLabel={'Suggested mentions'}
                         allowSuggestionsAboveCursor={true}

@@ -126,7 +126,6 @@
 
 .modalBodyWrap .dropdownWrap :global .ant-btn-compact-first-item {
     flex: 1;
-    color: white;
 }
 
 .modalBodyWrap :global .ant-space-compact .ant-btn {

@@ -12,20 +12,16 @@ import {
     getApiWithoutAuth,
     postStreamApiWithAuth,
     getStreamApiWithAuth,
-    getApiWithAuth,
 } from '../../utils/api';
-import { useDispatch, useSelector } from 'react-redux';
 import { message } from 'antd';
-import { setChatroomModelList } from '../../states/chat/chatSlice';
-import { useSearchParams } from 'next/navigation';
 
-export default function Chats({}) {
-    const dispatch = useDispatch();
-    const chatsState = useSelector((state) => state.chats);
-    const searchParams = useSearchParams();
-    const checkmodalData = chatsState?.roomModels?.length
-        ? chatsState.roomModels
-        : [];
+export default function Chats({
+    setChatData,
+    chatData,
+    setModalData,
+    modalData,
+}) {
+    const [checkmodalData, setCheckmodalData] = useState([]);
     const [modelsList, setModelsList] = useState({ records: [], total: 0 });
     const [nonTextInput, setNonTextInput] = useState(<></>);
     const [showChatSpinner, setShowChatSpinner] = useState(false);
@@ -33,8 +29,6 @@ export default function Chats({}) {
     const [filterData, setFilterData] = useState('');
     const [filterDataSearch] = useDebounce(filterData, 600);
     const [streamingData, setStreamingData] = useState([]);
-    const [chatData, setChatData] = useState([]);
-    const [modalData, setModalData] = useState({});
     const [showSpinner, setShowSpinner] = useState(false);
     const [abortController, setAbortController] = useState();
     const [mentionList, setMentionList] = useState([]);
@@ -47,10 +41,6 @@ export default function Chats({}) {
     const messageRef = useRef(null);
 
     useEffect(() => {
-        fetchChat();
-    }, [searchParams]);
-
-    useEffect(() => {
         const searchParams1 = new URLSearchParams(window.location.search);
         const category = searchParams1.get('category');
         getModelsById(category);
@@ -58,6 +48,7 @@ export default function Chats({}) {
 
     useEffect(() => {
         const tempChatData = [...chatData];
+
         if (
             streamingData?.length &&
             tempChatData?.length &&
@@ -68,37 +59,6 @@ export default function Chats({}) {
             setStreamingData([]);
         }
     }, [chatData, streamingData]);
-
-    const fetchChat = async () => {
-        const searchParams1 = new URLSearchParams(window.location.search);
-        const chatId = searchParams1.get('chatId');
-
-        if (chatId === null) {
-            setChatData([]);
-            setModalData({});
-        } else {
-            const res = await getApiWithAuth(
-                `${URLs.GetConversation}/${chatId}`,
-            );
-            if (res.data.success) {
-                setChatData(res.data.data.conversation);
-                setModalData(res.data.data.room);
-                dispatch(
-                    setChatroomModelList(
-                        res?.data?.data?.room?.model
-                            ? res.data.data.room.model
-                            : [],
-                    ),
-                );
-            } else {
-                message.open({
-                    type: 'error',
-                    content: `${res.data.message}`,
-                    duration: 2,
-                });
-            }
-        }
-    };
 
     const getModelsById = async (selectedCategoryItem) => {
         if (selectedCategoryItem) {
@@ -176,6 +136,7 @@ export default function Chats({}) {
                 const updatedValue = prompt
                     ? fileContent + ' ' + prompt
                     : fileContent;
+                setFileContent(fileContent);
                 setData({ prompt: updatedValue, onlyPrompt: prompt });
             };
 
@@ -270,7 +231,7 @@ export default function Chats({}) {
 
                 setStreamingData(resultArray);
             }
-            fetchChat();
+
             setShowChatSpinner(false);
             setStreamInProgress(false);
         }
@@ -338,7 +299,7 @@ export default function Chats({}) {
                 }),
             );
         }
-        fetchChat();
+
         setShowSpinnerRegenerate(false);
         setStreamInProgress(false);
     };
@@ -383,11 +344,7 @@ export default function Chats({}) {
                                 favouriteAnswer={item}
                                 key={item._id}
                                 messageRef={messageRef}
-                                models={
-                                    item?.model?.length
-                                        ? item.model
-                                        : checkmodalData
-                                }
+                                models={item.model ? item.model : []}
                                 question={item.prompt}
                                 isLastIndexChat={chatData.length - 1 === index}
                                 regenerateFunction={regenerateFunction}
@@ -400,7 +357,6 @@ export default function Chats({}) {
             </section>
             <Form className={styles.chatwrap} form={form} onFinish={onSend}>
                 <ChatInput
-                    disabled={streamInProgress}
                     checkmodalData={checkmodalData}
                     getModelsByIdMdntionSearch={getModelsByIdMdntionSearch}
                     modelsList={modelsList}

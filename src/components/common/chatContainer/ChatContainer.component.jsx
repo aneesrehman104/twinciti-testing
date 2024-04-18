@@ -267,9 +267,7 @@ const ChatContainer = ({
                                                         </div>
                                                         <div
                                                             className={
-                                                                expandChat
-                                                                    ? styles.comparAnswers
-                                                                    : styles.comparAnswersCollapsed
+                                                                styles.comparAnswers
                                                             }
                                                         >
                                                             {answers?.length &&
@@ -438,11 +436,7 @@ const ChatContainer = ({
                                         </div>
                                     )}
                                     <p
-                                        className={
-                                            expandChat
-                                                ? styles.answerStyle
-                                                : styles.answerStyleCollapsed
-                                        }
+                                        className={styles.answerStyle}
                                         style={{
                                             color:
                                                 answers?.answers?.length &&
