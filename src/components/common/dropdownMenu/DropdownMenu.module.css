@@ -5,6 +5,7 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    min-width: 100px;
 }
 
 .menuItemStyleAuthenticated {
@@ -15,4 +16,12 @@
     font-family: var(--font-poppins) !important;
     cursor: pointer;
     color: white !important;
+}
+.dividerAuthenticated {
+    border: 1px solid rgba(63, 65, 71, 1);
+    background: rgba(63, 65, 71, 1);
+    display: flex;
+    justify-content: center;
+    margin: 0px !important;
+    margin-bottom: 10px !important;
 }
