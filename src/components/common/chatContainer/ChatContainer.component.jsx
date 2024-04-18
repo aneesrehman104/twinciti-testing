@@ -28,14 +28,22 @@ const ChatContainer = ({
     const [likeShow, setLikeShow] = useState(false);
     const [isShare, setIsShare] = useState(false);
     const [isHover, setIsHover] = useState(false);
+    const [showGrid, setShowGrid] = useState(true);
+    const [expandChat, setExpandChat] = useState(true);
     const [currentAnswerIndex, setCurrentAnswerIndex] = useState(0);
     const [showSpinnerRegenerate, setShowSpinnerRegenerate] = useState(false);
 
     useEffect(() => {
         if (answers.length > 0) {
             setLikeShow(
-                favouriteAnswer.answers[currentAnswerIndex][selectedAnswer]
-                    ?.like,
+                favouriteAnswer?.answers?.length &&
+                    favouriteAnswer.answers[currentAnswerIndex]?.length &&
+                    favouriteAnswer.answers[currentAnswerIndex][selectedAnswer]
+                        ?.like
+                    ? favouriteAnswer.answers[currentAnswerIndex][
+                          selectedAnswer
+                      ]?.like
+                    : false,
             );
         }
     }, [likeShow]);
@@ -109,25 +117,33 @@ const ChatContainer = ({
 
     return (
         <div className={styles.mainDivStyle}>
-            <div className={styles.positionAvatar}>
+            <div className={styles.positionAvatar + ' ' + styles.adminChat}>
                 <div className={styles.avatarStyle}>{'A'}</div>
-                <div className={styles.innerDivWidth}>
-                    <div className={styles.questionStyle}>{question}</div>
-                    <div
-                        ref={messageRef}
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'flex-end',
-                            marginTop: 20,
-                        }}
-                    >
-                        <div style={{ display: 'flex' }}>
+                <div className={styles.chatWrap}>
+                    <span className={styles.adminName}>You</span>
+                    <div className={styles.innerDivWidth}>
+                        <div className={styles.questionStyle}>{question}</div>
+                        <div
+                            ref={messageRef}
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                            }}
+                        >
                             <Image
-                                alt="editIcon"
-                                height={20}
-                                src="/editIcon.svg"
-                                style={{ marginRight: 10, cursor: 'pointer' }}
-                                width={20}
+                                alt="regenerateIcon"
+                                height={16}
+                                src="/regenerateIcon.svg"
+                                style={{
+                                    cursor: 'pointer',
+                                }}
+                                width={16}
+                                onClick={() =>
+                                    regenerateFunction(
+                                        chatSpecficId,
+                                        setShowSpinnerRegenerate,
+                                    )
+                                }
                             />
                         </div>
                     </div>
@@ -148,187 +164,401 @@ const ChatContainer = ({
                     }}
                 >
                     <Image
-                        alt="whitelogo"
+                        alt="circularLogo"
                         height={24}
-                        src="/whitelogo.svg"
+                        src="/circularLogo.svg"
                         width={24}
                     />
                 </div>
-                <div className={styles.innerDivWidth}>
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            flexWrap: 'wrap',
-                            width: '100%',
-                            marginTop: 5,
-                            marginBottom: 15,
-                            overflow: 'visible',
-                            gap: '20px',
-                        }}
-                    >
-                        {models?.map((item, index) => (
+                <div className={styles.chatWrap}>
+                    {isHover && !showGrid ? (
+                        <div ref={messageRef} className={styles.ShareSocialBtn}>
                             <div
-                                className={
-                                    selectedAnswer === index
-                                        ? styles.selectedTab
-                                        : styles.notSelectedTab
-                                }
-                                key={index}
-                                onClick={() => handleItemClick(index)}
+                                className={styles.socialBtn}
+                                onClick={() => setIsShare(!isShare)}
                             >
-                                {item.model_name.split('/')[1]}
+                                <Image
+                                    alt="shareIcon"
+                                    height={20}
+                                    src="/sharelcon.svg"
+                                    width={20}
+                                />
                             </div>
-                        ))}
-                    </div>
-                    {answers.length > 1 && (
-                        <div
-                            style={{
-                                color: 'black',
-                                display: 'flex',
-                                alignSelf: 'flex-start',
-                            }}
-                        >
-                            <CaretLeftOutlined
-                                onClick={() => handlePrevious(answers.length)}
-                                style={{
-                                    color:
-                                        currentAnswerIndex === 0
-                                            ? 'grey'
-                                            : 'white',
-                                }}
-                            />
-                            <span style={{ color: 'white' }}>
-                                {currentAnswerIndex + 1}/{answers.length}
-                            </span>
-                            <CaretRightOutlined
-                                onClick={() => handleNext(answers.length)}
-                                style={{
-                                    color:
-                                        currentAnswerIndex ===
-                                        answers.length - 1
-                                            ? 'grey'
-                                            : 'white',
-                                }}
-                            />
+                            <div
+                                className={styles.socialBtn}
+                                onClick={() =>
+                                    saveFav(
+                                        answers[currentAnswerIndex][
+                                            selectedAnswer
+                                        ],
+                                    )
+                                }
+                            >
+                                <Image
+                                    alt="copyIcon"
+                                    height={22}
+                                    src="/starredIcon.svg"
+                                    width={22}
+                                />
+                            </div>
+                            <div
+                                className={styles.socialBtn}
+                                onClick={() =>
+                                    copyToClipBoard(
+                                        answers[currentAnswerIndex][
+                                            selectedAnswer
+                                        ].message,
+                                    )
+                                }
+                            >
+                                <Image
+                                    alt="copyIcon"
+                                    height={16}
+                                    src="/fluentCopyIcon.svg"
+                                    width={16}
+                                />
+                            </div>
                         </div>
-                    )}
-                    <p
-                        className={styles.answerStyle}
-                        style={{
-                            color:
-                                answers.length > 0 &&
-                                answers[currentAnswerIndex][selectedAnswer]
-                                    ?.like
-                                    ? 'rgba(171, 105, 255, 1)'
-                                    : '',
-                        }}
+                    ) : null}
+                    <div
+                        className={
+                            styles.chatinerWrap +
+                            ` ${showGrid ? styles.gridView : ''}`
+                        }
                     >
-                        {answers.length === 0 || showSpinnerRegenerate ? (
-                            <SyncOutlined spin />
-                        ) : answers?.length &&
-                          answers[currentAnswerIndex] &&
-                          answers[currentAnswerIndex]?.length &&
-                          answers[currentAnswerIndex][selectedAnswer] &&
-                          answers[currentAnswerIndex][selectedAnswer]
-                              .message ? (
-                            answers[currentAnswerIndex][selectedAnswer].message
-                        ) : (
-                            ''
-                        )}
-                    </p>
-                    {isHover || isLastIndexChat
-                        ? models.length > 0 && (
-                              <div
-                                  ref={messageRef}
-                                  style={{
-                                      display: 'flex',
-                                      justifyContent: 'space-between',
-                                      marginTop: 20,
-                                  }}
-                              >
-                                  <div>
-                                      <Image
-                                          alt="shareIcon"
-                                          height={21}
-                                          src="/sharelcon.svg"
-                                          style={{ cursor: 'pointer' }}
-                                          width={60}
-                                          onClick={() => setIsShare(!isShare)}
-                                      />
-                                  </div>
-                                  <div style={{ display: 'flex' }}>
-                                      {models[selectedAnswer].is_llm && (
-                                          <Tooltip title={'Click and save'}>
-                                              <LikeFilled
-                                                  onClick={() =>
-                                                      saveFav(
-                                                          answers[
-                                                              currentAnswerIndex
-                                                          ][selectedAnswer],
-                                                      )
-                                                  }
-                                                  style={{
-                                                      fontSize: '18px',
-                                                      marginRight: 10,
-                                                      cursor: 'pointer',
-                                                      color:
-                                                          answers.length > 0 &&
-                                                          answers[
-                                                              currentAnswerIndex
-                                                          ][selectedAnswer].like
-                                                              ? 'rgba(171, 105, 255, 1)'
-                                                              : '#7D7F7E',
-                                                  }}
-                                              />
-                                          </Tooltip>
-                                      )}
-                                      <Image
-                                          alt="regenerateIcon"
-                                          height={16}
-                                          src="/regenerateIcon.svg"
-                                          style={{
-                                              marginRight: 10,
-                                              cursor: 'pointer',
-                                          }}
-                                          width={16}
-                                          onClick={() =>
-                                              regenerateFunction(
-                                                  chatSpecficId,
-                                                  setShowSpinnerRegenerate,
-                                              )
-                                          }
-                                      />
-                                      <Image
-                                          alt="copyIcon"
-                                          height={12}
-                                          onClick={() =>
-                                              copyToClipBoard(
-                                                  answers[currentAnswerIndex][
-                                                      selectedAnswer
-                                                  ].message,
-                                              )
-                                          }
-                                          src="/fluentCopyIcon.svg"
-                                          style={{
-                                              marginRight: 10,
-                                              cursor: 'pointer',
-                                          }}
-                                          width={15}
-                                      />
-                                  </div>
-                              </div>
-                          )
-                        : null}
-                    {isShare && (
-                        <ShareSocialPlatforms
-                            answer={
-                                answers[currentAnswerIndex][selectedAnswer]
-                                    .message
-                            }
-                            question={question}
-                        />
-                    )}
+                        <span className={styles.clientChatWrap}>Twinciti</span>
+
+                        <div className={styles.innerDivWidth}>
+                            {showGrid ? (
+                                <div className={styles.cardWrap}>
+                                    <div className={styles.gridBox} style={{}}>
+                                        {models.map((item, index) => {
+                                            return (
+                                                <div
+                                                    className={
+                                                        styles.questionStyle
+                                                    }
+                                                    key={index}
+                                                    onClick={() =>
+                                                        handleItemClick(index)
+                                                    }
+                                                >
+                                                    <Image
+                                                        alt="Logo"
+                                                        height={32}
+                                                        src="/whitelogo.svg"
+                                                        width={32}
+                                                    />
+                                                    <div
+                                                        className={
+                                                            styles.detailWrap
+                                                        }
+                                                    >
+                                                        <div
+                                                            className={
+                                                                styles.compareHadding
+                                                            }
+                                                        >
+                                                            {
+                                                                item.model_name.split(
+                                                                    '/',
+                                                                )[1]
+                                                            }
+                                                        </div>
+                                                        <div
+                                                            className={
+                                                                styles.comparAnswers
+                                                            }
+                                                        >
+                                                            {answers?.length &&
+                                                            answers[
+                                                                currentAnswerIndex
+                                                            ] &&
+                                                            answers[
+                                                                currentAnswerIndex
+                                                            ]?.length &&
+                                                            answers[
+                                                                currentAnswerIndex
+                                                            ][index] &&
+                                                            answers[
+                                                                currentAnswerIndex
+                                                            ][index].message
+                                                                ? answers[
+                                                                      currentAnswerIndex
+                                                                  ][index]
+                                                                      .message
+                                                                : ''}
+                                                        </div>
+                                                    </div>
+                                                    {isHover ? (
+                                                        <div
+                                                            ref={messageRef}
+                                                            className={
+                                                                styles.shareIconWrap
+                                                            }
+                                                        >
+                                                            <div
+                                                                className={
+                                                                    styles.socialBtn
+                                                                }
+                                                            >
+                                                                <Image
+                                                                    alt="shareIcon"
+                                                                    height={18}
+                                                                    src="/sharelcon.svg"
+                                                                    width={18}
+                                                                    onClick={() =>
+                                                                        setIsShare(
+                                                                            !isShare,
+                                                                        )
+                                                                    }
+                                                                />
+                                                            </div>
+                                                            <div
+                                                                className={
+                                                                    styles.socialBtn
+                                                                }
+                                                            >
+                                                                <Image
+                                                                    alt="copyIcon"
+                                                                    height={20}
+                                                                    src="/starredIcon.svg"
+                                                                    width={20}
+                                                                    onClick={() =>
+                                                                        saveFav(
+                                                                            answers[
+                                                                                currentAnswerIndex
+                                                                            ][
+                                                                                index
+                                                                            ],
+                                                                        )
+                                                                    }
+                                                                />
+                                                            </div>
+                                                            <div
+                                                                className={
+                                                                    styles.socialBtn
+                                                                }
+                                                            >
+                                                                <Image
+                                                                    alt="copyIcon"
+                                                                    height={16}
+                                                                    onClick={() =>
+                                                                        copyToClipBoard(
+                                                                            answers[
+                                                                                currentAnswerIndex
+                                                                            ][
+                                                                                index
+                                                                            ]
+                                                                                .message,
+                                                                        )
+                                                                    }
+                                                                    src="/fluentCopyIcon.svg"
+                                                                    width={16}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    ) : null}
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            ) : (
+                                <>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'row',
+                                            flexWrap: 'wrap',
+                                            width: '100%',
+                                            marginTop: 5,
+                                            marginBottom: 16,
+                                            overflow: 'visible',
+                                            gap: '8px',
+                                        }}
+                                    >
+                                        {models?.map((item, index) => (
+                                            <div
+                                                className={`${
+                                                    styles.notSelectedTab
+                                                } ${
+                                                    selectedAnswer === index
+                                                        ? styles.selectedTab
+                                                        : ''
+                                                }`}
+                                                key={index}
+                                                onClick={() =>
+                                                    handleItemClick(index)
+                                                }
+                                            >
+                                                {item.model_name.split('/')[1]}
+                                            </div>
+                                        ))}
+                                    </div>
+                                    {answers.length > 1 && (
+                                        <div
+                                            style={{
+                                                color: 'black',
+                                                display: 'flex',
+                                                alignSelf: 'flex-start',
+                                            }}
+                                        >
+                                            <CaretLeftOutlined
+                                                onClick={() =>
+                                                    handlePrevious(
+                                                        answers.length,
+                                                    )
+                                                }
+                                                style={{
+                                                    color:
+                                                        currentAnswerIndex === 0
+                                                            ? 'grey'
+                                                            : 'white',
+                                                }}
+                                            />
+                                            <span style={{ color: 'white' }}>
+                                                {currentAnswerIndex + 1}/
+                                                {answers.length}
+                                            </span>
+                                            <CaretRightOutlined
+                                                onClick={() =>
+                                                    handleNext(answers.length)
+                                                }
+                                                style={{
+                                                    color:
+                                                        currentAnswerIndex ===
+                                                        answers.length - 1
+                                                            ? 'grey'
+                                                            : 'white',
+                                                }}
+                                            />
+                                        </div>
+                                    )}
+                                    <p
+                                        className={styles.answerStyle}
+                                        style={{
+                                            color:
+                                                answers?.answers?.length &&
+                                                answers.answers[
+                                                    currentAnswerIndex
+                                                ]?.length &&
+                                                answers.answers[
+                                                    currentAnswerIndex
+                                                ][selectedAnswer]?.like
+                                                    ? 'rgba(171, 105, 255, 1)'
+                                                    : '',
+                                        }}
+                                    >
+                                        {answers.length === 0 ||
+                                        showSpinnerRegenerate ? (
+                                            <SyncOutlined spin />
+                                        ) : answers?.length &&
+                                          answers[currentAnswerIndex] &&
+                                          answers[currentAnswerIndex]?.length &&
+                                          answers[currentAnswerIndex][
+                                              selectedAnswer
+                                          ] &&
+                                          answers[currentAnswerIndex][
+                                              selectedAnswer
+                                          ].message ? (
+                                            answers[currentAnswerIndex][
+                                                selectedAnswer
+                                            ].message
+                                        ) : (
+                                            ''
+                                        )}
+                                    </p>
+                                </>
+                            )}
+
+                            {isShare && (
+                                <ShareSocialPlatforms
+                                    answer={
+                                        answers?.answers?.length &&
+                                        answers.answers[currentAnswerIndex]
+                                            ?.length &&
+                                        answers.answers[currentAnswerIndex][
+                                            selectedAnswer
+                                        ]?.message
+                                            ? answers[currentAnswerIndex][
+                                                  selectedAnswer
+                                              ].message
+                                            : ''
+                                    }
+                                    question={question}
+                                />
+                            )}
+                        </div>
+                    </div>
+                    {isHover ? (
+                        <div ref={messageRef} className={styles.bottomNav}>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    width: '100%',
+                                }}
+                            >
+                                {expandChat ? (
+                                    <Image
+                                        alt="collapseIcon"
+                                        height={18}
+                                        src="/collapseIcon.svg"
+                                        style={{ cursor: 'pointer' }}
+                                        width={30}
+                                        onClick={() => setExpandChat(false)}
+                                    />
+                                ) : (
+                                    <Image
+                                        alt="expandIcon"
+                                        height={18}
+                                        src="/expandIcon.svg"
+                                        style={{ cursor: 'pointer' }}
+                                        width={30}
+                                        onClick={() => setExpandChat(true)}
+                                    />
+                                )}
+                            </div>
+                            <div className={styles.iconGirdList}>
+                                <div
+                                    className={
+                                        styles.iconWrap +
+                                        ` ${showGrid ? styles.activeView : ''}`
+                                    }
+                                >
+                                    <Image
+                                        alt="grid"
+                                        height={16}
+                                        src="/gridIcon.svg"
+                                        style={{
+                                            cursor: 'pointer',
+                                        }}
+                                        width={16}
+                                        onClick={() => setShowGrid(true)}
+                                    />
+                                </div>
+                                <div
+                                    className={
+                                        styles.iconWrap +
+                                        ` ${!showGrid ? styles.activeView : ''}`
+                                    }
+                                >
+                                    <Image
+                                        alt="list"
+                                        height={16}
+                                        onClick={() => setShowGrid(false)}
+                                        src="/listIcon.svg"
+                                        style={{
+                                            cursor: 'pointer',
+                                        }}
+                                        width={16}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    ) : null}
                 </div>
             </div>
         </div>

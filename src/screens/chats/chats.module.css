@@ -1,13 +1,12 @@
 .sendButtonStyle {
-    background-color: rgba(171, 105, 255, 1);
-    border: 1px solid rgba(171, 105, 255, 1);
+    background: transparent;
     width: 36px;
     height: 36px;
     border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: var(--font-poppins) !important;
+    cursor: pointer;
 }
 
 .stopButtonStyle {
@@ -255,8 +254,6 @@
     color: rgba(247, 251, 255, 1);
 }
 .noChatsContainer {
-    border: 1px solid rgba(63, 65, 71, 1);
-    background: rgba(43, 45, 49, 1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -267,14 +264,16 @@
 }
 .noChatsContent {
     display: flex;
-    flex-direction: column;
+    gap: 12px;
     align-items: center;
 }
 .noChatsText {
-    color: rgba(229, 229, 229, 1);
-    font-weight: 400;
-    font-size: 14px;
-    font-family: var(--font-poppins) !important;
+    color: #fff;
+    text-align: right;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
 }
 @media only screen and (min-width: 0px) and (max-width: 767px) {
     .dropdownPosition {
@@ -416,6 +415,9 @@
     max-height: 300px;
     overflow-y: auto;
     margin-top: 7px;
+}
+.chatwrap :global .ant-form-item {
+    margin: 0;
 }
 
 @media only screen and (min-width: 0px) and (max-width: 767px) {

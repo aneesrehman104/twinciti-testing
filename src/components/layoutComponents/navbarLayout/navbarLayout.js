@@ -66,7 +66,7 @@ const NavbarLayout = () => {
     return (
         <Header
             className={styles.navbarHeight}
-            style={{ padding: '0px .5rem' }}
+            style={{ padding: '18px 16px 14px 6px' }}
         >
             <div className={styles.topLeftSide}>
                 {navbarArray.map((item) => {
@@ -75,42 +75,24 @@ const NavbarLayout = () => {
                             key={item.key}
                             className={
                                 selectedNav === item.key
-                                    ? styles.btnGradient
-                                    : ''
+                                    ? styles.linkactive
+                                    : styles.linkWrap
                             }
                             onClick={() => {
                                 router.push(item.route);
-                            }}
-                            style={{
-                                height: 40,
-                                width: 138,
-                                borderRadius: 21,
-                                // marginLeft: 10,
-                                cursor: 'pointer',
                             }}
                         >
                             <div
                                 className={
                                     selectedNav === item.key
-                                        ? styles.btnGradientInner
-                                        : ''
+                                        ? styles.btnGradientActive
+                                        : styles.btninfo
                                 }
-                                style={{
-                                    height: 40,
-                                    width: '138px',
-                                    borderRadius: 21,
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    color: 'white',
-                                    cursor: 'pointer',
-                                }}
                             >
                                 <Image
                                     alt={item.icon}
                                     height={16}
                                     src={item.icon}
-                                    style={{ marginRight: '5px' }}
                                     width={16}
                                 />
                                 {item.title}
