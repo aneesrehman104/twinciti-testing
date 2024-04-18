@@ -26,7 +26,7 @@ export function ShareSocialPlatforms({ answer, question, url }) {
                     url={
                         url ? url : 'https://twinciti-frontend-dev.vercel.app/'
                     }
-                    title="anees"
+                    title="share"
                 >
                     <FacebookIcon size={32} round />
                 </FacebookShareButton>

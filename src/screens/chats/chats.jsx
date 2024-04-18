@@ -99,9 +99,7 @@ export default function Chats({
                     callback(transformedModels);
                 }
             })
-            .catch((error) => {
-                // Handle error if needed
-            });
+            .catch((error) => {});
     };
 
     const handleFileChange = async (event) => {
@@ -320,27 +318,25 @@ export default function Chats({
                 flexDirection: 'column',
                 flexGrow: 1,
                 flexShrink: 1,
-                padding: '15px 0',
             }}
         >
-            <div className={styles.dropdownPosition}>DROPDOWN</div>
             <section className={styles.chatInnerHeight}>
                 {chatData.length === 0 ? (
                     <div className={styles.noChatsContainer}>
                         <div className={styles.noChatsContent}>
                             <Image
-                                alt="nochatyetIcon"
+                                alt="circularLogo"
                                 height={31}
-                                src="/nochatyetIcon.svg"
+                                src="/circularLogo.svg"
                                 width={34}
                             />
                             <div className={styles.noChatsText}>
-                                No chats yet
+                                Hello 👋, How Can I Help You Today?
                             </div>
                         </div>
                     </div>
                 ) : (
-                    chatData?.map((item, index) => {
+                    chatData.slice(-1).map((item, index) => {
                         return (
                             <ChatContainer
                                 answers={item.answers ? item.answers : []}
@@ -359,7 +355,7 @@ export default function Chats({
                     })
                 )}
             </section>
-            <Form form={form} onFinish={onSend}>
+            <Form className={styles.chatwrap} form={form} onFinish={onSend}>
                 <ChatInput
                     checkmodalData={checkmodalData}
                     getModelsByIdMdntionSearch={getModelsByIdMdntionSearch}
