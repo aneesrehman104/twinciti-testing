@@ -126,6 +126,22 @@
     margin: 0 0 12px 0;
 }
 
+.answerStyleCollapsed {
+    font-weight: 300;
+    font-size: 14px;
+    font-family: var(--font-poppins);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 1);
+    font-family: var(--font-poppins) !important;
+    line-height: 1.75;
+    margin: 0 0 12px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
 .adminChat .innerDivWidth {
     display: flex;
     align-items: center;
@@ -176,7 +192,7 @@
     width: 100%;
 }
 
-.comparAnswers {
+.comparAnswersCollapsed {
     font-weight: 400;
     font-size: 14px;
     color: rgba(255, 255, 255, 0.7);
@@ -194,6 +210,16 @@
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+}
+
+.comparAnswers {
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: normal;
+    line-height: 16px;
+    max-width: 95%;
+    margin-top: 16px;
 }
 
 .adminChat {
