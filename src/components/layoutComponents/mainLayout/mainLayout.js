@@ -25,27 +25,12 @@ const MainLayout = ({ children }) => {
     const searchParams = useSearchParams();
 
     const sideBarObj = {
+        '/': <ModalSidebar />,
         '/chats': <ChatSidebar />,
         '/discover': <DiscoverSidebar />,
         '/models': <ModalSidebar />,
     };
 
-    const isOpenHandle = (name) =>
-        setIsOpen((pre) => (pre === name ? '' : name));
-
-    useEffect(() => {
-        fetchCategories();
-    }, []);
-    const selectedCategory = (selectedCategoryItem) => {
-        if (selectedCategoryId === selectedCategoryItem.label) {
-            router.push('/models');
-        } else {
-            setSelectedCategoryId(selectedCategoryItem.label);
-            const params = new URLSearchParams(searchParams.toString());
-            params.set('category', selectedCategoryItem.label);
-            router.push('/models' + '?' + params.toString());
-        }
-    };
     return (
         <Layout style={layoutStyle}>
             <SiderComponent>{sideBarObj[pathname] || ''}</SiderComponent>
