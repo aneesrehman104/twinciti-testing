@@ -12,6 +12,10 @@ const ModelCard = ({
     modified_task_name,
     downloads,
     dorpdownOption,
+    addSelectedModel,
+    removeSelectedModel,
+    showRemove,
+    addToExisting,
 }) => {
     const [open, setOpen] = React.useState(false);
 
@@ -27,12 +31,8 @@ const ModelCard = ({
     const openHandler = () => setOpen(!open);
 
     return (
-        <>
-            <div
-                className={
-                    !active ? styles.cardWrapper : styles.cardWrapperGradient
-                }
-            >
+        <div className={active ? styles.btnGradient : null}>
+            <div className={styles.cardWrapper}>
                 <div className={styles.card}>
                     <div className={styles.cardHeader}>
                         <div className={styles.cardTitleImage}>
@@ -48,8 +48,44 @@ const ModelCard = ({
                         <div className={styles.cardActions}>
                             <DropdownMenu
                                 onOpenChange={openHandler}
-                                open={open}
-                                items={dorpdownOption}
+                                open={showRemove ? open : active ? false : open}
+                                items={
+                                    showRemove
+                                        ? [
+                                              {
+                                                  key: 0,
+                                                  label: 'Remove',
+                                                  onClick: () => {
+                                                      removeSelectedModel(
+                                                          dorpdownOption.model,
+                                                      );
+                                                      setOpen(false);
+                                                  },
+                                              },
+                                          ]
+                                        : [
+                                              {
+                                                  key: 0,
+                                                  label: 'Add to new chat',
+                                                  onClick: () => {
+                                                      addSelectedModel(
+                                                          dorpdownOption.model,
+                                                      );
+                                                      setOpen(false);
+                                                  },
+                                              },
+                                              {
+                                                  key: 1,
+                                                  label: 'Add to existing chat',
+                                                  onClick: () => {
+                                                      addToExisting(
+                                                          dorpdownOption.model,
+                                                      );
+                                                      setOpen(false);
+                                                  },
+                                              },
+                                          ]
+                                }
                                 innerData={
                                     <Image
                                         src={
@@ -60,7 +96,7 @@ const ModelCard = ({
                                         alt="model"
                                         width={40}
                                         height={40}
-                                        onClick={openHandler}
+                                        // onClick={openHandler}
                                         className={styles.modelImage}
                                     />
                                 }
@@ -68,7 +104,7 @@ const ModelCard = ({
                         </div>
                     </div>
                     <div className={styles.cardBody}>
-                        <p>{description}</p>
+                        <p style={{ width: '90%' }}>{description}</p>
                         <div className={styles.cardInfoWrapper}>
                             <p className={styles.cardTextInfoWrapper}>
                                 <Image
@@ -115,7 +151,7 @@ const ModelCard = ({
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

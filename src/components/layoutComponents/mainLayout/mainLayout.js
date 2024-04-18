@@ -25,6 +25,7 @@ const MainLayout = ({ children }) => {
     const searchParams = useSearchParams();
 
     const sideBarObj = {
+        '/': <ModalSidebar />,
         '/chats': <ChatSidebar />,
         '/discover': <DiscoverSidebar />,
         '/models': <ModalSidebar />,

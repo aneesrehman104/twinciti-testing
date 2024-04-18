@@ -43,32 +43,30 @@ const MenuButton = ({
                 categories.map((category, index) => (
                     <div
                         key={index}
+                        onClick={() => selectedCategory(category)}
                         style={{
+                            position: 'relative',
                             display: 'flex',
                             alignItems: 'center',
-                            width: '100%',
-                            marginBottom:
-                                index !== categories.length - 1
-                                    ? '0px'
-                                    : '10px',
                         }}
-                        onClick={() => selectedCategory(category)}
                     >
+                        <Image
+                            alt="Icon"
+                            height={52}
+                            src={
+                                selectedCategoryId === category.label
+                                    ? '/sidebarActive.svg'
+                                    : '/sidebarInactive.svg'
+                            }
+                            width={270}
+                        />
                         <div
                             style={{
-                                border: '1px solid rgba(255, 255, 255, 0.2)',
-                                height: 50,
+                                position: 'absolute',
+                                paddingLeft: 15,
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyContent: 'center',
-                                borderRightStyle: 'none',
-                                borderRadius: '10px 10px 0px 10px',
-                                width: '25%',
-                                marginTop: '-8px',
-                                background:
-                                    selectedCategoryId === category.label
-                                        ? 'url(/active-bg.svg)'
-                                        : 'transparent',
+                                textTransform: 'capitalize',
                             }}
                         >
                             <Image
@@ -76,26 +74,10 @@ const MenuButton = ({
                                 height={24}
                                 src={'/modelImage.svg'}
                                 width={24}
+                                style={{ marginRight: 10 }}
                             />
+                            <div>{convertToSpace(category.label)}</div>
                         </div>
-                        <p
-                            style={{
-                                border: '1px solid rgba(255, 255, 255, 0.2)',
-                                height: 42,
-                                display: 'flex',
-                                alignItems: 'center',
-                                borderLeftStyle: 'none',
-                                borderRadius: '0px 10px 10px 0px',
-                                width: '80%',
-                                textTransform: 'capitalize',
-                                background:
-                                    selectedCategoryId === category.label
-                                        ? 'url(/active-bg.svg)'
-                                        : 'transparent',
-                            }}
-                        >
-                            {convertToSpace(category.label)}
-                        </p>
                     </div>
                 ))}
         </div>

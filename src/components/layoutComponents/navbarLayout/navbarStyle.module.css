@@ -24,6 +24,13 @@
 }
 .topLeftSide {
     width: auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    height: auto;
+    border-radius: 40px;
+    display: flex;
+    padding: 5px;
+    gap: 5px;
+    align-items: center;
     height: auto;
     border-radius: 40px;
     display: flex;
@@ -39,6 +46,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 16px;
+    cursor: pointer;
 }
 .linkactive {
     padding: 16px 20px;
@@ -49,6 +57,7 @@
     font-weight: 400;
     line-height: 16px;
     position: relative;
+    cursor: pointer;
 }
 .btnGradientActive {
     position: relative;
