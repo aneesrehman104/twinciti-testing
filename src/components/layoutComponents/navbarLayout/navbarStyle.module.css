@@ -5,7 +5,6 @@
     justify-content: space-between;
     align-items: center;
 }
-
 .btnGradient {
     background: linear-gradient(black, black) padding-box,
         linear-gradient(94.25deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
@@ -25,6 +24,7 @@
 }
 .topLeftSide {
     width: auto;
+<<<<<<< HEAD
     border: 1px solid rgba(255, 255, 255, 0.2);
     height: auto;
     border-radius: 40px;
@@ -32,6 +32,65 @@
     padding: 5px;
     gap: 5px;
     align-items: center;
+=======
+    height: auto;
+    border-radius: 40px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+.linkWrap {
+    padding: 16px 20px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+}
+.linkactive {
+    padding: 16px 20px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    position: relative;
+}
+.btnGradientActive {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+}
+.btninfo {
+    display: flex;
+    align-content: inherit;
+    justify-content: center;
+    gap: 8px;
+}
+.btnGradientActive::after {
+    content: '';
+    bottom: -15px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(
+        116deg,
+        #ff8473 0%,
+        #b784ff 35.71%,
+        #2eb0fb 66.91%
+    );
+    width: 100%;
+    position: absolute;
+    left: 0;
+>>>>>>> 8ebe4f866276f72e9853c74323193cd0f89db5fc
 }
 .menuItemStyleAuthenticated {
     height: 50px;

@@ -7,6 +7,7 @@ const ButtonComponent = ({
     htmlType = 'button',
     disabled,
     variant,
+    className = '',
     showEllips = false,
     height = '32px',
 }) => {
@@ -23,7 +24,7 @@ const ButtonComponent = ({
     return (
         <div className={variant === 'default' ? styles.btnGradient : null}>
             <button
-                className={`${styles.buttonWrapper} ${defaultStyle}`}
+                className={`${styles.buttonWrapper} ${defaultStyle} ${className}`}
                 onClick={onClick}
                 type={htmlType}
                 disabled={disabled}
