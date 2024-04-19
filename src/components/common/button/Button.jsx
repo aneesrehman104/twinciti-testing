@@ -10,10 +10,17 @@ const ButtonComponent = ({
     className = '',
     showEllips = false,
     height = '32px',
+    width = '100%',
 }) => {
     const defaultStyle =
         variant === 'activeBorder'
             ? styles.activeBorder
+            : variant === 'activeBorderCancel'
+            ? styles.activeBorderCancel
+            : variant === 'activeBorderConfirm'
+            ? styles.activeBorderConfirm
+            : variant === 'activeBorderRed'
+            ? styles.activeBorderRed
             : variant === 'primary'
             ? styles.buttonPrimary
             : variant === 'secondary'
@@ -39,7 +46,7 @@ const ButtonComponent = ({
                 type={htmlType}
                 disabled={disabled}
                 title={label}
-                style={{ height }}
+                style={{ height, width }}
             >
                 {showEllips ? <>&#x25cf;&ensp;</> : null}
                 {label}
