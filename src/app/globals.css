@@ -170,3 +170,13 @@ a {
     background: transparent !important;
     border-color: rgba(255, 255, 255, 0.12) !important;
 }
+
+.ant-switch.ant-switch-checked .ant-switch-inner {
+    background: rgba(6, 220, 131, 1) !important;
+}
+.ant-switch-inner {
+    background: rgba(255, 255, 255, 0.6) !important;
+}
+.ant-switch .ant-switch-handle::before {
+    background-color: rgba(43, 45, 49, 1) !important;
+}

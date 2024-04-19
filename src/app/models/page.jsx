@@ -8,11 +8,9 @@ import ModelHub from '../../screens/modelHub/ModelHub';
 export default function ChatsPage() {
     return (
         <Provider store={store}>
-            <Suspense>
-                <MainLayout>
-                    <ModelHub />
-                </MainLayout>
-            </Suspense>
+            <MainLayout>
+                <ModelHub />
+            </MainLayout>
         </Provider>
     );
 }
