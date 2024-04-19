@@ -12,7 +12,9 @@ const ButtonComponent = ({
     height = '32px',
 }) => {
     const defaultStyle =
-        variant === 'primary'
+        variant === 'activeBorder'
+            ? styles.activeBorder
+            : variant === 'primary'
             ? styles.buttonPrimary
             : variant === 'secondary'
             ? styles.buttonSecondary
@@ -22,7 +24,15 @@ const ButtonComponent = ({
             ? styles.buttonDefaultActive
             : styles.buttonDefault;
     return (
-        <div className={variant === 'default' ? styles.btnGradient : null}>
+        <div
+            className={
+                variant === 'activeBorder'
+                    ? styles.activeBorder
+                    : variant === 'default'
+                    ? styles.btnGradient
+                    : null
+            }
+        >
             <button
                 className={`${styles.buttonWrapper} ${defaultStyle} ${className}`}
                 onClick={onClick}

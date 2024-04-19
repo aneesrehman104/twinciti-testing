@@ -74,3 +74,20 @@
     color: rgba(124, 225, 183, 1);
     cursor: pointer;
 }
+
+.activeBorder {
+    background: linear-gradient(#16151a, #16151a) padding-box,
+        linear-gradient(94.25deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+            border-box;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    width: 100%;
+    color: #fff;
+    text-align: right;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 20px; /* 125% */
+    cursor: pointer;
+}

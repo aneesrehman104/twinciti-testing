@@ -23,6 +23,8 @@ const Usage = () => {
     const [myCurrentPlan, setMyCurrentPlan] = useState({});
     const [inputValues, setInputValues] = useState('');
     const [arrayInputValues, setArrayInputValues] = useState([]);
+    const [userPaid, setUserPaid] = useState(false);
+    const [spinner, setSpinner] = useState(false);
 
     const deleteThisChat = async () => {
         await deleteChatData();
@@ -56,11 +58,18 @@ const Usage = () => {
     }, []);
 
     const fetchCurrectPlan = async () => {
-        const res = await getApiWithAuth(`${URLs.GetConversation}`);
-        console.log('===============res', res);
+        setSpinner(true);
+        const res = await getApiWithAuth(`${URLs.SUBSCRIPTION}`);
         if (res.data.success) {
-            setMyCurrentPlan(res.data);
+            if (res.data.data.is_paid) {
+                setUserPaid(true);
+                setMyCurrentPlan(res.data);
+            } else {
+                setUserPaid(false);
+            }
+            setSpinner(false);
         } else {
+            setSpinner(false);
             message.open({
                 type: 'error',
                 content: `${res.data.message}`,
@@ -92,7 +101,14 @@ const Usage = () => {
     };
     return (
         <>
-            <div style={{ padding: 20, width: '100%', overflow: 'auto' }}>
+            <div
+                style={{
+                    padding: 20,
+                    width: '100%',
+                    overflow: 'auto',
+                    height: '100%',
+                }}
+            >
                 <div className={styles.topHeadingStyle}>Usage overview</div>
                 <div className={styles.topParagraphStyle}>
                     Lorem Ipsum is simply dummy text of the printing and
@@ -104,7 +120,329 @@ const Usage = () => {
                 </div>
                 <div className={styles.topHeadingStyle}>My Current plan</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    <div
+                    {userPaid ? (
+                        <></>
+                    ) : (
+                        <>
+                            <div className={styles.boxStyle}>
+                                <div className={styles.innerBoxText}>
+                                    This section shows usage but you need a plan
+                                    first.
+                                </div>
+                                <Image
+                                    alt="usageNoPlan"
+                                    height={200}
+                                    src="/usageNoPlan.svg"
+                                    width={200}
+                                />
+                                <ButtonComponent
+                                    variant="activeBorder"
+                                    height="44px"
+                                    label={'View  plans'}
+                                    onClick={() => router.push('/plans')}
+                                />
+                            </div>
+                            <div className={styles.boxStyle}>
+                                <div>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'flex-start',
+                                        }}
+                                    >
+                                        <Image
+                                            alt="autoIcon"
+                                            height={24}
+                                            src="/autoIcon.svg"
+                                            width={24}
+                                            style={{ marginRight: 10 }}
+                                        />
+                                        <div>
+                                            <div
+                                                className={
+                                                    styles.descriptionHeadingStyleInactive
+                                                }
+                                            >
+                                                Auto-buy quota increase{' '}
+                                                <Image
+                                                    alt="infoIcon"
+                                                    height={20}
+                                                    src="/infoIcon.svg"
+                                                    width={20}
+                                                    style={{ marginLeft: 10 }}
+                                                />
+                                            </div>
+
+                                            <div style={{ display: 'flex' }}>
+                                                <div
+                                                    className={
+                                                        styles.descriptionStyleInactive
+                                                    }
+                                                >
+                                                    Automatically buy quota
+                                                    increases when the remaining
+                                                    usage quota is below a
+                                                    certain threshold.
+                                                </div>
+                                                <Switch
+                                                    style={{ marginTop: 10 }}
+                                                    value={false}
+                                                    disabled
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        className={
+                                            styles.descriptionStyleInactive
+                                        }
+                                    >
+                                        When remaining usage quota is below
+                                    </div>
+
+                                    <Form autoComplete="false">
+                                        <Input
+                                            className={styles.inputStyle}
+                                            placeholder="0.0"
+                                            suffix={
+                                                <>
+                                                    <Image
+                                                        alt="buttonEndPercentage"
+                                                        height={50}
+                                                        src="/buttonEndPercentage.svg"
+                                                        style={{
+                                                            position:
+                                                                'absolute',
+                                                            right: 0,
+                                                            borderTopRightRadius: 8,
+                                                            borderBottomRightRadius: 8,
+                                                        }}
+                                                        width={47}
+                                                    />
+                                                </>
+                                            }
+                                            // value={filterData}
+                                            // onChange={(e) => setFilterData(e.target.value)}
+                                        />
+                                    </Form>
+                                    <div
+                                        className={
+                                            styles.descriptionStyleInactive
+                                        }
+                                    >
+                                        Purchase this amount
+                                    </div>
+
+                                    <Form autoComplete="false">
+                                        <Input
+                                            className={styles.inputStyle}
+                                            placeholder="0.0"
+                                            suffix={
+                                                <>
+                                                    <Image
+                                                        alt="buttonEndDollar"
+                                                        height={50}
+                                                        src="/buttonEndDollar.svg"
+                                                        style={{
+                                                            position:
+                                                                'absolute',
+                                                            right: 0,
+                                                            borderTopRightRadius: 8,
+                                                            borderBottomRightRadius: 8,
+                                                        }}
+                                                        width={47}
+                                                    />
+                                                </>
+                                            }
+                                            // value={filterData}
+                                            // onChange={(e) => setFilterData(e.target.value)}
+                                        />
+                                    </Form>
+                                    <div className={styles.topParagraphStyle}>
+                                        Min $10 and max $1000
+                                    </div>
+
+                                    <div
+                                        className={
+                                            styles.descriptionStyleInactive
+                                        }
+                                    >
+                                        The amount entered is approximately:
+                                    </div>
+                                    <div className={styles.backGroundAdded}>
+                                        <div
+                                            className={
+                                                styles.descriptionStyleInactive
+                                            }
+                                        >
+                                            <Image
+                                                alt="tick"
+                                                height={12}
+                                                src="/tick.svg"
+                                                width={12}
+                                                style={{ marginRight: 5 }}
+                                            />
+                                            1000 words per month
+                                        </div>
+                                        <div
+                                            className={
+                                                styles.descriptionStyleInactive
+                                            }
+                                        >
+                                            <Image
+                                                alt="tick"
+                                                height={12}
+                                                src="/tick.svg"
+                                                width={12}
+                                                style={{ marginRight: 5 }}
+                                            />
+                                            12 images per month
+                                        </div>
+                                        <div
+                                            className={
+                                                styles.descriptionStyleInactive
+                                            }
+                                        >
+                                            <Image
+                                                alt="tick"
+                                                height={12}
+                                                src="/tick.svg"
+                                                width={12}
+                                                style={{ marginRight: 5 }}
+                                            />
+                                            2 videos per month
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles.boxStyle}>
+                                <div>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'flex-start',
+                                        }}
+                                    >
+                                        <Image
+                                            alt="autoIcon"
+                                            height={24}
+                                            src="/autoIcon.svg"
+                                            width={24}
+                                            style={{ marginRight: 10 }}
+                                        />
+                                        <div>
+                                            <div
+                                                className={
+                                                    styles.descriptionHeadingStyleInactive
+                                                }
+                                            >
+                                                Threshold alert{' '}
+                                                <Image
+                                                    alt="infoIcon"
+                                                    height={20}
+                                                    src="/infoIcon.svg"
+                                                    width={20}
+                                                    style={{ marginLeft: 10 }}
+                                                />
+                                            </div>
+
+                                            <div style={{ display: 'flex' }}>
+                                                <div
+                                                    className={
+                                                        styles.descriptionStyleInactive
+                                                    }
+                                                >
+                                                    Be alerted when your usage
+                                                    quota drops below a certain
+                                                    threshold.
+                                                </div>
+                                                <Switch
+                                                    style={{ marginTop: 10 }}
+                                                    value={false}
+                                                    disabled
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        className={
+                                            styles.descriptionStyleInactive
+                                        }
+                                    >
+                                        Set threshold alert
+                                    </div>
+
+                                    <Form autoComplete="false">
+                                        <Input
+                                            className={styles.inputStyle}
+                                            placeholder="0.0"
+                                            suffix={
+                                                <>
+                                                    <Image
+                                                        alt="buttonEndPercentage"
+                                                        height={50}
+                                                        src="/buttonEndPercentage.svg"
+                                                        style={{
+                                                            position:
+                                                                'absolute',
+                                                            right: 0,
+                                                            borderTopRightRadius: 8,
+                                                            borderBottomRightRadius: 8,
+                                                        }}
+                                                        width={47}
+                                                    />
+                                                </>
+                                            }
+                                            // value={filterData}
+                                            // onChange={(e) => setFilterData(e.target.value)}
+                                        />
+                                    </Form>
+                                    <div
+                                        className={
+                                            styles.descriptionHeadingStylePerpule
+                                        }
+                                        onClick={() => saveThisAlert()}
+                                    >
+                                        + Add
+                                    </div>
+                                    <div
+                                        className={
+                                            styles.descriptionStyleInactive
+                                        }
+                                    >
+                                        Alert 1
+                                    </div>
+
+                                    <Form autoComplete="false">
+                                        <Input
+                                            className={styles.inputStyle}
+                                            placeholder="0.0"
+                                            suffix={
+                                                <>
+                                                    <Image
+                                                        alt="buttonEndDelete"
+                                                        height={50}
+                                                        src="/buttonEndDelete.svg"
+                                                        style={{
+                                                            position:
+                                                                'absolute',
+                                                            right: 0,
+                                                            borderTopRightRadius: 8,
+                                                            borderBottomRightRadius: 8,
+                                                        }}
+                                                        width={47}
+                                                    />
+                                                </>
+                                            }
+                                            value={'50%'}
+                                            // onChange={(e) => setFilterData(e.target.value)}
+                                        />
+                                    </Form>
+                                </div>
+                            </div>
+                        </>
+                    )}
+                    {/* <div
                         style={{
                             background: 'rgba(43, 45, 49, 1)',
                             borderRadius: 8,
@@ -205,34 +543,6 @@ const Usage = () => {
                                 sss
                             </div>
 
-                            {/* {item.description.map((descriptionItem: any) => {
-                return (
-                  <div
-                    className={
-                      descriptionItem.provide
-                        ? styles.headingStyle
-                        : styles.topParagraphStyle
-                    }
-                    key={descriptionItem._id}
-                  >
-                    <Image
-                      alt="tick"
-                      height={12}
-                      src="/tick.svg"
-                      width={12}
-                      style={{ marginRight: 5 }}
-                    />
-                    {descriptionItem.text}
-                  </div>
-                );
-              })} */}
-                            {/* <ButtonComponent
-                                className={styles.cancelSubscriptionButton}
-                                htmlType="button"
-                                label={'Cancel Subscription'}
-                                // onClick={handleButtonClick}
-                                type="button"
-                            /> */}
                             <ButtonComponent
                                 variant="dark"
                                 height="48px"
@@ -566,7 +876,7 @@ const Usage = () => {
                                 </>
                             ) : null}
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>

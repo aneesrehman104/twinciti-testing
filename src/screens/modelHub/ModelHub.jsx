@@ -41,6 +41,7 @@ const ModelHub = () => {
     const user = useSelector((state) => state.user);
     const modelInfo = useSelector((state) => state.models);
     const dispatch = useDispatch();
+    const router = useRouter();
     const searchParams = useSearchParams();
     const [showSelectedModal, setShowSelectedModal] = useState(false);
     const [modelsList, setModelsList] = useState({ records: [], total: 0 });
