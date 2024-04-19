@@ -1,30 +1,31 @@
 import styles from './ChatGistCard.module.css';
 import { MoreOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
+import { useRouter } from 'next/navigation';
 
 const ChatGistCard = ({
     active = false,
     name,
     time,
     description,
-    currentModelSettings,
-    defaultModelSettings,
+    id,
+    taskName,
 }) => {
-    const formatNumber = (num) => {
-        if (num < 1000) {
-            return num.toString();
-        } else if (num < 1e6) {
-            return `${(num / 1e3).toFixed(0)}k`;
-        }
-        return `${(num / 1e6).toFixed(1)}M`;
-    };
+    const router = useRouter();
+
     return (
         <div
-            className={
-                active
-                    ? styles.cardWrapper + ' ' + styles.cardWrapperActive
-                    : styles.cardWrapper
-            }
+            className={`${styles.cardWrapper} ${
+                active ? styles.cardWrapperActive : ''
+            }`}
+            onClick={() => {
+                if (id)
+                    router.push(
+                        `/chats?category=${
+                            taskName || 'text-generation'
+                        }&&chatId=${id}`,
+                    );
+            }}
         >
             <div className={styles.card}>
                 <div className={styles.cardHeader}>

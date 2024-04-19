@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from './ModalSettingCard.module.css';
 import { Collapse, Switch, Input, Dropdown, InputNumber, Slider } from 'antd';
@@ -8,51 +8,47 @@ import {
     DeleteOutlined,
     InfoCircleOutlined,
 } from '@ant-design/icons';
+import { postApiWithAuth } from '../../../utils/api';
 
 const handleMenuClick = (e) => {};
-const items = [
-    {
-        label: '1st menu item',
-        key: '1',
-    },
-    {
-        label: '2nd menu item',
-        key: '2',
-    },
-    {
-        label: '3rd menu item',
-        key: '3',
-    },
-    {
-        label: '4rd menu item',
-        key: '4',
-    },
-];
-
-const settingsList = [
-    { name: 'Max Tokens' },
-    { name: 'Chat Memory' },
-    { name: 'Temperature' },
-    { name: 'Top P' },
-    { name: 'Top K' },
-    { name: 'Frequency Penalty' },
-    { name: 'Presence Penalty' },
-    { name: 'Repetition Penalty' },
-    { name: 'Min P' },
-    { name: 'Top A' },
-];
 
 const menuProps = {
-    items,
+    items: [],
     onClick: handleMenuClick,
 };
 
+const settingsList = [
+    { name: 'Max Tokens', key: 'max_token' },
+    { name: 'Chat Memory', key: 'chat_memory' },
+    { name: 'Temperature', key: 'temperature' },
+    { name: 'Top P', key: 'top_p' },
+    { name: 'Top K', key: 'top_k' },
+    { name: 'Frequency Penalty', key: 'frequency_penalty' },
+    { name: 'Presence Penalty', key: 'presence_penalty' },
+    { name: 'Repetition Penalty', key: 'repetition_penalty' },
+    { name: 'Min P', key: 'min_p' },
+    { name: 'Top A', key: 'top_a' },
+];
+
 const ModalSettingCard = ({
+    modelId,
+    chatId,
     index = -1,
     modelName = '',
     currentModelSettings = {},
-    defaultModelSettings = {},
 }) => {
+    const [modelSettings, setModelSettings] = useState(currentModelSettings);
+    useEffect(() => {
+        (async () => {
+            if (chatId && modelId) {
+                const response = await postApiWithAuth(
+                    `${process.env.NEXT_PUBLIC_API_URL}/setting/${chatId}/model/${modelId}`,
+                    modelSettings,
+                );
+            }
+        })();
+    }, [modelSettings]);
+
     const genExtra = () => (
         <>
             <Switch
@@ -77,53 +73,62 @@ const ModalSettingCard = ({
                 <span className={styles.labelText}>Model</span>
                 <Dropdown.Button
                     className={styles.dropdownWrap}
-                    icon={<DownOutlined />}
+                    icon={
+                        <Image
+                            alt="expandIcon"
+                            height={18}
+                            src="/expandIcon.svg"
+                            width={30}
+                        />
+                    }
                     menu={menuProps}
-                    onClick={() => {}}
+                    disabled
                 >
-                    Dropdown
+                    {modelName}
                 </Dropdown.Button>
             </div>
             <div className={styles.itemsWrap}>
                 <span className={styles.labelText}>Description</span>
                 <Input.TextArea
                     className={styles.textAreaWrap}
-                    placeholder="Autosize height with minimum and maximum number of lines"
+                    placeholder=""
+                    onChange={(e) =>
+                        setModelSettings((prev) => {
+                            return {
+                                ...prev,
+                                system_prompt: e?.target?.value || '',
+                            };
+                        })
+                    }
                     autoSize={{ minRows: 3, maxRows: 3 }}
                 />
             </div>
             <div className={styles.subItemsWrap}>
-                {settingsList.map((se) => (
+                {settingsList.map(({ name, key }) => (
                     <div className={styles.mainRowsWrap}>
                         <div className={styles.rowsWrap}>
                             <div className={styles.subItemWrap}>
-                                <p className={styles.headerText}>{se?.name}</p>
+                                <p className={styles.headerText}>{name}</p>
                                 <InfoCircleOutlined />
                             </div>
                             <InputNumber
                                 className={styles.inputWraper}
-                                min={se?.min}
-                                max={se?.max}
                                 defaultValue={
-                                    currentModelSettings[se?.key]
-                                        ? currentModelSettings[se?.key]
-                                        : 0
+                                    modelSettings[key] ? modelSettings[key] : 0
                                 }
-                                onChange={() => {}}
                                 readOnly
                                 changeOnWheel
                             />
                         </div>
                         <Slider
                             className={styles.rangeSlider}
-                            min={se?.min}
-                            max={se?.max}
-                            onChange={() => {}}
-                            value={
-                                currentModelSettings[se?.key]
-                                    ? currentModelSettings[se?.key]
-                                    : 0
-                            }
+                            onChange={(e) => {
+                                setModelSettings((prev) => {
+                                    prev[key] = e?.target?.value || prev[key];
+                                    return prev;
+                                });
+                            }}
+                            value={modelSettings[key] ? modelSettings[key] : 0}
                         />
                     </div>
                 ))}

@@ -54,8 +54,6 @@
     border-top: 0.5px solid rgba(255, 255, 255, 0.2);
 }
 
-.contentStyle {
-}
 .rightpanel :global .ant-layout-header {
     height: 80px;
 }
