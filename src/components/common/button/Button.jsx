@@ -7,11 +7,21 @@ const ButtonComponent = ({
     htmlType = 'button',
     disabled,
     variant,
+    className = '',
     showEllips = false,
     height = '32px',
+    width = '100%',
 }) => {
     const defaultStyle =
-        variant === 'primary'
+        variant === 'activeBorder'
+            ? styles.activeBorder
+            : variant === 'activeBorderCancel'
+            ? styles.activeBorderCancel
+            : variant === 'activeBorderConfirm'
+            ? styles.activeBorderConfirm
+            : variant === 'activeBorderRed'
+            ? styles.activeBorderRed
+            : variant === 'primary'
             ? styles.buttonPrimary
             : variant === 'secondary'
             ? styles.buttonSecondary
@@ -21,14 +31,22 @@ const ButtonComponent = ({
             ? styles.buttonDefaultActive
             : styles.buttonDefault;
     return (
-        <div className={variant === 'default' ? styles.btnGradient : null}>
+        <div
+            className={
+                variant === 'activeBorder'
+                    ? styles.activeBorder
+                    : variant === 'default'
+                    ? styles.btnGradient
+                    : null
+            }
+        >
             <button
-                className={`${styles.buttonWrapper} ${defaultStyle}`}
+                className={`${styles.buttonWrapper} ${defaultStyle} ${className}`}
                 onClick={onClick}
                 type={htmlType}
                 disabled={disabled}
                 title={label}
-                style={{ height }}
+                style={{ height, width }}
             >
                 {showEllips ? <>&#x25cf;&ensp;</> : null}
                 {label}

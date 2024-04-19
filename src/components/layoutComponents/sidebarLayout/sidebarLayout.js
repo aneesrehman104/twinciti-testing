@@ -15,8 +15,8 @@ const SiderComponent = ({
             collapsedWidth="0"
             onBreakpoint={onBreakpoint}
             onCollapse={collapsedHandle}
-            style={{ background: '#16151A' }}
-            width={'300px'}
+            style={{ background: '#16151A', minWidth: '320px' }}
+            width={'320px'}
         >
             {children}
         </Sider>

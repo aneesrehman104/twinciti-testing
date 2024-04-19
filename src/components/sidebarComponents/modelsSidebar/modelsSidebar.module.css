@@ -14,7 +14,7 @@
 }
 
 .btnGradient {
-    background: linear-gradient(#16151a, #16151a) padding-box,
+    background: linear-gradient(black, black) padding-box,
         linear-gradient(94.25deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
             border-box;
     border: 1px solid transparent;
@@ -52,8 +52,4 @@
     line-height: 16px;
     height: 45px;
     border-top: 0.5px solid rgba(255, 255, 255, 0.2);
-}
-
-.rightpanel :global .ant-layout-header {
-    height: 80px;
 }

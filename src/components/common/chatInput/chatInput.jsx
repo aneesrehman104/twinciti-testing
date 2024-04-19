@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form } from 'antd';
 import { Mention, MentionsInput } from 'react-mentions';
 import styles from './chatInput.module.css';
@@ -29,9 +29,12 @@ const ChatInput = ({
     getModelsByIdMdntionSearch,
     onSend,
 }) => {
+    const [isHover, setIsHover] = useState(false);
+
     const handleKeyDown = (event) => {
         if (event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault();
+            setIsHover(false);
             onSend();
         }
     };
@@ -45,9 +48,20 @@ const ChatInput = ({
                 rules={rules}
                 style={style}
             >
-                <div className={styles.inputFieldMention}>
-                    <div style={{ width: 'auto', marginTop: 10 }}>{prefix}</div>
+                <div
+                    className={
+                        styles.inputFieldMention +
+                        ' ' +
+                        (isHover ? styles.activeInputBorder : '')
+                    }
+                >
+                    <div style={{ width: 'auto' }}>{prefix}</div>
                     <MentionsInput
+                        onFocus={() => setIsHover(true)}
+                        onBlur={() => {
+                            setIsHover(false);
+                        }}
+                        disabled={disabled}
                         onKeyDown={handleKeyDown}
                         a11ySuggestionsListLabel={'Suggested mentions'}
                         allowSuggestionsAboveCursor={true}
@@ -60,7 +74,7 @@ const ChatInput = ({
                             width: '100%',
                             position: 'relative',
                             control: {
-                                backgroundColor: 'rgba(43, 45, 49, 1)',
+                                background: 'transparent',
                                 fontSize: 14,
                                 fontWeight: 'normal',
                             },
@@ -75,10 +89,13 @@ const ChatInput = ({
                                     border: '1px solid transparent',
                                 },
                                 input: {
-                                    padding: 9,
+                                    padding: '14px 12px',
                                     border: 'none',
+                                    background: 'transparent',
                                     overflow: 'auto',
                                     maxHeight: 280,
+                                    fontSize: '14px',
+                                    lineHeight: '16px',
                                 },
                             },
                             '&singleLine': {
@@ -133,7 +150,7 @@ const ChatInput = ({
                             appendSpaceOnAdd
                         />
                     </MentionsInput>
-                    <div style={{ marginTop: 5 }}>{suffix}</div>
+                    <div>{suffix}</div>
                 </div>
             </Form.Item>
         </>
