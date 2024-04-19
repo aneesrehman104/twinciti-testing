@@ -1,0 +1,26 @@
+.modalWidth{
+    width: 70%;
+}
+.headerStyle{
+    font-size: 24px;
+    color: rgba(247, 251, 255, 1);
+    font-weight: 600;
+    text-align: center;
+    font-family: var(--font-poppins) !important;
+    padding-top: 30px;
+
+}
+.headerStyleInLine{
+    padding-top: 0px;
+}
+
+@media only screen and (max-width: 700px)  {
+    .modalWidth{
+        width: 90%;
+    }
+}
+@media only screen and (max-width: 700px)  {
+    .modalWidth{
+        width: 90%;
+    }
+}
