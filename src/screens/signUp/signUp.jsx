@@ -36,7 +36,6 @@ const SignUp = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [otp, setOtp] = useState('');
-    console.log('otpp==>', otp);
     const [timer, setTimer] = useState(60);
     const [timerRunning, setTimerRunning] = useState(false);
 
@@ -56,10 +55,6 @@ const SignUp = () => {
         setDetailData({ ...detailData, [name]: value });
     };
 
-    // const onChangeHandlePhone = (e) => {
-    //     const { value } = e.target;
-    //     setPhoneNumber(value);
-    // };
     const handlePhoneNumberChange = (value, country) => {
         setPhoneNumber('+' + value);
         setCountryCode(country.dialCode);
@@ -147,7 +142,6 @@ const SignUp = () => {
         }
     };
     const handleOtpEmail = async () => {
-        console.log(url);
         const response = await getApiWithAuth(url);
         setOtpSentEmail(false);
         startTimer();
