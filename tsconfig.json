@@ -31,7 +31,9 @@
         "src/components/common/twincitiButton/page.jsx",
         "src/components/common/twincitiInput/page.jsx",
         "src/components/common/twincitiInput/page.jsx",
-        "src/components/common/twincitiInput/page.jsx"
+        "src/components/common/twincitiInput/page.jsx",
+        "src/components/authComponent/fotgotPassword/forgotPassword.jsx",
+        "src/components/authComponent/resetpassword/resetPassword.jsx"
     ],
     "exclude": ["node_modules"]
 }

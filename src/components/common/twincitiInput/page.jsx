@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
 import { Form, Input } from 'antd';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import './style.css';
 
@@ -53,6 +55,19 @@ export default function TwincitiInput({
                         required={required}
                         type={type}
                         value={value}
+                    />
+                ) : type === 'phoneNumber' ? (
+                    <PhoneInput
+                        country={'us'}
+                        value={value}
+                        onChange={onChange}
+                        inputProps={{
+                            name,
+                            placeholder,
+                            required,
+                            autoFocus,
+                            disabled,
+                        }}
                     />
                 ) : type === 'TextArea' ? (
                     <Input.TextArea

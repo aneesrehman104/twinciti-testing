@@ -1,11 +1,12 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Checkbox, Form, message } from 'antd';
 import { useRouter } from 'next/navigation';
 import { setCookie } from 'cookies-next';
 import { useDispatch } from 'react-redux';
 
 import {
+    getApiWithAuth,
     patchApiWithAuth,
     postApiWithAuth,
     postApiWithoutAuth,
@@ -24,16 +25,26 @@ const SignUp = () => {
 
     const [data, setData] = useState([]);
     const [detailData, setDetailData] = useState([]);
-    const [phoneNumber, setPhoneNumber] = useState(null);
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [countryCode, setCountryCode] = useState('');
     const [buttonSpinner, setButtonSpinner] = useState(false);
     const [buttonDisable, setButtonDisable] = useState(false);
     const [agree, setAgree] = useState(false);
     const [verifyPhoneVisible, setVerifyPhoneVisible] = useState(false);
     const [otpSent, setOtpSent] = useState(false);
+    const [otpSentEmail, setOtpSentEmail] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
-    const [otp, setOtp] = useState({});
+    const [otp, setOtp] = useState('');
+    console.log('otpp==>', otp);
     const [timer, setTimer] = useState(60);
+    const [timerRunning, setTimerRunning] = useState(false);
+
+    const queryParams = new URLSearchParams({
+        code: otp,
+    });
+
+    const url = `${URLs.VERIFY_EMAIL}?${queryParams}`;
 
     const onChangeHandleSubmit = (e) => {
         const { name, value } = e.target;
@@ -45,11 +56,14 @@ const SignUp = () => {
         setDetailData({ ...detailData, [name]: value });
     };
 
-    const onChangeHandlePhone = (e) => {
-        const { value } = e.target;
-        setPhoneNumber(value);
+    // const onChangeHandlePhone = (e) => {
+    //     const { value } = e.target;
+    //     setPhoneNumber(value);
+    // };
+    const handlePhoneNumberChange = (value, country) => {
+        setPhoneNumber('+' + value);
+        setCountryCode(country.dialCode);
     };
-
     const handleFinish = (values) => {
         setOtp(values);
     };
@@ -59,15 +73,34 @@ const SignUp = () => {
     };
 
     const sendOtp = async () => {
+        resetTimer();
         setButtonDisable(true);
         const response = await postApiWithAuth(URLs.SMS_VERIFICATION, {
             phone: phoneNumber,
         });
-
         if (response.success) {
-            startTimer();
-            setOtpSent(true);
             setVerifyPhoneVisible(false);
+            setOtpSent(true);
+            startTimer();
+        } else {
+            setButtonSpinner(false);
+            setTimeout(() => {
+                setButtonDisable(false);
+            }, 3000);
+            message.open({
+                type: 'error',
+                content: `${response.message}`,
+                duration: 2,
+            });
+        }
+    };
+
+    const sendOtpEmail = async () => {
+        resetTimer();
+        const response = await getApiWithAuth(URLs.EMAIL_VERIFICATION);
+        if (response.success) {
+            setOtpSentEmail(false);
+            startTimer();
         } else {
             setButtonSpinner(false);
             setTimeout(() => {
@@ -82,30 +115,47 @@ const SignUp = () => {
     };
 
     const startTimer = () => {
-        setButtonDisable(true);
-        const interval = setInterval(() => {
-            setTimer((prevTimer) => {
-                if (prevTimer === 1) {
-                    clearInterval(interval);
-                    setButtonDisable(false);
-                }
-                return prevTimer - 1;
-            });
-        }, 1000);
+        setTimerRunning(true);
+    };
+
+    const resetTimer = () => {
+        setTimerRunning(false);
     };
 
     const handleOtp = async () => {
         setVerifyPhoneVisible(false);
         const response = await postApiWithAuth(URLs.VERIFY_PHONE, {
-            ...phoneNumber,
+            phone: phoneNumber,
             code: otp,
-            countryCode: 'PK',
+            countryCode,
         });
         if (response.success) {
-            setOtpSent(true);
+            setOtpSentEmail(true);
             setIsVisible(true);
+            startTimer();
         } else {
             setOtpSent(true);
+            setButtonSpinner(false);
+            setTimeout(() => {
+                setButtonDisable(false);
+            }, 3000);
+            message.open({
+                type: 'error',
+                content: `${response.message}`,
+                duration: 2,
+            });
+        }
+    };
+    const handleOtpEmail = async () => {
+        console.log(url);
+        const response = await getApiWithAuth(url);
+        setOtpSentEmail(false);
+        startTimer();
+        if (response.data.success) {
+            setVerifyPhoneVisible(true);
+            setOtpSentEmail(false);
+        } else {
+            setOtpSentEmail(true);
             setButtonSpinner(false);
             setTimeout(() => {
                 setButtonDisable(false);
@@ -123,7 +173,11 @@ const SignUp = () => {
         setIsModalVisible(true);
     };
 
-    const signupSubmit = async () => {
+    const onEmailModalVisible = () => {
+        setIsModalVisible(true);
+    };
+
+    const signUpSubmit = async () => {
         setButtonSpinner(true);
         setButtonDisable(true);
         if (!agree) {
@@ -150,7 +204,9 @@ const SignUp = () => {
             dispatch(loginUser(response.data.user_details));
             setButtonDisable(false);
             setButtonSpinner(false);
-            onModalVisible();
+            sendOtpEmail();
+            setOtpSentEmail(true);
+            setIsModalVisible(true);
         } else {
             setButtonSpinner(false);
             setTimeout(() => {
@@ -190,6 +246,25 @@ const SignUp = () => {
         }
     };
 
+    useEffect(() => {
+        console.log(timerRunning);
+        let interval;
+        if (timerRunning) {
+            interval = setInterval(() => {
+                setTimer((prevTimer) => {
+                    if (prevTimer === 1) {
+                        clearInterval(interval);
+                        setTimerRunning(false);
+                    }
+                    return prevTimer - 1;
+                });
+            }, 1000);
+        } else {
+            clearInterval(interval);
+            setTimer(60);
+        }
+        return () => clearInterval(interval);
+    }, [timerRunning]);
     return (
         <>
             <div className={styles.mainWrapperBody}>
@@ -201,7 +276,7 @@ const SignUp = () => {
                             labelCol={{ span: 24 }}
                             layout="vertical"
                             name="signUp-form"
-                            onFinish={signupSubmit}
+                            onFinish={signUpSubmit}
                             wrapperCol={{ span: 24 }}
                         >
                             <TwincitiInput
@@ -291,7 +366,7 @@ const SignUp = () => {
                                         style={{ marginLeft: 5 }}
                                     />
                                 }
-                            ></TwincitiButton>
+                            />
                             <p className={styles.linkBtn}>
                                 Already have an account?
                                 <a
@@ -401,18 +476,11 @@ const SignUp = () => {
                                 textAlign: 'left',
                             }}
                         >
-                            Verify Phone
+                            Add phone number
                         </h4>
                     }
                 >
                     <div className={styles.modalMainWrapper}>
-                        <p className={styles.textTitle}>
-                            A 6 digits Code has been sent to your phone
-                            amae******gmail.com
-                            <span>
-                                <a href="#">Change</a>
-                            </span>
-                        </p>
                         <Form
                             initialValues={{ remember: true }}
                             labelCol={{ span: 24 }}
@@ -423,14 +491,21 @@ const SignUp = () => {
                         >
                             <div className={styles.phInputWrap}>
                                 <TwincitiInput
-                                    name="phone"
-                                    label="Phone"
-                                    onChange={onChangeHandlePhone}
-                                    placeholder="Enter your phone number"
+                                    type="phoneNumber"
+                                    label="Phone Number"
+                                    placeholder="234 567 8900"
+                                    value={phoneNumber}
+                                    onChange={handlePhoneNumberChange}
+                                    required
+                                />
+                                <TwincitiInput
+                                    name="Referral code"
+                                    label="Referral code (Optional)"
+                                    onChange={() => {}}
+                                    placeholder="XYE565SDX667"
                                     rules={[
                                         {
-                                            required: true,
-                                            message: 'Enter your phone number',
+                                            required: false,
                                         },
                                     ]}
                                     type="text"
@@ -456,7 +531,7 @@ const SignUp = () => {
                     footer={null}
                     onClose={() => {
                         setOtpSent(false);
-                        setIsModalVisible(false);
+                        setIsModalVisible(true);
                     }}
                     modal
                     visible={otpSent}
@@ -484,7 +559,7 @@ const SignUp = () => {
                             initialValues={{ remember: true }}
                             labelCol={{ span: 24 }}
                             layout="vertical"
-                            name="otp-verification"
+                            name="otp-phone-verification"
                             wrapperCol={{ span: 24 }}
                             onFinish={handleOtp}
                         >
@@ -518,9 +593,118 @@ const SignUp = () => {
                             </div>
                         </Form>
                         <div className={styles.timeSection}>
-                            <h2>{`00:${timer < 10 ? `0${timer}` : timer}`}</h2>
-                            <p>
+                            {timer !== 60 && (
+                                <h2>{`00:${
+                                    timer < 10 ? `0${timer}` : timer
+                                }`}</h2>
+                            )}
+
+                            <p
+                                onClick={sendOtp}
+                                className="hover-pointer"
+                                style={{
+                                    color: timerRunning ? '#646268' : '#ab69ff',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                Resend
+                            </p>
+                        </div>
+                    </div>
+                </CustomModal>
+                <CustomModal
+                    width={'440px'}
+                    className={styles.mainModalGroup}
+                    footer={null}
+                    onClose={() => {
+                        setOtpSentEmail(false);
+                        setIsVisible(true);
+                    }}
+                    visible={otpSentEmail}
+                    modalWidth={'100%'}
+                    title={
+                        <h4
+                            style={{
+                                margin: '-28px 0 18px',
+                                textAlign: 'left',
+                            }}
+                        >
+                            Verify email code
+                        </h4>
+                    }
+                >
+                    <div className={styles.modalMainWrapper}>
+                        <p className={styles.textTitle}>
+                            A 6 digits Code has been sent to your email{' '}
+                            {data.email
+                                ? `${data.email.slice(
+                                      0,
+                                      4,
+                                  )}******${data.email.slice(
+                                      data.email.indexOf('@'),
+                                  )}`
+                                : ''}{' '}
+                            Change
+                        </p>
+
+                        <Form
+                            initialValues={{ remember: true }}
+                            labelCol={{ span: 24 }}
+                            layout="vertical"
+                            name="otp-email-verification"
+                            wrapperCol={{ span: 24 }}
+                            onFinish={handleOtpEmail}
+                        >
+                            <div className={styles.otpWrapper}>
+                                <TwincitiInput
+                                    name="otp2"
+                                    onChange={(value) => {
+                                        setOtp(value);
+                                    }}
+                                    rules={[
+                                        {
+                                            validator: async () =>
+                                                Promise.resolve(),
+                                        },
+                                    ]}
+                                    type="OTP"
+                                    value={data.password}
+                                />
+                            </div>
+
+                            <div className={styles.btnWrap}>
+                                <TwincitiButton
+                                    disabled={buttonDisable}
+                                    htmlType="submit"
+                                    label="Verify Code"
+                                    className={styles.btnLogin}
+                                    loading={buttonSpinner}
+                                    onClick={() => {}}
+                                />
+                            </div>
+                        </Form>
+                        <div className={styles.timeSection}>
+                            {timer !== 60 && (
+                                <h2>{`00:${
+                                    timer < 10 ? `0${timer}` : timer
+                                }`}</h2>
+                            )}
+                            {/* <p>
                                 <a href="#">Change</a>
+                            </p> */}
+                            <p
+                                onClick={!timerRunning ? sendOtpEmail : null}
+                                className={`hover-pointer ${
+                                    timerRunning ? styles.disabled : ''
+                                }`}
+                                style={{
+                                    color: timerRunning ? '#646268' : '#ab69ff',
+                                    cursor: timerRunning
+                                        ? 'not-allowed'
+                                        : 'pointer',
+                                }}
+                            >
+                                Resend
                             </p>
                         </div>
                     </div>

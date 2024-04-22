@@ -17,4 +17,6 @@ export const URLs = {
     SUBSCRIPTION: '/stripe/subscription',
     SMS_VERIFICATION: '/phone/getcode',
     VERIFY_PHONE: '/phone/verify',
+    EMAIL_VERIFICATION: '/verify-email/code',
+    VERIFY_EMAIL: 'verify-email/verify',
 };

@@ -253,6 +253,17 @@
     font-weight: 400;
     line-height: 20px;
     margin-bottom: 24px;
+    cursor: pointer;
+}
+
+.modalMainWrapper .gray-text {
+    color: gray;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 24px;
+    cursor: pointer;
 }
 
 .modalMainWrapper p span a {
@@ -296,6 +307,104 @@
 .phInputWrap :global .ant-form-item .ant-form-item-row .ant-form-item-control {
     width: 100%;
 }
+
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    input {
+    border-radius: 8px;
+    padding-left: 60px;
+    border: 0.604px solid #3f4147;
+    background: transparent;
+    width: 100%;
+    height: 50px;
+    color: #fff;
+}
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    .flag-dropdown
+    .country-list {
+    background: linear-gradient(180deg, #191920 0%, #1c1b21 100%) !important;
+    width: 500px;
+    color: #fff;
+}
+
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    .flag-dropdown
+    .country-list
+    .country:hover,
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    .flag-dropdown
+    .country-list
+    .country.active,
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    .flag-dropdown
+    .country-list
+    .country.highlight {
+    color: #fff;
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.04) 100%
+    );
+}
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    .flag-dropdown {
+    padding-right: 16px;
+    margin: auto 16px auto auto;
+    background: transparent !important;
+    border-right: 0.604px solid rgba(255, 255, 255, 0.4);
+    height: 34px;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+}
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    .flag-dropdown
+    .selected-flag {
+    padding-right: 16px;
+    color: #fff;
+    width: 38px;
+    padding-left: 12px;
+    /* border: 0.604px solid #3f4147; */
+    background: transparent !important;
+    /* border-right: 0.604px solid rgba(255, 255, 255, 0.4); */
+}
+
 .phInputWrap :global .ant-form-item .ant-form-item-row {
     display: flex;
     flex-direction: column;
@@ -370,8 +479,9 @@
 }
 .timeSection p {
     margin: 0;
+    color: 'red';
 }
-.timeSection p a {
+.timeSection p {
     color: #ab69ff;
     font-size: 14px;
     font-weight: 400;
