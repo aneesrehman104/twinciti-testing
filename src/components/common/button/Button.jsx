@@ -10,7 +10,7 @@ const ButtonComponent = ({
     className = '',
     showEllips = false,
     height = '32px',
-    width = '100%',
+    width,
 }) => {
     const defaultStyle =
         variant === 'activeBorder'
