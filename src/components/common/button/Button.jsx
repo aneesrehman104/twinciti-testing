@@ -29,7 +29,9 @@ const ButtonComponent = ({
             ? styles.buttonDark
             : variant === 'defaultActive'
             ? styles.buttonDefaultActive
-            : styles.buttonDefault;
+            : !className
+            ? styles.buttonDefault
+            : '';
     return (
         <div
             className={
@@ -46,7 +48,6 @@ const ButtonComponent = ({
                 type={htmlType}
                 disabled={disabled}
                 title={label}
-                style={{ height, width }}
             >
                 {showEllips ? <>&#x25cf;&ensp;</> : null}
                 {label}
