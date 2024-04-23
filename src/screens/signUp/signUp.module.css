@@ -1,0 +1,557 @@
+.mainWrapperBody {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.mainLogin {
+    max-width: 680px;
+    width: 100%;
+    padding: 28px 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(32.72395324707031px);
+}
+.mainLogin h4 {
+    color: #fff;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+    margin-bottom: 40px;
+}
+.mainLogin form {
+    padding: 0 50px;
+}
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-label
+    label {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+}
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-label
+    label::before {
+    display: none;
+}
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    input {
+    border-radius: 8px;
+    border: 0.604px solid #3f4147;
+    background: transparent;
+}
+
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+}
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .ant-form-item-control-input
+    .ant-input-affix-wrapper {
+    border-radius: 8px;
+    border: 0.604px solid #3f4147;
+    background: transparent;
+}
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .ant-form-item-control-input
+    .ant-input-affix-wrapper
+    input {
+    border: none;
+}
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .ant-form-item-control-input
+    .ant-input-affix-wrapper
+    .ant-input-suffix
+    .anticon {
+    color: rgba(255, 255, 255, 0.4);
+}
+.linkWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+}
+.linkWrapper .checkLabel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+}
+.linkWrapper .forgotPassword {
+    color: #fff;
+    text-align: right;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+.mainModalGroup .modalMainWrapper .btnWrap {
+    display: flex;
+    justify-content: center;
+}
+.mainModalGroup .modalMainWrapper .btnWrap :global .twincitiButton {
+    max-width: 360px;
+    width: 100%;
+    margin: 24px auto 0 !important;
+}
+.mainWrapperBody .mainLogin :global .ant-form .twincitiButton,
+.mainModalGroup .modalMainWrapper .btnWrap :global .twincitiButton {
+    border-radius: 10px;
+    background: var(
+        --Primary,
+        linear-gradient(94deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+    );
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 48px;
+    margin: 40px 0;
+    height: 48px;
+    padding: 0 18px;
+    transform: scale(1);
+    transition: all 1s ease;
+}
+.mainWrapperBody .mainLogin :global .ant-form .twincitiButton:hover,
+.mainModalGroup .modalMainWrapper .btnWrap :global .twincitiButton:hover {
+    border-radius: 10px;
+    transform: scale(1.1);
+    background: var(
+        --Primary,
+        linear-gradient(94deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+    );
+}
+.linkBtn {
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+}
+.linkBtn .signUpLink {
+    margin-left: 5px;
+    color: #ab69ff;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    text-decoration-line: underline;
+}
+.conditionWrap span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #58d8a4;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 16px;
+    margin-top: -8px;
+}
+.conditionWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+.termsWrap {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+.termsWrap :global .ant-form-item {
+    margin: 0;
+}
+.termsWrap :global .ant-form-item .ant-form-item-control-input {
+    min-height: fit-content;
+}
+.termsWrap
+    :global
+    .ant-form-item
+    .ant-form-item-control-input
+    .ant-checkbox-wrapper
+    .ant-checkbox {
+    margin-top: 0;
+}
+.termsWrap :global .ant-form-item .ant-form-item-control {
+    margin-top: 6px;
+}
+.termsWrap
+    :global
+    .ant-form-item
+    .ant-form-item-control-input
+    .ant-checkbox-wrapper
+    .ant-checkbox
+    .ant-checkbox-inner::after {
+    margin-top: -4px;
+}
+.termsWrap label {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+}
+.termsWrap label a {
+    color: #ab69ff;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-decoration-line: underline;
+}
+
+.modalMainWrapper {
+    padding: 0;
+}
+
+.modalMainWrapper p {
+    color: #c4c4c4;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 24px;
+    cursor: pointer;
+}
+
+.modalMainWrapper .gray-text {
+    color: gray;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 24px;
+    cursor: pointer;
+}
+
+.modalMainWrapper p span a {
+    color: #ab69ff;
+    text-decoration-line: underline;
+}
+
+.termOfService {
+    color: #f7fbff;
+    font-size: 12px;
+    font-family: var(--font-poppins) !important;
+
+    margin-left: 8px;
+    letter-spacing: 0.16px;
+}
+
+.termOfServiceLink::after,
+.termOfServiceLink,
+.termOfServiceLink:focus {
+    color: #fff;
+    margin-left: 5px;
+    text-decoration: underline;
+}
+
+.termOfServiceLink:hover {
+    text-decoration: underline;
+}
+
+.termsWrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+.phInputWrap :global .ant-form-item .ant-form-item-label label {
+    color: #fff;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px;
+}
+.phInputWrap :global .ant-form-item .ant-form-item-row .ant-form-item-control {
+    width: 100%;
+}
+
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    input {
+    border-radius: 8px;
+    padding-left: 60px;
+    border: 0.604px solid #3f4147;
+    background: transparent;
+    width: 100%;
+    height: 50px;
+    color: #fff;
+}
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    .flag-dropdown
+    .country-list {
+    background: linear-gradient(180deg, #191920 0%, #1c1b21 100%) !important;
+    width: 500px;
+    color: #fff;
+}
+
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    .flag-dropdown
+    .country-list
+    .country:hover,
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    .flag-dropdown
+    .country-list
+    .country.active,
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    .flag-dropdown
+    .country-list
+    .country.highlight {
+    color: #fff;
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.04) 100%
+    );
+}
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    .flag-dropdown {
+    padding-right: 16px;
+    margin: auto 16px auto auto;
+    background: transparent !important;
+    border-right: 0.604px solid rgba(255, 255, 255, 0.4);
+    height: 34px;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+}
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .react-tel-input
+    .flag-dropdown
+    .selected-flag {
+    padding-right: 16px;
+    color: #fff;
+    width: 38px;
+    padding-left: 12px;
+    /* border: 0.604px solid #3f4147; */
+    background: transparent !important;
+    /* border-right: 0.604px solid rgba(255, 255, 255, 0.4); */
+}
+
+.phInputWrap :global .ant-form-item .ant-form-item-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.mainModalGroup {
+    width: 100%;
+    top: 33%;
+    padding-bottom: 12px;
+    /* transform: translateY(-50%); */
+}
+/* .mainModalGroup :global .ant-modal-content .ant-modal-body > div {
+    top: unset;
+    transform: unset;
+} */
+
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-label
+    label::before {
+    display: none;
+}
+.phInputWrap
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .ant-form-item-control-input
+    input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.pinWrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.pinWrapper :global .ant-form-item {
+    margin: 20px 0 30px;
+}
+.pinWrapper
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .ant-form-item-control-input
+    .ant-form-item-control-input-content
+    .ant-input {
+    text-align: center;
+}
+.timeSection {
+    padding-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.timeSection h2 {
+    color: #c4c4c4;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 0;
+}
+.timeSection p {
+    margin: 0;
+    color: 'red';
+}
+.timeSection p {
+    color: #ab69ff;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-decoration-line: underline;
+}
+.moreDetailWrapper {
+    display: flex;
+    flex-direction: column;
+}
+.moreDetailWrapper :global .ant-form .inputMainWrap {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    width: 100%;
+}
+
+.moreDetailWrapper :global .ant-form .inputMainWrap .ant-form-item {
+    flex: 1;
+}
+
+.otpWrapper
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .ant-form-item-control-input
+    .ant-form-item-control-input-content
+    .ant-otp {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+.otpWrapper
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .ant-form-item-control-input
+    .ant-form-item-control-input-content
+    .ant-otp
+    .ant-otp-input {
+    border: 1px solid #3f4147;
+    border-radius: 8px;
+    flex: 1;
+    height: 48px;
+}
+.textTitle {
+    display: flex;
+    flex-direction: column;
+}
+.moreDetailWrapper
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .ant-form-item-control-input
+    .ant-form-item-control-input-content
+    input::-webkit-inner-spin-button,
+.moreDetailWrapper
+    :global
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .ant-form-item-control-input
+    .ant-form-item-control-input-content
+    input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}

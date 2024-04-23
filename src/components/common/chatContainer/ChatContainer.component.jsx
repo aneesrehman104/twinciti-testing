@@ -26,7 +26,6 @@ const ChatContainer = ({
 }) => {
     const [selectedAnswer, setSelectedAnswer] = useState(0);
     const [likeShow, setLikeShow] = useState(false);
-    const [isShare, setIsShare] = useState(false);
     const [isHover, setIsHover] = useState(false);
     const [showGrid, setShowGrid] = useState(true);
     const [expandChat, setExpandChat] = useState(true);
@@ -96,16 +95,11 @@ const ChatContainer = ({
         if (res.data.success) {
             setChatData(
                 chatData.map((item) => {
-                    if (item._id === chatSpecficId) {
+                    if (item?._id && item._id === chatSpecficId) {
                         return res.data.data;
                     }
                 }),
             );
-            message.open({
-                type: 'success',
-                content: 'Chat save as a fav',
-                duration: 2,
-            });
         } else {
             message.open({
                 type: 'error',
@@ -154,20 +148,14 @@ const ChatContainer = ({
                 onMouseEnter={() => setIsHover(true)}
                 onMouseLeave={() => {
                     setIsHover(false);
-                    setIsShare(false);
                 }}
             >
-                <div
-                    className={styles.avatarStyle2}
-                    style={{
-                        background: 'rgba(171, 105, 255, 1)',
-                    }}
-                >
+                <div className={styles.avatarStyle2}>
                     <Image
                         alt="circularLogo"
-                        height={24}
+                        height={32}
                         src="/circularLogo.svg"
-                        width={24}
+                        width={32}
                     />
                 </div>
                 <div className={styles.chatWrap}>
@@ -175,15 +163,53 @@ const ChatContainer = ({
                         <div ref={messageRef} className={styles.ShareSocialBtn}>
                             <div
                                 className={styles.socialBtn}
-                                onClick={() => setIsShare(!isShare)}
+                                onClick={() =>
+                                    copyToClipBoard(
+                                        answers[currentAnswerIndex][
+                                            selectedAnswer
+                                        ].message,
+                                    )
+                                }
                             >
                                 <Image
-                                    alt="shareIcon"
-                                    height={20}
-                                    src="/sharelcon.svg"
-                                    width={20}
+                                    alt="copyIcon"
+                                    height={24}
+                                    src="/newCopyIcon.svg"
+                                    width={24}
                                 />
                             </div>
+
+                            <Tooltip
+                                title={() => {
+                                    return (
+                                        <ShareSocialPlatforms
+                                            answer={
+                                                answers?.answers?.length &&
+                                                answers.answers[
+                                                    currentAnswerIndex
+                                                ]?.length &&
+                                                answers.answers[
+                                                    currentAnswerIndex
+                                                ][selectedAnswer]?.message
+                                                    ? answers[
+                                                          currentAnswerIndex
+                                                      ][selectedAnswer].message
+                                                    : ''
+                                            }
+                                            question={question}
+                                        />
+                                    );
+                                }}
+                            >
+                                <div className={styles.socialBtn}>
+                                    <Image
+                                        alt="shareIcon"
+                                        height={20}
+                                        src="/sharelcon.svg"
+                                        width={20}
+                                    />
+                                </div>
+                            </Tooltip>
                             <div
                                 className={styles.socialBtn}
                                 onClick={() =>
@@ -197,25 +223,20 @@ const ChatContainer = ({
                                 <Image
                                     alt="copyIcon"
                                     height={22}
-                                    src="/starredIcon.svg"
-                                    width={22}
-                                />
-                            </div>
-                            <div
-                                className={styles.socialBtn}
-                                onClick={() =>
-                                    copyToClipBoard(
+                                    src={
+                                        answers?.length &&
+                                        answers[currentAnswerIndex] &&
+                                        answers[currentAnswerIndex]?.length &&
                                         answers[currentAnswerIndex][
                                             selectedAnswer
-                                        ].message,
-                                    )
-                                }
-                            >
-                                <Image
-                                    alt="copyIcon"
-                                    height={16}
-                                    src="/fluentCopyIcon.svg"
-                                    width={16}
+                                        ] &&
+                                        answers[currentAnswerIndex][
+                                            selectedAnswer
+                                        ].like
+                                            ? '/starFilled.svg'
+                                            : '/starOutlined.svg'
+                                    }
+                                    width={22}
                                 />
                             </div>
                         </div>
@@ -244,9 +265,12 @@ const ChatContainer = ({
                                                     }
                                                 >
                                                     <Image
+                                                        style={{
+                                                            borderRadius: '8px',
+                                                        }}
                                                         alt="Logo"
                                                         height={32}
-                                                        src="/whitelogo.svg"
+                                                        src="/modelDemoIcon.svg"
                                                         width={32}
                                                     />
                                                     <div
@@ -305,46 +329,8 @@ const ChatContainer = ({
                                                                 }
                                                             >
                                                                 <Image
-                                                                    alt="shareIcon"
-                                                                    height={18}
-                                                                    src="/sharelcon.svg"
-                                                                    width={18}
-                                                                    onClick={() =>
-                                                                        setIsShare(
-                                                                            !isShare,
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </div>
-                                                            <div
-                                                                className={
-                                                                    styles.socialBtn
-                                                                }
-                                                            >
-                                                                <Image
                                                                     alt="copyIcon"
-                                                                    height={20}
-                                                                    src="/starredIcon.svg"
-                                                                    width={20}
-                                                                    onClick={() =>
-                                                                        saveFav(
-                                                                            answers[
-                                                                                currentAnswerIndex
-                                                                            ][
-                                                                                index
-                                                                            ],
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </div>
-                                                            <div
-                                                                className={
-                                                                    styles.socialBtn
-                                                                }
-                                                            >
-                                                                <Image
-                                                                    alt="copyIcon"
-                                                                    height={16}
+                                                                    height={24}
                                                                     onClick={() =>
                                                                         copyToClipBoard(
                                                                             answers[
@@ -355,8 +341,102 @@ const ChatContainer = ({
                                                                                 .message,
                                                                         )
                                                                     }
-                                                                    src="/fluentCopyIcon.svg"
-                                                                    width={16}
+                                                                    src="/newCopyIcon.svg"
+                                                                    width={24}
+                                                                />
+                                                            </div>
+                                                            <Tooltip
+                                                                trigger="click"
+                                                                title={() => {
+                                                                    return (
+                                                                        <ShareSocialPlatforms
+                                                                            answer={
+                                                                                answers
+                                                                                    ?.answers
+                                                                                    ?.length &&
+                                                                                answers
+                                                                                    .answers[
+                                                                                    currentAnswerIndex
+                                                                                ]
+                                                                                    ?.length &&
+                                                                                answers
+                                                                                    .answers[
+                                                                                    currentAnswerIndex
+                                                                                ][
+                                                                                    index
+                                                                                ]
+                                                                                    ?.message
+                                                                                    ? answers[
+                                                                                          currentAnswerIndex
+                                                                                      ][
+                                                                                          index
+                                                                                      ]
+                                                                                          .message
+                                                                                    : ''
+                                                                            }
+                                                                            question={
+                                                                                question
+                                                                            }
+                                                                        />
+                                                                    );
+                                                                }}
+                                                            >
+                                                                <div
+                                                                    className={
+                                                                        styles.socialBtn
+                                                                    }
+                                                                >
+                                                                    <Image
+                                                                        alt="shareIcon"
+                                                                        height={
+                                                                            18
+                                                                        }
+                                                                        src="/sharelcon.svg"
+                                                                        width={
+                                                                            18
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                            </Tooltip>
+                                                            <div
+                                                                className={
+                                                                    styles.socialBtn
+                                                                }
+                                                            >
+                                                                <Image
+                                                                    alt="copyIcon"
+                                                                    height={20}
+                                                                    src={
+                                                                        answers?.length &&
+                                                                        answers[
+                                                                            currentAnswerIndex
+                                                                        ] &&
+                                                                        answers[
+                                                                            currentAnswerIndex
+                                                                        ]
+                                                                            ?.length &&
+                                                                        answers[
+                                                                            currentAnswerIndex
+                                                                        ][
+                                                                            index
+                                                                        ] &&
+                                                                        answers[
+                                                                            currentAnswerIndex
+                                                                        ][index]
+                                                                            .like
+                                                                            ? '/starFilled.svg'
+                                                                            : '/starOutlined.svg'
+                                                                    }
+                                                                    width={20}
+                                                                    onClick={() =>
+                                                                        saveFav(
+                                                                            answers[
+                                                                                currentAnswerIndex
+                                                                            ][
+                                                                                index
+                                                                            ],
+                                                                        )
+                                                                    }
                                                                 />
                                                             </div>
                                                         </div>
@@ -394,6 +474,15 @@ const ChatContainer = ({
                                                     handleItemClick(index)
                                                 }
                                             >
+                                                <Image
+                                                    style={{
+                                                        borderRadius: '8px',
+                                                    }}
+                                                    alt="Logo"
+                                                    height={24}
+                                                    src="/modelDemoIcon.svg"
+                                                    width={24}
+                                                />
                                                 {item.model_name.split('/')[1]}
                                             </div>
                                         ))}
@@ -443,18 +532,6 @@ const ChatContainer = ({
                                                 ? styles.answerStyle
                                                 : styles.answerStyleCollapsed
                                         }
-                                        style={{
-                                            color:
-                                                answers?.answers?.length &&
-                                                answers.answers[
-                                                    currentAnswerIndex
-                                                ]?.length &&
-                                                answers.answers[
-                                                    currentAnswerIndex
-                                                ][selectedAnswer]?.like
-                                                    ? 'rgba(171, 105, 255, 1)'
-                                                    : '',
-                                        }}
                                     >
                                         {answers.length === 0 ||
                                         showSpinnerRegenerate ? (
@@ -476,24 +553,6 @@ const ChatContainer = ({
                                         )}
                                     </p>
                                 </>
-                            )}
-
-                            {isShare && (
-                                <ShareSocialPlatforms
-                                    answer={
-                                        answers?.answers?.length &&
-                                        answers.answers[currentAnswerIndex]
-                                            ?.length &&
-                                        answers.answers[currentAnswerIndex][
-                                            selectedAnswer
-                                        ]?.message
-                                            ? answers[currentAnswerIndex][
-                                                  selectedAnswer
-                                              ].message
-                                            : ''
-                                    }
-                                    question={question}
-                                />
                             )}
                         </div>
                     </div>

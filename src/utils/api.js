@@ -3,7 +3,7 @@ import { AxiosInstance } from 'axios';
 import { getCookie } from 'cookies-next';
 
 export const backEndURLWithAuth = axios.create({
-    baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
+    baseURL: `https://api-stag.twinciti.com/api/twin_citi`,
     headers: {
         Authorization: `Bearer ${getCookie('accessToken')}`,
         Accept: 'application/json',
@@ -12,7 +12,7 @@ export const backEndURLWithAuth = axios.create({
 });
 
 export const backEndURLWithoutAuth = axios.create({
-    baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
+    baseURL: 'https://api-stag.twinciti.com/api/twin_citi',
     headers: { Accept: 'application/json' },
     withCredentials: true,
 });
@@ -113,6 +113,7 @@ export const deleteApiWithAuth = async (url) => {
 };
 // PATCH request without authentication
 export const patchApiWithoutAuth = async (url, body) => {
+    console.log('boadyyy====>', body);
     try {
         const result = await backEndURLWithoutAuth.patch(url, body);
         return result.data;

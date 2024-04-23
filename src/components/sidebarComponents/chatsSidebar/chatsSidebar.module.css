@@ -303,6 +303,20 @@
     background-color: rgba(255, 255, 255, 0.6);
     border-radius: 6px;
 }
+.modalGroupWrap
+    :global
+    .ant-collapse-header
+    .ant-collapse-header-text
+    .ant-input {
+    border-radius: 8px;
+    background: #32373b;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    padding: 4px 8px;
+    border: 0;
+}
 .customeScroll {
     height: calc(100vh - 232px);
     overflow-y: auto;
