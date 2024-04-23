@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Form, Input } from 'antd';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import './style.css';
 
-const TwincitiInput = ({
+export default function TwincitiInput({
     rules,
     style,
     value,
@@ -11,6 +13,7 @@ const TwincitiInput = ({
     name,
     placeholder,
     onChange,
+    onFinish,
     required,
     className,
     suffix,
@@ -26,7 +29,8 @@ const TwincitiInput = ({
     selectedModel,
     onChangeHandle,
     onAdd,
-}) => {
+    label,
+}) {
     return (
         <>
             <Form.Item
@@ -35,6 +39,7 @@ const TwincitiInput = ({
                 name={name}
                 rules={rules}
                 style={style}
+                label={label}
             >
                 {type === 'password' ? (
                     <Input.Password
@@ -51,6 +56,45 @@ const TwincitiInput = ({
                         type={type}
                         value={value}
                     />
+                ) : type === 'phoneNumber' ? (
+                    <PhoneInput
+                        country={'us'}
+                        value={value}
+                        onChange={onChange}
+                        inputProps={{
+                            name,
+                            placeholder,
+                            required,
+                            autoFocus,
+                            disabled,
+                        }}
+                    />
+                ) : type === 'TextArea' ? (
+                    <Input.TextArea
+                        autoFocus={autoFocus}
+                        className={className ? className : 'inputFieldStyle'}
+                        disabled={disabled}
+                        name={name}
+                        onChange={onChange}
+                        placeholder={placeholder}
+                        required={required}
+                        type={type}
+                        value={value}
+                        label={label}
+                    />
+                ) : type === 'OTP' ? (
+                    <Input.OTP
+                        autoFocus={autoFocus}
+                        className={className ? className : 'inputFieldStyle'}
+                        disabled={disabled}
+                        name={name}
+                        onFinish={onFinish}
+                        onChange={onChange}
+                        required={required}
+                        type={type}
+                        value={value}
+                        label={label}
+                    />
                 ) : (
                     <Input
                         autoFocus={autoFocus}
@@ -60,16 +104,13 @@ const TwincitiInput = ({
                         onChange={onChange}
                         onKeyDown={onKeyDown}
                         placeholder={placeholder}
-                        prefix={prefix}
                         required={required}
-                        suffix={suffix}
                         type={type}
                         value={value}
+                        label={label}
                     />
                 )}
             </Form.Item>
         </>
     );
-};
-
-export default TwincitiInput;
+}
