@@ -1,0 +1,173 @@
+.mainWrapperBody {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.mainLogin {
+    max-width: 600px;
+    width: 100%;
+    padding: 28px 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(32.72395324707031px);
+}
+.mainLogin h4 {
+    color: #fff;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+    margin-bottom: 40px;
+}
+.mainLogin form {
+    padding: 0 50px;
+}
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-label
+    label {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+}
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-label
+    label::before {
+    display: none;
+}
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    input {
+    border-radius: 8px;
+    border: 0.604px solid #3f4147;
+    background: transparent;
+}
+
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+}
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .ant-form-item-control-input
+    .ant-input-affix-wrapper {
+    border-radius: 8px;
+    border: 0.604px solid #3f4147;
+    background: transparent;
+}
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .ant-form-item-control-input
+    .ant-input-affix-wrapper
+    input {
+    border: none;
+}
+.mainLogin
+    :global
+    .ant-form
+    .ant-form-item
+    .ant-form-item-row
+    .ant-form-item-control
+    .ant-form-item-control-input
+    .ant-input-affix-wrapper
+    .ant-input-suffix
+    .anticon {
+    color: rgba(255, 255, 255, 0.4);
+}
+.linkWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+}
+.linkWrapper .checkLabel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+}
+.linkWrapper .forgotPassword {
+    color: #fff;
+    text-align: right;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+.mainWrapperBody .mainLogin :global .ant-form .twincitiButton {
+    border-radius: 10px;
+    background: var(
+        --Primary,
+        linear-gradient(94deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+    );
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 48px;
+    margin: 40px 0;
+    height: 48px;
+    padding: 0 18px;
+    transform: scale(1);
+    transition: all 1s ease;
+}
+.mainWrapperBody .mainLogin :global .ant-form .twincitiButton:hover {
+    border-radius: 10px;
+    transform: scale(1.1);
+    background: var(
+        --Primary,
+        linear-gradient(94deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+    );
+}
+.linkBtn {
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+}
+.linkBtn .signUpLink {
+    margin-left: 5px;
+    color: #ab69ff;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    text-decoration-line: underline;
+}
