@@ -71,6 +71,13 @@
     gap: 8px;
 }
 
+.optionsBox {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
 .cardTitleImage {
     display: flex;
     align-items: center;

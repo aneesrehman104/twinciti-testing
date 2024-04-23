@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './chats.module.css';
 import { Form, Spin } from 'antd';
-import { SendOutlined, PauseOutlined } from '@ant-design/icons';
+import { PauseOutlined } from '@ant-design/icons';
 import ChatInput from '../../components/common/chatInput/chatInput';
 import ButtonComponent from '../../components/common/button/Button';
 import Image from 'next/image';
@@ -13,11 +13,16 @@ import {
     postStreamApiWithAuth,
     getStreamApiWithAuth,
     getApiWithAuth,
+    putApiWithAuth,
 } from '../../utils/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { message } from 'antd';
-import { setChatroomModelList } from '../../states/chat/chatSlice';
+import {
+    setAddNewModel,
+    setChatroomModelList,
+} from '../../states/chat/chatSlice';
 import { useSearchParams } from 'next/navigation';
+import AddNewModalComponent from '../../components/common/addNewModalComponent';
 
 export default function Chats({}) {
     const dispatch = useDispatch();
@@ -26,6 +31,7 @@ export default function Chats({}) {
     const checkmodalData = chatsState?.roomModels?.length
         ? chatsState.roomModels
         : [];
+    const showNewModal = chatsState?.showNewModal;
     const [modelsList, setModelsList] = useState({ records: [], total: 0 });
     const [nonTextInput, setNonTextInput] = useState(<></>);
     const [showChatSpinner, setShowChatSpinner] = useState(false);
@@ -38,6 +44,7 @@ export default function Chats({}) {
     const [showSpinner, setShowSpinner] = useState(false);
     const [abortController, setAbortController] = useState();
     const [mentionList, setMentionList] = useState([]);
+    const [selectedCategoryId, setSelectedCategoryId] = useState('');
     const [data, setData] = useState({
         prompt: '',
         onlyPrompt: '',
@@ -68,6 +75,13 @@ export default function Chats({}) {
             setStreamingData([]);
         }
     }, [chatData, streamingData]);
+
+    const setShowNewModal = (showAddModel) => {
+        dispatch(setAddNewModel(showAddModel));
+    };
+    const setCheckmodalData = (data = []) => {
+        dispatch(setChatroomModelList(data));
+    };
 
     const fetchChat = async () => {
         const searchParams1 = new URLSearchParams(window.location.search);
@@ -343,6 +357,39 @@ export default function Chats({}) {
         setStreamInProgress(false);
     };
 
+    const saveModelInBackend = async (saveThisModel, action, chatId) => {
+        const response = await putApiWithAuth(
+            `${URLs.ChatRoom}/${chatId}?action=${action}`,
+            { modelId: saveThisModel._id },
+        );
+        if (response.success) {
+            setCheckmodalData(response?.data?.records?.model);
+        } else {
+            message.open({
+                type: 'error',
+                content: `${response.message}`,
+                duration: 2,
+            });
+        }
+    };
+
+    const selectedModel = async (selectedModelItem) => {
+        const searchParams1 = new URLSearchParams(window.location.search);
+        const chatId = searchParams1.get('chatId');
+        checkModel(selectedModelItem, chatId);
+    };
+
+    const removeSeletedModel = (selectedModelItem) => {
+        const searchParams1 = new URLSearchParams(window.location.search);
+        const chatId = searchParams1.get('chatId');
+
+        saveModelInBackend(selectedModelItem, 'remove', chatId);
+    };
+
+    const checkModel = async (saveThisModel, chatId) => {
+        saveModelInBackend(saveThisModel, 'add', chatId);
+    };
+
     const onChangeHandle = (event, mentions) => {
         setData({ ...data, prompt: event.target.value });
         setMentionList(mentions);
@@ -406,7 +453,7 @@ export default function Chats({}) {
                     modelsList={modelsList}
                     name="prompt"
                     onChangeHandle={onChangeHandle}
-                    placeholder={'Type @ to mention someone'}
+                    placeholder={'Chat or prompt'}
                     prefix={
                         <div style={{ display: 'flex' }}>
                             <label
@@ -457,10 +504,11 @@ export default function Chats({}) {
                                     showChatSpinner ? (
                                         <Spin />
                                     ) : (
-                                        <SendOutlined
-                                            style={{
-                                                color: 'white',
-                                            }}
+                                        <Image
+                                            alt="sendIcon"
+                                            height={20}
+                                            src="/sendIcon.svg"
+                                            width={20}
                                         />
                                     )
                                 }
@@ -472,6 +520,19 @@ export default function Chats({}) {
                     onSend={onSend}
                 />
             </Form>
+            <AddNewModalComponent
+                checkmodalData={checkmodalData}
+                filterData={filterData}
+                getModelsById={getModelsById}
+                modelInfo={modalData}
+                modelsList={modelsList}
+                removeSeletedModel={removeSeletedModel}
+                selectedCategoryId={selectedCategoryId}
+                selectedModel={selectedModel}
+                setFilterData={setFilterData}
+                setShowNewModal={setShowNewModal}
+                showNewModal={showNewModal}
+            />
         </div>
     );
 }

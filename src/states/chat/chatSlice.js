@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     roomList: [],
     roomModels: [],
+    showNewModal: false,
 };
 
 const chatSlice = createSlice({
@@ -15,9 +16,13 @@ const chatSlice = createSlice({
         setChatroomModelList: (state, action) => {
             state.roomModels = action?.payload?.length ? action.payload : [];
         },
+        setAddNewModel: (state, action) => {
+            state.showNewModal = Boolean(action?.payload);
+        },
     },
 });
 
-export const { setChatroomList, setChatroomModelList } = chatSlice.actions;
+export const { setChatroomList, setChatroomModelList, setAddNewModel } =
+    chatSlice.actions;
 
 export default chatSlice.reducer;
