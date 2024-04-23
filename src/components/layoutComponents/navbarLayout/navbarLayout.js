@@ -19,7 +19,7 @@ const navbarArray = [
         key: 'models',
     },
     {
-        icon: '/modelhubIcon.svg',
+        icon: '/discoverIcon.svg',
         title: 'Discover',
         route: '/discover',
         key: 'discover',

@@ -2,6 +2,22 @@ import styles from './ChatGistCard.module.css';
 import { MoreOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
+import { Dropdown } from 'antd';
+
+const items = [
+    {
+        label: 'New',
+        key: '0',
+    },
+    {
+        label: 'Edit',
+        key: '1',
+    },
+    {
+        label: 'Delete',
+        key: '2',
+    },
+];
 
 const ChatGistCard = ({
     active = false,
@@ -40,7 +56,16 @@ const ChatGistCard = ({
                             {dayjs(time).format('HH:mm')}
                         </p>
                         <div className={styles.cardActions}>
-                            <MoreOutlined />
+                            <Dropdown
+                                overlayClassName={styles.optionsBox}
+                                menu={{
+                                    items,
+                                }}
+                                placement="bottomRight"
+                                trigger={['click']}
+                            >
+                                <MoreOutlined />
+                            </Dropdown>
                         </div>
                     </div>
                 </div>

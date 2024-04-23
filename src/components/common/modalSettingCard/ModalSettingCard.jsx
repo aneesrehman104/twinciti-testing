@@ -3,11 +3,7 @@ import Image from 'next/image';
 import styles from './ModalSettingCard.module.css';
 import { Collapse, Switch, Input, Dropdown, InputNumber, Slider } from 'antd';
 import ButtonComponent from '../button/Button';
-import {
-    DownOutlined,
-    DeleteOutlined,
-    InfoCircleOutlined,
-} from '@ant-design/icons';
+import { InfoCircleOutlined } from '@ant-design/icons';
 import { postApiWithAuth } from '../../../utils/api';
 
 const handleMenuClick = (e) => {};
@@ -18,16 +14,34 @@ const menuProps = {
 };
 
 const settingsList = [
-    { name: 'Max Tokens', key: 'max_token' },
-    { name: 'Chat Memory', key: 'chat_memory' },
-    { name: 'Temperature', key: 'temperature' },
-    { name: 'Top P', key: 'top_p' },
-    { name: 'Top K', key: 'top_k' },
-    { name: 'Frequency Penalty', key: 'frequency_penalty' },
-    { name: 'Presence Penalty', key: 'presence_penalty' },
-    { name: 'Repetition Penalty', key: 'repetition_penalty' },
-    { name: 'Min P', key: 'min_p' },
-    { name: 'Top A', key: 'top_a' },
+    { name: 'Max Tokens', key: 'max_token', max: 10, min: 0, unit: 1 },
+    { name: 'Chat Memory', key: 'chat_memory', max: 10, min: 0, unit: 1 },
+    { name: 'Temperature', key: 'temperature', max: 1, min: 0, unit: 1 / 4 },
+    { name: 'Top P', key: 'top_p', max: 1, min: 0, unit: 1 / 4 },
+    { name: 'Top K', key: 'top_k', max: 1, min: 0, unit: 1 / 4 },
+    {
+        name: 'Frequency Penalty',
+        key: 'frequency_penalty',
+        max: 1,
+        min: 0,
+        unit: 1 / 4,
+    },
+    {
+        name: 'Presence Penalty',
+        key: 'presence_penalty',
+        max: 1,
+        min: 0,
+        unit: 1 / 4,
+    },
+    {
+        name: 'Repetition Penalty',
+        key: 'repetition_penalty',
+        max: 1,
+        min: 0,
+        unit: 1 / 4,
+    },
+    { name: 'Min P', key: 'min_p', max: 1, min: 0, unit: 1 / 4 },
+    { name: 'Top A', key: 'top_a', max: 1, min: 0, unit: 1 / 4 },
 ];
 
 const ModalSettingCard = ({
@@ -38,6 +52,8 @@ const ModalSettingCard = ({
     currentModelSettings = {},
 }) => {
     const [modelSettings, setModelSettings] = useState(currentModelSettings);
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [editName, setEditName] = useState(false);
     useEffect(() => {
         (async () => {
             if (chatId && modelId) {
@@ -49,6 +65,10 @@ const ModalSettingCard = ({
         })();
     }, [modelSettings]);
 
+    const collapseIconSrc = isExpanded
+        ? '/collapseExIcon.svg'
+        : '/expandedCoIcon.svg';
+
     const genExtra = () => (
         <>
             <Switch
@@ -58,12 +78,21 @@ const ModalSettingCard = ({
                     event.stopPropagation();
                 }}
             />
-            <DeleteOutlined
+            <Image
+                alt="trashIcon"
+                height={16}
+                src="/trashIcon.svg"
+                width={16}
                 onClick={(event) => {
                     event.stopPropagation();
                 }}
             />
-            <DownOutlined />
+            <Image
+                alt="collapse"
+                height={16}
+                src={collapseIconSrc}
+                width={16}
+            />
         </>
     );
 
@@ -104,7 +133,7 @@ const ModalSettingCard = ({
                 />
             </div>
             <div className={styles.subItemsWrap}>
-                {settingsList.map(({ name, key }) => (
+                {settingsList.map(({ name, key, max, min, unit }) => (
                     <div className={styles.mainRowsWrap} key={key}>
                         <div className={styles.rowsWrap}>
                             <div className={styles.subItemWrap}>
@@ -122,13 +151,18 @@ const ModalSettingCard = ({
                         </div>
                         <Slider
                             className={styles.rangeSlider}
+                            max={max}
+                            min={min}
+                            step={unit}
                             onChange={(e) => {
                                 setModelSettings((prev) => {
                                     prev[key] = e?.target?.value || prev[key];
                                     return prev;
                                 });
                             }}
-                            value={modelSettings[key] ? modelSettings[key] : 0}
+                            defaultValue={
+                                modelSettings[key] ? modelSettings[key] : 0
+                            }
                         />
                     </div>
                 ))}
@@ -141,22 +175,66 @@ const ModalSettingCard = ({
         </div>
     );
 
-    const item = {
-        key: index,
-        label: modelName,
-        children: settings,
-        extra: genExtra(),
+    const handleKeyDown = (event) => {
+        event.stopPropagation();
+        if (event.key === 'Enter') {
+            setEditName(false);
+        }
     };
 
     return (
-        <Collapse
-            accordion
-            expandIconPosition={'start'}
-            expandIcon={() => (
-                <Image alt="Logo" height={32} src="/whitelogo.svg" width={32} />
-            )}
-            items={[item]}
-        />
+        <div onClick={() => setIsExpanded(!isExpanded)}>
+            <Collapse
+                accordion
+                expandIconPosition={'start'}
+                expandIcon={() => (
+                    <Image
+                        alt="Logo"
+                        style={{
+                            borderRadius: '8px',
+                        }}
+                        height={32}
+                        src="/modelDemoIcon.svg"
+                        width={32}
+                    />
+                )}
+                items={[
+                    {
+                        key: index,
+                        label: editName ? (
+                            <span>
+                                {
+                                    <Input
+                                        onClick={(event) => {
+                                            event.stopPropagation();
+                                        }}
+                                        onKeyDown={handleKeyDown}
+                                        style={{
+                                            cursor: 'pointer',
+                                        }}
+                                        defaultValue={modelName}
+                                    />
+                                }
+                            </span>
+                        ) : (
+                            <span
+                                onClick={(event) => {
+                                    event.stopPropagation();
+                                    setEditName(true);
+                                }}
+                                style={{
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                {modelName}
+                            </span>
+                        ),
+                        children: settings,
+                        extra: genExtra(),
+                    },
+                ]}
+            />
+        </div>
     );
 };
 

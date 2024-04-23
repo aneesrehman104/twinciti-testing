@@ -8,6 +8,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import ModalSidebar from '../../sidebarComponents/modelsSidebar/modelsSidebar';
 import DiscoverSidebar from '../../sidebarComponents/discoverSidebar/discoverSidebar';
 import ChatSidebar from '../../sidebarComponents/chatsSidebar/chatsSidebar';
+import SettingsSidebar from '../../sidebarComponents/settingsSidebar/settingsSidebar';
 import styles from './mainLayoutStyle.module.css';
 
 const ContentLayout = dynamic(() =>
@@ -32,10 +33,17 @@ const MainLayout = ({ children }) => {
         '/chats': <ChatSidebar />,
         '/discover': <DiscoverSidebar />,
         '/models': <ModalSidebar />,
+
+        // Settings Pages
+        '/usage': <SettingsSidebar />,
+        '/billing': <SettingsSidebar />,
+        '/plans': <SettingsSidebar />,
+        '/profile': <SettingsSidebar />,
+        '/apiKeys': <SettingsSidebar />,
     };
 
     return (
-        <Layout style={layoutStyle}>
+        <Layout className={styles.sideBodyWrap} style={layoutStyle}>
             <SiderComponent>{sideBarObj[pathname] || ''}</SiderComponent>
             <Layout className={styles.rightpanel}>
                 <NavbarLayout />

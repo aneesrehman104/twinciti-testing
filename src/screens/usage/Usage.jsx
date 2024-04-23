@@ -160,6 +160,7 @@ const Usage = () => {
                     overflow: 'auto',
                     height: '100%',
                 }}
+                className="usagePage"
             >
                 <div className={styles.topHeadingStyle}>Usage overview</div>
                 <div className={styles.topParagraphStyle}>
@@ -991,7 +992,7 @@ const Usage = () => {
                                                 </div>
                                                 <Switch
                                                     style={{ marginTop: 10 }}
-                                                    value={false}
+                                                    value={true}
                                                     disabled
                                                 />
                                             </div>
