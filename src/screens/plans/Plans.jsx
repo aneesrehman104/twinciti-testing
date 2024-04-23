@@ -40,9 +40,10 @@ const Plans = () => {
                     text.
                 </div>
                 <div className={styles.planItemMainWrap}>
-                    {plans?.map((plan) => {
+                    {plans?.map((plan, index) => {
                         return (
                             <div
+                                key={index}
                                 className={
                                     styles.plansContainer +
                                     ` ${
@@ -143,9 +144,12 @@ const Plans = () => {
                                     }
                                 />
 
-                                {plan?.description?.map((listitem) => {
+                                {plan?.description?.map((listitem, index) => {
                                     return (
-                                        <div className={styles.listWrap}>
+                                        <div
+                                            className={styles.listWrap}
+                                            key={index}
+                                        >
                                             {' '}
                                             <div
                                                 className={

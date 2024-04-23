@@ -62,8 +62,8 @@ const SettingsSidebar = ({}) => {
                 </Col>
             </Row>
             <Row gutter={[12, 12]}>
-                {menuItems.map((item) => (
-                    <Col span={24}>
+                {menuItems.map((item, index) => (
+                    <Col span={24} key={index}>
                         <div
                             onClick={() => {
                                 router.push(item?.route || '');
