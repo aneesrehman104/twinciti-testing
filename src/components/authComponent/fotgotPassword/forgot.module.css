@@ -30,13 +30,12 @@
 }
 .btnOutline:hover {
     border: 3px solid transparent;
-    background-image: linear-gradient(
-        94deg,
-        #ff8473 3.46%,
-        #b784ff 49.4%,
-        #2eb0fb 97.06%
-    );
-    background-origin: border-box;
+
+    background-image: linear-gradient(#121316, #121316),
+        linear-gradient(65deg, #ff8473 0%, #b784fd 75%, #2eb0fb 100%) !important;
+    background-origin: border-box !important;
+    background-clip: padding-box, border-box !important;
+    transform: scale(1.1);
 }
 
 .btnOutline {
@@ -48,6 +47,8 @@
     border-radius: 10px;
     width: 100%;
     height: 50px;
+    transform: scale(1);
+    transition: all 1s ease;
 }
 .mainLogin :global .ant-form .twincitiButton {
     border-radius: 10px;

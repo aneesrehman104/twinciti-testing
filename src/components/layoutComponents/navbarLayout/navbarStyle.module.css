@@ -1,60 +1,115 @@
 .navbarHeight {
-  height: 88px;
-  background: #16151A !important;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    height: 88px;
+    background: #16151a !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-
 .btnGradient {
-  background: linear-gradient(black, black) padding-box,
-  linear-gradient(94.25deg, #FF8473 3.46%, #B784FF 49.4%, #2EB0FB 97.06%) border-box;
-  border: 1px solid transparent;
+    background: linear-gradient(black, black) padding-box,
+        linear-gradient(94.25deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+            border-box;
+    border: 1px solid transparent;
 }
 
 .btnGradientInner {
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(
-      360deg,
-      rgba(255, 255, 255, 0.0001) 0%,
-      rgba(255, 255, 255, 0.198579) 100%
-    ),
-    linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
-
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(
+            360deg,
+            rgba(255, 255, 255, 0.0001) 0%,
+            rgba(255, 255, 255, 0.198579) 100%
+        ),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
 }
 .topLeftSide {
-  width: auto;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  height: auto;
-  border-radius: 40px;
-  display: flex;
-  padding: 5px;
-  gap: 5px;
-  align-items: center;
+    width: auto;
+    height: auto;
+    display: flex;
+    padding: 5px;
+    gap: 5px;
+    align-items: center;
+    height: auto;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+.linkWrap {
+    padding: 16px 20px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    cursor: pointer;
+}
+.linkactive {
+    padding: 16px 20px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    position: relative;
+    cursor: pointer;
+}
+.btnGradientActive {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+}
+.btninfo {
+    display: flex;
+    align-content: inherit;
+    justify-content: center;
+    gap: 8px;
+}
+.btnGradientActive::after {
+    content: '';
+    bottom: -15px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(
+        116deg,
+        #ff8473 0%,
+        #b784ff 35.71%,
+        #2eb0fb 66.91%
+    );
+    width: 100%;
+    position: absolute;
+    left: 0;
 }
 .menuItemStyleAuthenticated {
-  height: 50px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  font-family: var(--font-poppins) !important;
+    height: 50px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: var(--font-poppins) !important;
 
-  color: white !important;
+    color: white !important;
 }
 .menuStyleAuthenticated {
-  background-color: rgba(49, 51, 56, 1) !important;
-  border: 1px solid rgba(73, 73, 73, 1);
-  box-sizing: border-box;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  width: 200px;
+    background-color: rgba(49, 51, 56, 1) !important;
+    border: 1px solid rgba(73, 73, 73, 1);
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
 }
 .dividerAuthenticated {
-  border: 1px solid rgba(63, 65, 71, 1);
-  background: rgba(63, 65, 71, 1);
-  display: flex;
-  justify-content: center;
-  margin: 0px;
+    border: 1px solid rgba(63, 65, 71, 1);
+    background: rgba(63, 65, 71, 1);
+    display: flex;
+    justify-content: center;
+    margin: 0px;
 }

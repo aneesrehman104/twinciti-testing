@@ -22,7 +22,6 @@ const ForgotModal = (props) => {
     const signupSubmit = async () => {
         setButtonSpinner(true);
         setButtonDisable(true);
-
         const response = await postApiWithoutAuth(URLs.ApiForgotPassword, data);
         if (response.success) {
             message.open({
@@ -32,7 +31,6 @@ const ForgotModal = (props) => {
             });
             setButtonDisable(false);
             setButtonSpinner(false);
-            onClose();
         } else {
             setButtonSpinner(false);
             setTimeout(() => {

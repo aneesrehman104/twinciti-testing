@@ -28,9 +28,9 @@
     letter-spacing: 0.362px;
 }
 
-/* .twincitiButton:hover {
+.twincitiButton:hover {
     border-color: var(--button) !important;
     border: 2px solid var(--button) !important;
     color: var(--text) !important;
     background: var(--button) !important;
-} */
+}

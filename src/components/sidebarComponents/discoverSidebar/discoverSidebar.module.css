@@ -1,0 +1,55 @@
+.siderComponentWrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.mainHeading {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: rgba(255, 255, 255, 1);
+}
+
+.btnGradient {
+    background: linear-gradient(black, black) padding-box,
+        linear-gradient(94.25deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+            border-box;
+    border: 1px solid transparent;
+    border-radius: 24px;
+}
+
+.searchBarGradient {
+    border-radius: 8px;
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.06) 0%,
+        rgba(255, 255, 255, 0.04) 100%
+    );
+}
+
+.inputStyle {
+    height: 48px;
+    background: transparent !important;
+    border: none !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+.inputStyle ::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.menuInnerStyle {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 1) !important;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    height: 45px;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.2);
+}

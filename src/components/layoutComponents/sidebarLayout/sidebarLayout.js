@@ -1,29 +1,26 @@
-import React from "react";
-import { Layout } from "antd";
+import React from 'react';
+import { Layout } from 'antd';
 
 const { Sider } = Layout;
 
-
-
 const SiderComponent = ({
-  children,
-  isCollapsed,
-  collapsedHandle,
-  onBreakpoint,
+    children,
+    isCollapsed,
+    collapsedHandle,
+    onBreakpoint,
 }) => {
-  return (
-      <Sider
-          collapsed={isCollapsed}
-          collapsedWidth="0"
-          onBreakpoint={onBreakpoint}
-          onCollapse={collapsedHandle}
-          style={{ background: '#16151A' }}
-          width={'23%'}
-          // width={'280px'}
-      >
-          {children}
-      </Sider>
-  );
+    return (
+        <Sider
+            collapsed={isCollapsed}
+            collapsedWidth="0"
+            onBreakpoint={onBreakpoint}
+            onCollapse={collapsedHandle}
+            style={{ background: '#16151A', minWidth: '320px' }}
+            width={'320px'}
+        >
+            {children}
+        </Sider>
+    );
 };
 
 export default SiderComponent;

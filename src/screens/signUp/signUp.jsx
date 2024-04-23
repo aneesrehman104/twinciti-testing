@@ -91,11 +91,10 @@ const SignUp = () => {
     };
 
     const sendOtpEmail = async () => {
-        resetTimer();
+        startTimer();
         const response = await getApiWithAuth(URLs.EMAIL_VERIFICATION);
         if (response.success) {
             setOtpSentEmail(false);
-            startTimer();
         } else {
             setButtonSpinner(false);
             setTimeout(() => {
@@ -118,7 +117,9 @@ const SignUp = () => {
     };
 
     const handleOtp = async () => {
+        resetTimer();
         setVerifyPhoneVisible(false);
+        startTimer();
         const response = await postApiWithAuth(URLs.VERIFY_PHONE, {
             phone: phoneNumber,
             code: otp,
@@ -142,10 +143,12 @@ const SignUp = () => {
         }
     };
     const handleOtpEmail = async () => {
+        resetTimer();
         const response = await getApiWithAuth(url);
         setOtpSentEmail(false);
         startTimer();
         if (response.data.success) {
+            startTimer();
             setVerifyPhoneVisible(true);
             setOtpSentEmail(false);
         } else {
@@ -160,15 +163,6 @@ const SignUp = () => {
                 duration: 2,
             });
         }
-    };
-
-    const onModalVisible = () => {
-        setVerifyPhoneVisible(true);
-        setIsModalVisible(true);
-    };
-
-    const onEmailModalVisible = () => {
-        setIsModalVisible(true);
     };
 
     const signUpSubmit = async () => {
@@ -241,7 +235,6 @@ const SignUp = () => {
     };
 
     useEffect(() => {
-        console.log(timerRunning);
         let interval;
         if (timerRunning) {
             interval = setInterval(() => {

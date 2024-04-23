@@ -117,12 +117,7 @@ export default function Login() {
                                     <input type="checkbox" />
                                     <label>Remember me</label>
                                 </div>
-                                {/* <a
-                            className={styles.forgotPassword}
-                            onClick={showForgotModal}
-                        >
-                            Forgot Password?
-                        </a> */}
+
                                 <div
                                     className={styles.forgotPassword}
                                     onClick={() => {
@@ -145,7 +140,7 @@ export default function Login() {
                                 Already have an account?
                                 <a
                                     className={styles.signUpLink}
-                                    onClick={() => router.push('/login')}
+                                    onClick={() => router.push('/signUp')}
                                 >
                                     Signup
                                 </a>

@@ -1,0 +1,27 @@
+.menuStyleAuthenticated {
+    background-color: rgb(30, 32, 35) !important;
+    border: 1px solid rgba(73, 73, 73, 1);
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    min-width: 100px;
+}
+
+.menuItemStyleAuthenticated {
+    margin: 0.3rem;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: var(--font-poppins) !important;
+    cursor: pointer;
+    color: white !important;
+}
+.dividerAuthenticated {
+    border: 1px solid rgba(63, 65, 71, 1);
+    background: rgba(63, 65, 71, 1);
+    display: flex;
+    justify-content: center;
+    margin: 0px !important;
+    margin-bottom: 10px !important;
+}
