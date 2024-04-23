@@ -1,0 +1,185 @@
+.siderComponentWrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.cardContainer {
+    border-radius: 12px;
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(180deg, #191920 0%, #1c1b21 100%);
+    display: flex;
+    width: 100%;
+    padding: 14px 24px;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 125% */
+}
+
+.activeCardContainer {
+    border-radius: 8px;
+    border: 1px solid rgba(241, 132, 142, 0.34);
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.04) 100%Fv
+    );
+}
+.subscriptionWrap {
+    display: flex;
+    height: calc(100% - 400px);
+    align-items: center;
+    justify-content: center;
+}
+.activeCardContainer .textlabel {
+    background: var(
+        --Primary-New,
+        linear-gradient(94deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subscriptionDetailCard {
+    border-radius: 12px;
+    background: var(
+        --Primary-New,
+        linear-gradient(94deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+    );
+    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    padding: 12px 16px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 16px;
+    position: relative;
+}
+.subscriptionDetailCard ::after {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background-image: url(/roundBg.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    opacity: 0.2;
+}
+.cardDetails {
+    color: #fff;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 16px; /* 160% */
+}
+.cardDetails span {
+    color: #f7b546;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: 16px;
+}
+.priceWrap {
+    color: #fff;
+    text-align: center;
+    font-family: Inter;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 40px;
+}
+.priceDetails {
+    color: #fff;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 16px;
+}
+.subHeaderWrap {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+.priceDetailsWrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+    flex-direction: column;
+}
+.referralBtn {
+    border-radius: 6px;
+    background: #edf2f7;
+    display: flex;
+    height: 32px;
+    padding: 0px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: #1a202c;
+    font-family: Inter;
+    font-size: 14px;
+    width: fit-content;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+}
+.mainHeading {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: rgba(255, 255, 255, 1);
+}
+
+.btnGradient {
+    background: linear-gradient(black, black) padding-box,
+        linear-gradient(94.25deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+            border-box;
+    border: 1px solid transparent;
+    border-radius: 24px;
+}
+
+.searchBarGradient {
+    border-radius: 8px;
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.06) 0%,
+        rgba(255, 255, 255, 0.04) 100%
+    );
+}
+
+.inputStyle {
+    height: 48px;
+    background: transparent !important;
+    border: none !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+.inputStyle ::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.menuInnerStyle {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 1) !important;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    height: 45px;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.2);
+}

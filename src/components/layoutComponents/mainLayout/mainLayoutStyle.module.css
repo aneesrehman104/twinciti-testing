@@ -10,6 +10,7 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
+    font-family: Inter;
     color: rgba(255, 255, 255, 1);
 }
 
@@ -54,6 +55,9 @@
     border-top: 0.5px solid rgba(255, 255, 255, 0.2);
 }
 
+.rightpanel.ant-layout {
+    gap: 8px;
+}
 .rightpanel :global .ant-layout-header {
     height: 80px;
 }
