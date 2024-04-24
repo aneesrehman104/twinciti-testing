@@ -1,9 +1,13 @@
 import React, { useCallback } from 'react';
 import { Form, Input } from 'antd';
+import {
+    EyeInvisibleOutlined,
+    EyeOutlined,
+    EditOutlined,
+} from '@ant-design/icons';
+import './style.css';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
-import './style.css';
 
 export default function TwincitiInput({
     rules,
@@ -30,7 +34,18 @@ export default function TwincitiInput({
     onChangeHandle,
     onAdd,
     label,
+    readOnly,
+    isEditing,
+    onClick,
 }) {
+    const renderIcon = () => {
+        if (isEditing) {
+            return <EditOutlined onClick={onClick} />;
+        } else {
+            return null; // Return null if icon is not to be shown
+        }
+    };
+
     return (
         <>
             <Form.Item
@@ -40,6 +55,7 @@ export default function TwincitiInput({
                 rules={rules}
                 style={style}
                 label={label}
+                readOnly={readOnly}
             >
                 {type === 'password' ? (
                     <Input.Password
@@ -55,6 +71,7 @@ export default function TwincitiInput({
                         required={required}
                         type={type}
                         value={value}
+                        readOnly={readOnly}
                     />
                 ) : type === 'phoneNumber' ? (
                     <PhoneInput
@@ -68,6 +85,7 @@ export default function TwincitiInput({
                             autoFocus,
                             disabled,
                         }}
+                        placeholder={placeholder}
                     />
                 ) : type === 'TextArea' ? (
                     <Input.TextArea
@@ -108,6 +126,7 @@ export default function TwincitiInput({
                         type={type}
                         value={value}
                         label={label}
+                        suffix={renderIcon()}
                     />
                 )}
             </Form.Item>
