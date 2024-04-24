@@ -213,7 +213,6 @@ const Usage = () => {
                                             <p className={styles.expireStyle}>
                                                 Expires on: 24 Mar, 2024
                                             </p>
-
                                             <p
                                                 className={
                                                     styles.remianingStyle
@@ -1511,6 +1510,10 @@ const Usage = () => {
                             ) : null}
                         </div>
                     </div> */}
+                    <span className={styles.warningNote}>
+                        * Quota limits are estimates and can vary based on
+                        several factors including the models you use.
+                    </span>
                 </div>
                 <Modal
                     onCancel={() => setShowCancelModal(false)}

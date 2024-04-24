@@ -7,17 +7,33 @@ import { useEffect, useState } from 'react';
 import ButtonComponent from '../../components/common/button/Button';
 import { getApiWithAuth } from '../../utils/api';
 import _ from 'lodash';
+import { URLs } from '../../utils/apiUrl';
 
 const Plans = () => {
     const router = useRouter();
     const [form] = Form.useForm();
     const [plans, setPlans] = useState([]);
-    const [activePlan, setActivePlans] = useState('');
+    const [activePlan, setActivePlans] = useState({});
 
     useEffect(() => {
         (async () => {
-            const res = await getApiWithAuth(`/stripe/products`);
-            if (res?.data?.data?.products) setPlans(res.data.data.products);
+            const res1 = await getApiWithAuth(`/stripe/products`);
+            if (res1?.data?.data?.products) setPlans(res1.data.data.products);
+            const res = await getApiWithAuth(`${URLs.SUBSCRIPTION}`);
+            if (res.data.success) {
+                if (
+                    res?.data?.data?.is_paid &&
+                    res?.data?.data?.userSubscription
+                ) {
+                    setActivePlans(res.data.data.userSubscription);
+                }
+            } else {
+                message.open({
+                    type: 'error',
+                    content: `${res.data.message}`,
+                    duration: 2,
+                });
+            }
         })();
     }, []);
 
@@ -32,22 +48,20 @@ const Plans = () => {
             >
                 <div className={styles.topHeadingStyle}>Plans Details</div>
                 <div className={styles.topParagraphStyleWrap}>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the
-                    industry&apos;s standard dummy text ever since the 1500s,
-                    when an unknown printer took a galley of type and scrambled
-                    it to make a type specimen book. Lorem Ipsum is simply dummy
-                    text.
+                    Adjust the sliders to see how much quota you can get for
+                    each type of content. e.g If you plan to generate words 50%
+                    of the time, move the slider for words 1/2 way
                 </div>
                 <div className={styles.planItemMainWrap}>
                     {plans?.map((plan, index) => {
                         return (
                             <div
-                                key={index}
+                                key={plan?._id}
                                 className={
                                     styles.plansContainer +
                                     ` ${
-                                        activePlan === plan._id
+                                        activePlan.subscription_code ===
+                                        plan.subscription_code
                                             ? styles.plansContainerActive
                                             : ''
                                     }`
@@ -133,12 +147,14 @@ const Plans = () => {
 
                                 <ButtonComponent
                                     label={
-                                        activePlan === plan._id
+                                        activePlan.subscription_code ===
+                                        plan.subscription_code
                                             ? 'Upgrade'
                                             : 'Subscribe Now'
                                     }
                                     className={
-                                        activePlan === plan._id
+                                        activePlan.subscription_code ===
+                                        plan.subscription_code
                                             ? styles.activePlanBtn
                                             : styles.planBtn
                                     }
@@ -147,8 +163,8 @@ const Plans = () => {
                                 {plan?.description?.map((listitem, index) => {
                                     return (
                                         <div
+                                            key={listitem?._id}
                                             className={styles.listWrap}
-                                            key={index}
                                         >
                                             {' '}
                                             <div
@@ -215,6 +231,10 @@ const Plans = () => {
                         );
                     })}
                 </div>
+                <span className={styles.warningNote}>
+                    * Quota limits are estimates and can vary based on several
+                    factors including the models you use.
+                </span>
             </div>
         </>
     );
