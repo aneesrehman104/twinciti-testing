@@ -134,7 +134,7 @@ const ModalSettingCard = ({
             </div>
             <div className={styles.subItemsWrap}>
                 {settingsList.map(({ name, key, max, min, unit }) => (
-                    <div className={styles.mainRowsWrap}>
+                    <div className={styles.mainRowsWrap} key={key}>
                         <div className={styles.rowsWrap}>
                             <div className={styles.subItemWrap}>
                                 <p className={styles.headerText}>{name}</p>
