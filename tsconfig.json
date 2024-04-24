@@ -27,9 +27,13 @@
         "src/components/common/chatContainer/ChatContainer.component.jsx",
         "src/components/common/shareSocialPlatforms/shareSocialPlatforms.jsx",
         "src/components/common/chatInput/index.js",
-        "src/components/common/twincitiInput/page.jsx",
+        "src/app/login/page.jsx",
         "src/components/common/twincitiButton/page.jsx",
-        "src/components/common/modal/page.jsx"
+        "src/components/common/twincitiInput/page.jsx",
+        "src/components/common/twincitiInput/page.jsx",
+        "src/components/common/twincitiInput/page.jsx",
+        "src/components/authComponent/fotgotPassword/forgotPassword.jsx",
+        "src/components/authComponent/resetpassword/resetPassword.jsx"
     ],
     "exclude": ["node_modules"]
 }

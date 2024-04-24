@@ -8,7 +8,10 @@ import { useSearchParams } from 'next/navigation';
 import { getApiWithAuth } from '../../../utils/api';
 import { URLs } from '../../../utils/apiUrl';
 import { useDispatch, useSelector } from 'react-redux';
-import { setChatroomList } from '../../../states/chat/chatSlice';
+import {
+    setAddNewModel,
+    setChatroomList,
+} from '../../../states/chat/chatSlice';
 
 const ChatSidebar = ({}) => {
     const searchParams = useSearchParams();
@@ -41,8 +44,11 @@ const ChatSidebar = ({}) => {
     const chatSettingsSection = (
         <>
             <Col span={24}>
-                <div className={styles.addModalWrap}>
-                    <span>Add</span>
+                <div
+                    onClick={() => dispatch(setAddNewModel(true))}
+                    className={styles.addModalWrap}
+                >
+                    <span>All Models</span>
                     <Image
                         alt="addBtn"
                         height={32}
@@ -65,6 +71,18 @@ const ChatSidebar = ({}) => {
                         chatId={selectedChatId}
                         index={i}
                         key={i}
+                        currentModelSettings={{
+                            max_token: 8,
+                            chat_memory: 4,
+                            temperature: 0.3453,
+                            top_p: 0.2667,
+                            top_k: 0.7623,
+                            frequency_penalty: 0.2212,
+                            presence_penalty: 0.999,
+                            repetition_penalty: 1,
+                            min_p: 0.5678,
+                            top_a: 0.7765,
+                        }}
                     />
                 ))}
                 <div className={styles.buttonGropWrap}>

@@ -262,6 +262,14 @@
 .subItemsWrap .rangeSlider {
     margin: 0 5px;
 }
+.subItemsWrap .rangeSlider :global .ant-slider-track {
+    background: linear-gradient(
+        115deg,
+        #ff8473 21.46%,
+        #b784ff 53.42%,
+        #2eb0fb 86.57%
+    );
+}
 .mainRowsWrap {
     display: flex;
     flex-direction: column;
