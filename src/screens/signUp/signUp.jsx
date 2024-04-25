@@ -68,15 +68,47 @@ const SignUp = () => {
     };
 
     const sendOtp = async () => {
-        resetTimer();
+        // resetTimer();
+        // setButtonDisable(true);
+        // const response = await postApiWithAuth(URLs.SMS_VERIFICATION, {
+        //     phone: phoneNumber,
+        // });
+        // if (response.success) {
+        //     setVerifyPhoneVisible(false);
+        //     setOtpSent(true);
+        //     startTimer();
+        //     message.open({
+        //         type: 'success',
+        //         content: `${response.data}`,
+        //         duration: 2,
+        //     });
+        // } else {
+        //     setButtonSpinner(false);
+        //     setTimeout(() => {
+        //         setButtonDisable(false);
+        //     }, 3000);
+        //     message.open({
+        //         type: 'error',
+        //         content: `${response.message}`,
+        //         duration: 2,
+        //     });
+        // }
+        startTimer();
         setButtonDisable(true);
         const response = await postApiWithAuth(URLs.SMS_VERIFICATION, {
             phone: phoneNumber,
         });
+        console.log('=======res', response);
         if (response.success) {
             setVerifyPhoneVisible(false);
             setOtpSent(true);
-            startTimer();
+            setButtonDisable(false);
+
+            message.open({
+                type: 'success',
+                content: `${response.data}`,
+                duration: 2,
+            });
         } else {
             setButtonSpinner(false);
             setTimeout(() => {
@@ -93,8 +125,9 @@ const SignUp = () => {
     const sendOtpEmail = async () => {
         startTimer();
         const response = await getApiWithAuth(URLs.EMAIL_VERIFICATION);
-        if (response.success) {
-            setOtpSentEmail(false);
+        console.log('=======res', response);
+        if (response.data.success) {
+            // setOtpSentEmail(false);
         } else {
             setButtonSpinner(false);
             setTimeout(() => {
@@ -102,7 +135,7 @@ const SignUp = () => {
             }, 3000);
             message.open({
                 type: 'error',
-                content: `${response.message}`,
+                content: `${response.data.message}`,
                 duration: 2,
             });
         }
@@ -117,18 +150,20 @@ const SignUp = () => {
     };
 
     const handleOtp = async () => {
-        resetTimer();
-        setVerifyPhoneVisible(false);
-        startTimer();
+        // resetTimer();
+        // setVerifyPhoneVisible(false);
+        //
         const response = await postApiWithAuth(URLs.VERIFY_PHONE, {
             phone: phoneNumber,
             code: otp,
             countryCode,
         });
+        console.log('==========resss', response);
         if (response.success) {
-            setOtpSentEmail(true);
-            setIsVisible(true);
             startTimer();
+            setOtpSent(false);
+            setOtpSentEmail(false);
+            setIsVisible(true);
         } else {
             setOtpSent(true);
             setButtonSpinner(false);
@@ -143,10 +178,11 @@ const SignUp = () => {
         }
     };
     const handleOtpEmail = async () => {
-        resetTimer();
+        // resetTimer();
         const response = await getApiWithAuth(url);
         setOtpSentEmail(false);
-        startTimer();
+        console.log('========res', response);
+
         if (response.data.success) {
             startTimer();
             setVerifyPhoneVisible(true);
@@ -159,7 +195,7 @@ const SignUp = () => {
             }, 3000);
             message.open({
                 type: 'error',
-                content: `${response.message}`,
+                content: `${response.data.message}`,
                 duration: 2,
             });
         }
@@ -270,7 +306,7 @@ const SignUp = () => {
                                 name="email"
                                 label="Email"
                                 onChange={onChangeHandleSubmit}
-                                placeholder="Enter email"
+                                placeholder="Enter your email"
                                 rules={[
                                     {
                                         required: true,
@@ -292,7 +328,7 @@ const SignUp = () => {
                                 name="password"
                                 label="Password"
                                 onChange={onChangeHandleSubmit}
-                                placeholder="Enter password"
+                                placeholder="Password"
                                 rules={[
                                     {
                                         required: true,
@@ -453,6 +489,8 @@ const SignUp = () => {
                         setVerifyPhoneVisible(false);
                         setIsVisible(true);
                     }}
+                    maskClosable={false}
+                    closable
                     modal
                     visible={verifyPhoneVisible}
                     modalWidth={'100%'}
@@ -521,6 +559,8 @@ const SignUp = () => {
                         setIsModalVisible(true);
                     }}
                     modal
+                    maskClosable={false}
+                    closable
                     visible={otpSent}
                     modalWidth={'100%'}
                     title={
@@ -536,10 +576,18 @@ const SignUp = () => {
                 >
                     <div className={styles.modalMainWrapper}>
                         <p className={styles.textTitle}>
-                            A 6 digits Code has been sent to your phone number
-                            +123 ******987 Change
                             <span>
-                                <a href="#">Change</a>
+                                A 6 digits Code has been sent to your phone
+                                number
+                                {phoneNumber
+                                    ? `${phoneNumber.slice(
+                                          0,
+                                          4,
+                                      )}******${phoneNumber.slice(-3)}`
+                                    : ''}
+                                <label>
+                                    {''} <a href="">Change</a>
+                                </label>
                             </span>
                         </p>
                         <Form
@@ -573,9 +621,7 @@ const SignUp = () => {
                                     label="Verify Code"
                                     className={styles.btnLogin}
                                     loading={buttonSpinner}
-                                    onClick={() => {
-                                        setOtpSent(false);
-                                    }}
+                                    onClick={() => {}}
                                 />
                             </div>
                         </Form>
@@ -603,6 +649,8 @@ const SignUp = () => {
                     width={'440px'}
                     className={styles.mainModalGroup}
                     footer={null}
+                    closable
+                    maskClosable={false}
                     onClose={() => {
                         setOtpSentEmail(false);
                         setIsVisible(true);
@@ -622,16 +670,20 @@ const SignUp = () => {
                 >
                     <div className={styles.modalMainWrapper}>
                         <p className={styles.textTitle}>
-                            A 6 digits Code has been sent to your email{' '}
-                            {data.email
-                                ? `${data.email.slice(
-                                      0,
-                                      4,
-                                  )}******${data.email.slice(
-                                      data.email.indexOf('@'),
-                                  )}`
-                                : ''}{' '}
-                            Change
+                            <span>
+                                A 6 digits Code has been sent to your email{' '}
+                                {data.email
+                                    ? `${data.email.slice(
+                                          0,
+                                          4,
+                                      )}******${data.email.slice(
+                                          data.email.indexOf('@'),
+                                      )}`
+                                    : ''}{' '}
+                                <label>
+                                    <a href="">Change</a>
+                                </label>
+                            </span>
                         </p>
 
                         <Form

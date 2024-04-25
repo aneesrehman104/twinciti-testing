@@ -93,7 +93,7 @@
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
 
     color: white !important;
 }

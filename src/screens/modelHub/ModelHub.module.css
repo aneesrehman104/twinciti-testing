@@ -22,6 +22,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
+    font-family: Inter;
 }
 .inputStyle ::placeholder {
     color: rgba(255, 255, 255, 0.7) !important;
@@ -33,7 +34,7 @@
     border: 1px solid rgba(174, 174, 174, 1);
     font-weight: 400;
     font-size: 12px;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
     color: rgba(196, 196, 196, 1);
     display: flex;
     align-items: center;
@@ -48,7 +49,7 @@
     border: 1px solid transparent;
     font-weight: 400;
     font-size: 12px;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
 
     color: rgba(196, 196, 196, 1);
     display: flex;

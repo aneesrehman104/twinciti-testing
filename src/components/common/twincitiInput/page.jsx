@@ -3,6 +3,8 @@ import { Form, Input } from 'antd';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
+import Image from 'next/image';
+
 import './style.css';
 
 export default function TwincitiInput({
@@ -47,7 +49,16 @@ export default function TwincitiInput({
                         className={className ? className : 'inputFieldStyle'}
                         disabled={disabled}
                         iconRender={(visible) =>
-                            visible ? <EyeOutlined /> : <EyeInvisibleOutlined />
+                            visible ? (
+                                <EyeOutlined />
+                            ) : (
+                                <Image
+                                    alt="vector"
+                                    height={20}
+                                    src="/hidePasswordIcon.svg"
+                                    width={20}
+                                />
+                            )
                         }
                         name={name}
                         onChange={onChange}

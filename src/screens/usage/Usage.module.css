@@ -4,7 +4,7 @@
     font-weight: 500;
     line-height: 28px;
     letter-spacing: 0em;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
     margin-bottom: 10px;
     margin-top: 10px;
 }
@@ -16,7 +16,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
 }
 
 .topParagraphStyle {
@@ -25,7 +25,7 @@
     font-weight: 400;
     line-height: 16px;
     letter-spacing: 0em;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
     margin-top: 10px;
 }
 
@@ -35,7 +35,7 @@
     font-weight: 400;
     line-height: 20px;
     letter-spacing: 0em;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
     display: flex;
     margin-bottom: 10px;
 }
@@ -56,7 +56,7 @@
     font-weight: 500;
     line-height: 24px;
     letter-spacing: 0em;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
     display: flex;
 }
 .offerStyle {
@@ -65,7 +65,7 @@
     font-weight: 800;
     line-height: 24px;
     letter-spacing: 0em;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
     background: rgba(247, 181, 70, 1);
     transform: rotate(45deg);
     align-items: center;
@@ -106,7 +106,7 @@
     font-weight: 600;
     line-height: 24px;
     letter-spacing: 0em;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
     margin-bottom: 5px;
 }
 .creditsText {
@@ -115,7 +115,7 @@
     font-weight: 400;
     line-height: 16px;
     letter-spacing: 0em;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
 }
 
 .referNowText {
@@ -124,7 +124,7 @@
     font-weight: 500;
     line-height: 20px;
     letter-spacing: 0em;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
     margin-right: 5px;
 }
 .dividerAuthenticated {
@@ -139,7 +139,7 @@
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
     color: rgba(255, 138, 112, 1) !important;
 }
 .menuStyleAuthenticated {

@@ -20,6 +20,7 @@
     font-weight: 600;
     line-height: 40px;
     margin-bottom: 40px;
+    font-family: Inter;
 }
 .mainLogin form {
     padding: 0 50px;
@@ -35,6 +36,7 @@
     font-size: 14px;
     font-weight: 600;
     line-height: 16px;
+    font-family: Inter;
 }
 .mainLogin
     :global
@@ -69,6 +71,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 16px;
+    font-family: Inter;
 }
 .mainLogin
     :global
@@ -119,6 +122,7 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
+    font-family: Inter;
 }
 .linkWrapper .forgotPassword {
     color: #fff;
@@ -127,6 +131,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
+    font-family: Inter;
 }
 .mainModalGroup .modalMainWrapper .btnWrap {
     display: flex;
@@ -153,13 +158,11 @@
     margin: 40px 0;
     height: 48px;
     padding: 0 18px;
-    transform: scale(1);
-    transition: all 1s ease;
+    font-family: Inter;
 }
 .mainWrapperBody .mainLogin :global .ant-form .twincitiButton:hover,
 .mainModalGroup .modalMainWrapper .btnWrap :global .twincitiButton:hover {
     border-radius: 10px;
-    transform: scale(1.1);
     background: var(
         --Primary,
         linear-gradient(94deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
@@ -172,6 +175,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 20px;
+    font-family: Inter;
 }
 .linkBtn .signUpLink {
     margin-left: 5px;
@@ -181,6 +185,7 @@
     font-weight: 500;
     line-height: 20px;
     text-decoration-line: underline;
+    font-family: Inter;
 }
 .conditionWrap span {
     display: flex;
@@ -191,6 +196,7 @@
     font-weight: 300;
     line-height: 16px;
     margin-top: -8px;
+    font-family: Inter;
 }
 .conditionWrap {
     display: flex;
@@ -233,6 +239,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 16px;
+    font-family: Inter;
 }
 .termsWrap label a {
     color: #ab69ff;
@@ -240,6 +247,7 @@
     font-weight: 400;
     line-height: 16px;
     text-decoration-line: underline;
+    font-family: Inter;
 }
 
 .modalMainWrapper {
@@ -254,6 +262,7 @@
     line-height: 20px;
     margin-bottom: 24px;
     cursor: pointer;
+    font-family: Inter;
 }
 
 .modalMainWrapper .gray-text {
@@ -264,6 +273,7 @@
     line-height: 20px;
     margin-bottom: 24px;
     cursor: pointer;
+    font-family: Inter;
 }
 
 .modalMainWrapper p span a {
@@ -274,8 +284,7 @@
 .termOfService {
     color: #f7fbff;
     font-size: 12px;
-    font-family: var(--font-poppins) !important;
-
+    font-family: Inter;
     margin-left: 8px;
     letter-spacing: 0.16px;
 }
@@ -303,6 +312,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: 16px;
+    font-family: Inter;
 }
 .phInputWrap :global .ant-form-item .ant-form-item-row .ant-form-item-control {
     width: 100%;
@@ -441,6 +451,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 16px;
+    font-family: Inter;
 }
 
 .pinWrapper {
@@ -476,10 +487,11 @@
     font-weight: 400;
     line-height: 20px;
     margin: 0;
+    font-family: Inter;
 }
 .timeSection p {
-    margin: 0;
-    color: 'red';
+    margin: 0px;
+    color: red;
 }
 .timeSection p {
     color: #ab69ff;
@@ -487,6 +499,7 @@
     font-weight: 400;
     line-height: 20px;
     text-decoration-line: underline;
+    font-family: Inter;
 }
 .moreDetailWrapper {
     display: flex;
