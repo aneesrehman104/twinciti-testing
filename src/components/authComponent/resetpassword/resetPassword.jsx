@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { URLs } from '../../../utils/apiUrl';
 import TwincitiInput from '../../common/twincitiInput/page';
 import TwincitiButton from '../../common/twincitiButton/page';
+import Image from 'next/image';
 
 const ResetPassword = () => {
     const searchParams = useSearchParams();
@@ -122,6 +123,15 @@ const ResetPassword = () => {
                             label={'Update Password'}
                             loading={buttonSpinner}
                             type="primary"
+                            RightImage={
+                                <Image
+                                    alt="vector"
+                                    height={20}
+                                    src="/vector.svg"
+                                    width={20}
+                                    style={{ marginLeft: 5 }}
+                                />
+                            }
                         />
                     </Form.Item>
                 </Form>
