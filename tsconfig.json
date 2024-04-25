@@ -33,13 +33,7 @@
         "src/components/common/twincitiInput/page.jsx",
         "src/components/common/twincitiInput/page.jsx",
         "src/components/authComponent/fotgotPassword/forgotPassword.jsx",
-        "src/components/authComponent/resetpassword/resetPassword.jsx",
-        "src/components/common/cardDetails/page.jsx",
-        "src/components/common/AddCard/StripeWrapper.jsx",
-        "src/components/common/AddCard/AddCard.jsx",
-        "src/components/AddCard/index.js",
-        "src/components/common/cardItem/index.js",
-        "src/components/common/cardItem/CardItem.jsx"
+        "src/components/authComponent/resetpassword/resetPassword.jsx"
     ],
     "exclude": ["node_modules"]
 }

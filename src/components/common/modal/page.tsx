@@ -1,10 +1,19 @@
-'use strict';
+'use client';
 import React, { useState } from 'react';
 import { Modal } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons';
 import './style.css';
+interface CustomModalProps {
+    visible: boolean;
+    onClose: () => void;
+    children: React.ReactNode;
+    title: string;
+    className?: any;
+    inLine?: boolean;
+    width?: number;
+}
 
-const CustomModal = ({
+const CustomModal: React.FC<CustomModalProps> = ({
     visible,
     onClose,
     children,
@@ -35,6 +44,7 @@ const CustomModal = ({
             footer={null}
             onCancel={handleCancel}
             onOk={handleOk}
+            className={className}
             open={visible}
             title={
                 <p className={inLine ? 'headerStyleInLine' : 'headerStyle'}>
