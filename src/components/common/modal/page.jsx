@@ -1,4 +1,4 @@
-'use strict';
+'use client';
 import React, { useState } from 'react';
 import { Modal } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons';

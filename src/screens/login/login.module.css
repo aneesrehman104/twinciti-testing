@@ -171,3 +171,27 @@
     line-height: 20px;
     text-decoration-line: underline;
 }
+@media screen and (max-width: 767px) {
+    .mainLogin {
+        margin: 0 20px;
+        padding: 28px 16px;
+    }
+    .mainLogin form {
+        padding: 0;
+    }
+    .mainLogin h4 {
+        font-size: 24px;
+        line-height: 28px;
+        margin-bottom: 28px;
+    }
+    .mainWrapperBody .mainLogin :global .ant-form .twincitiButton {
+        margin: 28px 0;
+    }
+    .mainWrapperBody .mainLogin :global .ant-form .twincitiButton span {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .mainWrapperBody .mainLogin :global .ant-form .twincitiButton:hover {
+        transform: unset;
+    }
+}

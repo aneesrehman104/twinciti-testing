@@ -156,7 +156,7 @@ const SignUp = () => {
         const response = await postApiWithAuth(URLs.VERIFY_PHONE, {
             phone: phoneNumber,
             code: otp,
-            countryCode,
+            countryCode: countryCode,
         });
         console.log('==========resss', response);
         if (response.success) {
