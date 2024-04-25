@@ -13,6 +13,7 @@ import TwincitiButton from '../../components/common/twincitiButton/page';
 import styles from './login.module.css';
 import ForgotModal from '../../components/authComponent/fotgotPassword/forgotPassword';
 import ResetPassword from '../../components/authComponent/resetpassword/resetPassword';
+import Image from 'next/image';
 
 export default function Login() {
     const router = useRouter();
@@ -135,6 +136,15 @@ export default function Login() {
                                 label="Login"
                                 className={styles.btnLogin}
                                 loading={buttonSpinner}
+                                RightImage={
+                                    <Image
+                                        alt="vector"
+                                        height={20}
+                                        src="/vector.svg"
+                                        width={20}
+                                        style={{ marginLeft: 5 }}
+                                    />
+                                }
                             />
                             <p className={styles.linkBtn}>
                                 Already have an account?

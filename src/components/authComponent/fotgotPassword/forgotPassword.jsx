@@ -6,6 +6,7 @@ import { URLs } from '../../../utils/apiUrl';
 import TwincitiInput from '../../common/twincitiInput/page';
 import TwincitiButton from '../../common/twincitiButton/page';
 import styles from './forgot.module.css';
+import Image from 'next/image';
 
 const ForgotModal = (props) => {
     const [data, setData] = useState({
@@ -79,6 +80,15 @@ const ForgotModal = (props) => {
                         label={'Send Email'}
                         loading={buttonSpinner}
                         type="primary"
+                        RightImage={
+                            <Image
+                                alt="vector"
+                                height={20}
+                                src="/vector.svg"
+                                width={20}
+                                style={{ marginLeft: 5 }}
+                            />
+                        }
                     />
                 </Form.Item>
                 <Form.Item>
@@ -89,6 +99,15 @@ const ForgotModal = (props) => {
                         onClick={props.onBackToLogin}
                         type="primary"
                         variant="outline"
+                        RightImage={
+                            <Image
+                                alt="vector"
+                                height={20}
+                                src="/vector.svg"
+                                width={20}
+                                style={{ marginLeft: 5 }}
+                            />
+                        }
                     />
                 </Form.Item>
             </Form>

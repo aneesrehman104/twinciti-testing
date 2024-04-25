@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'antd';
 import './twincitiButton.css';
 
-export default function TwincitiButto({
+export default function TwincitiButton({
     className,
     label,
     RightImage,
