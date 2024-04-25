@@ -1,64 +1,64 @@
 .inputFieldStyle {
-  font-size: 12px;
-  font-family: var(--font-poppins) !important;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24.167px;
-  color: #c4c4c4 !important;
-  height: 50px;
-  border-radius: 8px;
-  border: 1px solid #3f4147;
-  margin-top: 4px;
-  background: transparent;
+    font-size: 12px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24.167px;
+    color: #c4c4c4 !important;
+    height: 50px;
+    border-radius: 8px;
+    border: 1px solid #3f4147;
+    margin-top: 4px;
+    background: transparent;
 }
 .inputFieldMention {
-  font-size: 12px;
-  font-family: var(--font-poppins) !important;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24.167px;
-  color: #c4c4c4 !important;
-  height: 50px;
-  border-radius: 8px;
-  border: 1px solid #3f4147;
-  margin-top: 4px;
-  background: transparent !important;
-  display: flex;
-  align-items: flex-start !important;
-  height: auto;
-  padding: 0 10px;
+    font-size: 12px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24.167px;
+    color: #c4c4c4 !important;
+    height: 50px;
+    border-radius: 8px;
+    border: 1px solid #3f4147;
+    margin-top: 4px;
+    background: transparent !important;
+    display: flex;
+    align-items: flex-start !important;
+    height: auto;
+    padding: 0 10px;
 }
 .ant-mentions > textarea {
-  font-size: 14px;
-  font-family: var(--font-poppins) !important;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24.167px;
-  color: #c4c4c4 !important;
-  border-radius: 8px;
-  border: none !important;
-  margin-top: 4px;
-  background: transparent !important;
+    font-size: 14px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24.167px;
+    color: #c4c4c4 !important;
+    border-radius: 8px;
+    border: none !important;
+    margin-top: 4px;
+    background: transparent !important;
 }
 .ant-mentions {
-  border: none !important;
-  background: transparent !important;
-  min-height: 45px !important;
-  padding: 0 10px;
-  max-height: 200px !important;
+    border: none !important;
+    background: transparent !important;
+    min-height: 45px !important;
+    padding: 0 10px;
+    max-height: 200px !important;
 }
 .ant-mentions-outlined {
-  border: none !important;
+    border: none !important;
 }
 .ant-mentions-outlined:focus-within {
-  box-shadow: none !important;
+    box-shadow: none !important;
 }
 
 .inputFieldMention:hover
-  .inputFieldMention:focus
-  .inputFieldMention:focus-within {
-  border: none !important;
+    .inputFieldMention:focus
+    .inputFieldMention:focus-within {
+    border: none !important;
 }
 .inputFieldStyle:hover .inputFieldStyle:focus .inputFieldStyle:focus-within {
-  border-color: rgba(118, 118, 118, 1) !important;
+    border-color: rgba(118, 118, 118, 1) !important;
 }

@@ -20,6 +20,7 @@
     font-weight: 600;
     line-height: 40px;
     margin-bottom: 40px;
+    font-family: Inter;
 }
 .mainLogin form {
     padding: 0 50px;
@@ -35,6 +36,7 @@
     font-size: 14px;
     font-weight: 600;
     line-height: 16px;
+    font-family: Inter;
 }
 .mainLogin
     :global
@@ -143,12 +145,10 @@
     margin: 40px 0;
     height: 48px;
     padding: 0 18px;
-    transform: scale(1);
-    transition: all 1s ease;
+    transition: none;
 }
 .mainWrapperBody .mainLogin :global .ant-form .twincitiButton:hover {
     border-radius: 10px;
-    transform: scale(1.1);
     background: var(
         --Primary,
         linear-gradient(94deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
