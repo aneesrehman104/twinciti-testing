@@ -11,6 +11,8 @@ interface CustomModalProps {
     className?: any;
     inLine?: boolean;
     width?: number;
+    closable?: boolean;
+    maskClosable?: boolean;
 }
 
 const CustomModal: React.FC<CustomModalProps> = ({
@@ -21,6 +23,8 @@ const CustomModal: React.FC<CustomModalProps> = ({
     className,
     inLine,
     width,
+    closable,
+    maskClosable,
     ...restProps
 }) => {
     const [confirmLoading, setConfirmLoading] = useState(false);
@@ -42,10 +46,12 @@ const CustomModal: React.FC<CustomModalProps> = ({
             closeIcon={<CloseCircleOutlined />}
             confirmLoading={confirmLoading}
             footer={null}
+            closable={closable ? false : true}
             onCancel={handleCancel}
             onOk={handleOk}
             className={className}
             open={visible}
+            maskClosable={maskClosable}
             title={
                 <p className={inLine ? 'headerStyleInLine' : 'headerStyle'}>
                     {title}

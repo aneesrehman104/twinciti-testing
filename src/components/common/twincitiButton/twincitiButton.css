@@ -9,6 +9,8 @@
     justify-content: center;
     align-items: center;
 }
+<<<<<<< HEAD
+=======
 .twincitiButton:disabled {
     border-radius: 10px;
     background: var(--button);
@@ -106,3 +108,4 @@
   color: var(--text) !important;
   background: var(--button) !important;
 } */
+>>>>>>> 3d7ba296e5f9b20ad06e2a29a60b734a6d317579
