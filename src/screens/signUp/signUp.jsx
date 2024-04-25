@@ -123,7 +123,7 @@ const SignUp = () => {
         const response = await postApiWithAuth(URLs.VERIFY_PHONE, {
             phone: phoneNumber,
             code: otp,
-            countryCode,
+            countryCode: countryCode,
         });
         if (response.success) {
             setOtpSentEmail(true);
@@ -537,7 +537,7 @@ const SignUp = () => {
                     <div className={styles.modalMainWrapper}>
                         <p className={styles.textTitle}>
                             A 6 digits Code has been sent to your phone number
-                            +123 ******987 Change
+                            +123 ******987
                             <span>
                                 <a href="#">Change</a>
                             </span>

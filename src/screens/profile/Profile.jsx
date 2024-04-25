@@ -128,6 +128,7 @@ const Profile = () => {
             updatePasswordUser();
             setIsVerify(true);
         } else {
+            setOtpSent(true);
             setButtonSpinner(false);
             setTimeout(() => {
                 setButtonDisable(false);
@@ -543,7 +544,9 @@ const Profile = () => {
                         <div className={styles.otpWrapper}>
                             <TwincitiInput
                                 name="otp"
-                                onChange={() => {}}
+                                onChange={(e) => {
+                                    e.value;
+                                }}
                                 rules={[
                                     {
                                         validator: async () =>
