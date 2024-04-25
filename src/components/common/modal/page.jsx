@@ -10,6 +10,7 @@ const CustomModal = ({
     children,
     title,
     className,
+    headerClassName,
     inLine,
     width,
     ...restProps
@@ -37,7 +38,11 @@ const CustomModal = ({
             onOk={handleOk}
             open={visible}
             title={
-                <p className={inLine ? 'headerStyleInLine' : 'headerStyle'}>
+                <p
+                    className={`${
+                        inLine ? 'headerStyleInLine' : 'headerStyle'
+                    } ${headerClassName || ''}`}
+                >
                     {title}
                 </p>
             }
