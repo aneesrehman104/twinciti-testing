@@ -7,6 +7,7 @@ const ButtonComponent = ({
     htmlType = 'button',
     disabled,
     variant,
+    style = {},
     className = '',
     showEllips = false,
     height = '32px',
@@ -34,6 +35,7 @@ const ButtonComponent = ({
             : '';
     return (
         <div
+            style={style}
             className={
                 variant === 'activeBorder'
                     ? styles.activeBorder

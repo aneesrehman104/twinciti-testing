@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .twincitiButton:disabled {
     border-radius: 10px;
     background: var(--button);

@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import { Form, Input } from 'antd';
 import {
-    EyeInvisibleOutlined,
     EyeOutlined,
     EditOutlined,
+    EyeInvisibleOutlined,
 } from '@ant-design/icons';
 import './style.css';
 import PhoneInput from 'react-phone-input-2';
