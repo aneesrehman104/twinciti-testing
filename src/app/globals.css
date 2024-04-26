@@ -478,3 +478,11 @@ a {
 .usagePage .ant-switch .ant-switch-handle::before {
     background-color: rgba(43, 45, 49, 1) !important;
 }
+.ant-modal-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ant-modal-wrap .ant-modal {
+    top: 0;
+}

@@ -7,44 +7,117 @@
 }
 
 .cardContainer {
-    border-radius: 12px;
-    border: 0.5px solid rgba(255, 255, 255, 0.2);
-    background: linear-gradient(180deg, #191920 0%, #1c1b21 100%);
-    display: flex;
     width: 100%;
-    padding: 14px 24px;
-    align-items: center;
+    padding: 12px 24px;
     color: rgba(255, 255, 255, 0.6);
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 18px; /* 125% */
+    line-height: 18px;
+    position: relative;
+    gap: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
-
-.activeCardContainer {
+.imageContainer {
     border-radius: 8px;
-    border: 1px solid rgba(241, 132, 142, 0.34);
+    background: linear-gradient(#16151a, #16151a) padding-box,
+        linear-gradient(94.25deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+            border-box;
+    border: 1px solid transparent;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cardContainer:hover {
     background: linear-gradient(
         0deg,
         rgba(255, 255, 255, 0) 0%,
         rgba(255, 255, 255, 0.04) 100%
     );
+    position: relative;
+    cursor: pointer;
+}
+.cardContainer:hover::before {
+    content: '';
+    background: url('../../../../public/dotCollection.svg') no-repeat center /
+        cover;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    position: absolute;
+    width: 91px;
+    height: 28px;
+}
+.cardContainer:hover::after {
+    content: '';
+    background: url('../../../../public/dotCollection.svg') no-repeat center /
+        cover;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 20px;
+    position: absolute;
+    width: 91px;
+    height: 28px;
+}
+.activeCardContainer {
+    background: linear-gradient(
+        90deg,
+        rgba(242, 132, 142, 0.01) 0%,
+        rgba(193, 132, 236, 0.2) 49.69%,
+        rgba(101, 158, 253, 0.01) 100%
+    );
+}
+.activeCardContainer:hover {
+    background: linear-gradient(
+        90deg,
+        rgba(242, 132, 142, 0.01) 0%,
+        rgba(193, 132, 236, 0.2) 49.69%,
+        rgba(101, 158, 253, 0.01) 100%
+    );
+}
+.activeCardContainer::before {
+    content: '';
+    background: url('../../../../public/dotCollection.svg') no-repeat center /
+        cover;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    position: absolute;
+    width: 91px;
+    height: 28px;
+}
+.activeCardContainer::after {
+    content: '';
+    background: url('../../../../public/dotCollection.svg') no-repeat center /
+        cover;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 20px;
+    position: absolute;
+    width: 91px;
+    height: 28px;
 }
 .subscriptionWrap {
     display: flex;
-    height: calc(100% - 400px);
     align-items: center;
     justify-content: center;
+    padding: 0 28px;
+    flex: 1;
 }
 .activeCardContainer .textlabel {
-    background: var(
+    /* background: var(
         --Primary-New,
         linear-gradient(94deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
     );
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent; */
+    color: #fff;
 }
 
 .subscriptionDetailCard {
@@ -183,4 +256,27 @@
     line-height: 16px;
     height: 45px;
     border-top: 0.5px solid rgba(255, 255, 255, 0.2);
+}
+.mainSidebarWrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100vh;
+}
+
+.mainSidebarWrapper .logoWrp {
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 56px;
+}
+
+.mainSidebarWrapper .logoWrp .logo {
+    display: flex;
+    align-items: center;
+}
+
+.bodyContent {
+    flex: 1;
 }

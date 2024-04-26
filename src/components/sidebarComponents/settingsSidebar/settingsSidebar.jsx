@@ -14,41 +14,37 @@ const SettingsSidebar = ({}) => {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const [activeBar, setActiveBar] = useState(0);
 
     const menuItems = [
-        { id: 0, label: 'Profile Settings', route: '/profile' },
-        { id: 1, label: 'Billings', route: '/billing' },
-        { id: 2, label: 'Plans', route: '/plans' },
-        { id: 3, label: 'Usage Overview', route: '/usage' },
-        { id: 4, label: 'API Keys', route: '/apiKeys' },
+        {
+            id: 0,
+            label: 'Profile Settings',
+            route: '/profile',
+            icon: '/profileIcon.svg',
+        },
+        {
+            id: 1,
+            label: 'Billings',
+            route: '/billing',
+            icon: 'cardBrokenIcon.svg',
+        },
+        { id: 2, label: 'Plans', route: '/plans', icon: '/plansIcon.svg' },
+        {
+            id: 3,
+            label: 'Usage Overview',
+            route: '/usage',
+            icon: '/statsIcon.svg',
+        },
+        { id: 4, label: 'API Keys', route: '/apiKeys', icon: '/lockIcon.svg' },
     ];
 
     return (
-        <section
-            style={{
-                padding: '16px 24px',
-                height: '100vh',
-            }}
-        >
+        <section className={styles.mainSidebarWrapper}>
             {' '}
             <Row>
                 <Col span={24}>
-                    <div
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            marginBottom: 60,
-                        }}
-                    >
-                        <div
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                margin: '0 8px',
-                            }}
-                        >
+                    <div className={styles.logoWrp}>
+                        <div className={styles.logo}>
                             <Image
                                 alt="/logo.svg"
                                 height={48}
@@ -61,26 +57,47 @@ const SettingsSidebar = ({}) => {
                     </div>
                 </Col>
             </Row>
-            <Row gutter={[12, 12]}>
-                {menuItems.map((item, index) => (
-                    <Col span={24} key={index}>
-                        <div
-                            onClick={() => {
-                                router.push(item?.route || '');
-                            }}
-                            className={`${styles.cardContainer} ${
-                                pathname === item.route
-                                    ? styles.activeCardContainer
-                                    : ''
-                            }`}
-                        >
-                            <div className={styles.textlabel}>
-                                {item?.label}
+            <div className={styles.bodyContent}>
+                <Row gutter={[12, 12]}>
+                    {menuItems.map((item) => (
+                        <Col key={item?.id} span={24}>
+                            <div
+                                onClick={() => {
+                                    router.push(item?.route || '');
+                                }}
+                                className={`${styles.cardContainer} ${
+                                    pathname === item.route
+                                        ? styles.activeCardContainer
+                                        : ''
+                                }`}
+                            >
+                                {pathname === item.route ? (
+                                    <div className={styles.imageContainer}>
+                                        <Image
+                                            alt={item.icon}
+                                            height={18}
+                                            src={item.icon}
+                                            width={18}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <Image
+                                            alt={item.icon}
+                                            height={24}
+                                            src={item.icon}
+                                            width={24}
+                                        />
+                                    </div>
+                                )}
+                                <div className={styles.textlabel}>
+                                    {item?.label}
+                                </div>
                             </div>
-                        </div>
-                    </Col>
-                ))}
-            </Row>
+                        </Col>
+                    ))}
+                </Row>
+            </div>
             <div className={styles.subscriptionWrap}>
                 <div className={styles.subscriptionDetailCard}>
                     <div className={styles.subHeaderWrap}>

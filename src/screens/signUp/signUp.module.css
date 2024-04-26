@@ -471,6 +471,7 @@
     .ant-form-item-control-input-content
     .ant-input {
     text-align: center;
+    height: 80px;
 }
 .timeSection {
     padding-top: 32px;
@@ -515,6 +516,9 @@
 .moreDetailWrapper :global .ant-form .inputMainWrap .ant-form-item {
     flex: 1;
 }
+.moreDetailWrapper :global .ant-form-item textarea.ant-input {
+    height: 80px;
+}
 
 .otpWrapper
     :global
@@ -544,8 +548,11 @@
     height: 48px;
 }
 .textTitle {
-    display: flex;
-    flex-direction: column;
+    display: inline-block;
+}
+.textTitle span {
+    display: inline-block;
+    padding-left: 5px;
 }
 .moreDetailWrapper
     :global
@@ -567,4 +574,53 @@
     -moz-appearance: none;
     appearance: none;
     margin: 0;
+}
+@media only screen and (max-width: 767px) {
+    .mainLogin {
+        margin: 0 20px;
+        padding: 28px 16px;
+    }
+    .mainLogin form {
+        padding: 0;
+    }
+    .mainLogin h4 {
+        font-size: 24px;
+        line-height: 28px;
+        margin-bottom: 28px;
+    }
+    .mainWrapperBody .mainLogin :global .ant-form .twincitiButton {
+        margin: 28px 0 0;
+    }
+    .mainWrapperBody .mainLogin :global .ant-form .twincitiButton:hover {
+        width: '90%';
+    }
+    .mainWrapperBody .mainLogin :global .ant-form .twincitiButton span {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .moreDetailWrapper :global .ant-form .inputMainWrap {
+        gap: 18px;
+    }
+
+    .mainModalGroup :global .ant-modal-content {
+        padding: 28px 16px;
+        margin: 0 auto;
+        width: 92%;
+    }
+    .timeSection {
+        padding-top: 40px;
+    }
+    .linkBtn {
+        margin-top: 28px;
+    }
+    .mainModalGroup {
+        padding: 0;
+    }
+    .mainModalGroup :global .ant-form-item {
+        margin-bottom: 16px;
+    }
+    .mainWrapperBody .mainLogin :global .ant-form .twincitiButton:hover,
+    .mainModalGroup .modalMainWrapper .btnWrap :global .twincitiButton:hover {
+        transform: unset;
+    }
 }
