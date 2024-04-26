@@ -35,10 +35,9 @@
 }
 .cardContainer:hover {
     background: linear-gradient(
-        90deg,
-        rgba(242, 132, 142, 0.01) 0%,
-        rgba(193, 132, 236, 0.2) 49.69%,
-        rgba(101, 158, 253, 0.01) 100%
+        0deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.04) 100%
     );
     position: relative;
     cursor: pointer;
@@ -215,6 +214,7 @@
     font-size: 20px;
     line-height: 24px;
     color: rgba(255, 255, 255, 1);
+    font-family: Inter;
 }
 
 .btnGradient {

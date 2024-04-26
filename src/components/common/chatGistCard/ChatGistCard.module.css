@@ -53,18 +53,21 @@
     width: 100%;
     white-space: pre-line;
     word-break: break-all;
+    font-family: Inter;
 }
 .cardInfo {
     color: rgba(255, 255, 255, 0.7);
     font-size: 12px;
     font-weight: 400;
     line-height: 16px;
+    font-family: Inter;
 }
 .cardHeader .timeWrap {
     color: rgba(255, 255, 255, 0.7);
     font-size: 12px;
     font-weight: 400;
     line-height: 16px;
+    font-family: Inter;
 }
 .cardHeader {
     display: flex;
@@ -76,6 +79,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 16px;
+    font-family: Inter;
 }
 
 .cardTitleImage {
@@ -93,6 +97,7 @@
     line-height: 20px;
     text-align: left;
     color: #fff;
+    font-family: Inter;
 
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -111,6 +116,7 @@
     font-weight: 400;
     line-height: 16px;
     text-align: left;
+    font-family: Inter;
 
     color: #ffffff80;
 
@@ -148,6 +154,7 @@
 }
 .cardActions {
     font-size: 16px;
+    font-family: Inter;
     color: #fff;
     display: flex;
     align-items: center;

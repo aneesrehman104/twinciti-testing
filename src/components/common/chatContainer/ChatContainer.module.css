@@ -43,7 +43,8 @@
     justify-content: center;
     align-items: center;
     font-weight: 600;
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
+
     margin-top: 4px;
 }
 .avatarStyle2 {
@@ -120,7 +121,8 @@
     font-family: var(--font-poppins);
     border-radius: 12px;
     color: rgba(255, 255, 255, 1);
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
+
     line-height: 1.75;
     margin: 0 0 12px 0;
 }
@@ -131,7 +133,8 @@
     font-family: var(--font-poppins);
     border-radius: 12px;
     color: rgba(255, 255, 255, 1);
-    font-family: var(--font-poppins) !important;
+    font-family: Inter;
+
     line-height: 1.75;
     margin: 0 0 12px 0;
     overflow: hidden;

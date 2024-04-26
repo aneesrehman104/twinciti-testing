@@ -13,6 +13,7 @@
     font-size: 20px;
     line-height: 24px;
     color: rgba(255, 255, 255, 1);
+    font-family: Inter;
 }
 
 .btnGradient {
@@ -42,6 +43,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
+    font-family: Inter;
 }
 .inputStyle ::placeholder {
     color: rgba(255, 255, 255, 0.7) !important;
@@ -56,6 +58,7 @@
     line-height: 16px;
     height: 45px;
     border-top: 0.5px solid rgba(255, 255, 255, 0.2);
+    font-family: Inter;
 }
 
 .logoWrap {
@@ -77,6 +80,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 16px;
+    font-family: Inter;
 }
 .tabsWrap :global .ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active {
     margin: 0;
@@ -134,6 +138,7 @@
     align-items: center;
     justify-content: space-between;
     margin: 8px 0 24px 0;
+    font-family: Inter;
 }
 
 .tabsWrap :global .ant-collapse {
@@ -176,6 +181,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 16px;
+    font-family: Inter;
 }
 .tabsWrap
     :global
@@ -198,6 +204,7 @@
     gap: 8px;
     color: #ffffff99;
     font-size: 16px;
+    font-family: Inter;
 }
 .tabsWrap
     :global
@@ -246,6 +253,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 16px;
+    font-family: Inter;
 }
 .tabsWrap :global .ant-space-compact .ant-btn-default.ant-btn:hover {
     color: #fff;
@@ -282,6 +290,7 @@
         rgba(255, 255, 255, 0.04) 100%
     );
     border: 0;
+    font-family: Inter;
 }
 
 .modalGroupWrap {
@@ -316,6 +325,7 @@
     line-height: 16px;
     padding: 4px 8px;
     border: 0;
+    font-family: Inter;
 }
 .customeScroll {
     height: calc(100vh - 232px);

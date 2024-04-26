@@ -12,6 +12,7 @@
     line-height: 24px;
     font-family: Inter;
     color: rgba(255, 255, 255, 1);
+    font-family: Inter;
 }
 
 .btnGradient {
@@ -39,6 +40,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
+    font-family: Inter;
 }
 .inputStyle ::placeholder {
     color: rgba(255, 255, 255, 0.7) !important;
@@ -53,6 +55,7 @@
     line-height: 16px;
     height: 45px;
     border-top: 0.5px solid rgba(255, 255, 255, 0.2);
+    font-family: Inter;
 }
 
 .rightpanel.ant-layout {
