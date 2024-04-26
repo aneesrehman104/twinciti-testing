@@ -1,0 +1,162 @@
+.cardCvcElement {
+    font-size: 14px;
+    font-family: var(--font-poppins) !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24.167px;
+    color: #c4c4c4 !important;
+    height: 50px;
+    border-radius: 8px;
+    border: 1px solid #3f4147 !important;
+    margin-top: 4px;
+    background: transparent;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.cardCvcElement:hover
+    :focus
+    :active
+    ::selection
+    :focus-visible
+    :focus-within
+    :target
+    ::after {
+    border: 1px solid #3f4147;
+    background: transparent;
+    border: 1px solid #3f4147 !important;
+    outline: none !important;
+}
+.cardDetailsText {
+    font-weight: 600;
+    font-family: var(--font-poppins) !important;
+    font-size: 18px;
+    color: rgba(242, 241, 241, 1);
+    margin-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.errorBorder {
+    border: 1px solid #ff4d4f !important;
+    margin-bottom: 2px;
+}
+
+.errorText {
+    color: #ff4d4f;
+    font-size: 13px;
+    font-family: var(--font-poppins) !important;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.ant-form-item .ant-form-item-label > label {
+    color: white;
+}
+
+.ant-form .cardDetailLabels label {
+    color: white;
+    padding-bottom: 7px;
+    font-family: var(--font-poppins) !important;
+    font-size: 13px !important;
+}
+
+.activePlanBtn {
+    background: var(
+        --New-Primary,
+        linear-gradient(94deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+    );
+    color: #fff;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 20px; /* 125% */
+    border-radius: 8px;
+    display: flex;
+    width: 100%;
+    padding: 12px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.addCardContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+}
+
+.button {
+    height: 61px;
+}
+.innerMainDiv {
+    width: 50%;
+}
+
+.simpleContainer {
+    padding: 20px;
+    margin: 15px;
+    display: 'flex';
+    flex-direction: 'column';
+    justify-content: 'space-evenly';
+    /* width: 320px; */
+    position: relative;
+    /* min-height: 560px; */
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.04) 100%
+    );
+}
+
+.simpleContainerActive {
+    background: linear-gradient(#16151a, #16151a) padding-box,
+        linear-gradient(94.25deg, #ff8473 3.46%, #b784ff 49.4%, #2eb0fb 97.06%)
+            border-box;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    position: relative;
+}
+
+.simpleContainerActive::after {
+    background-image: url(/chekmark.svg);
+    background-size: cover;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background-position: center;
+    content: '';
+    top: -5px;
+    left: -1px;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+    .innerMainDiv {
+        width: 80%;
+    }
+    .radioButtonTextNotDefault {
+        width: 85%;
+        margin-left: 10px;
+        padding-left: 10px;
+    }
+}
+@media only screen and (min-width: 1275px) and (max-width: 1584px) {
+    .ant-form .cardDetailLabels label {
+        font-size: 12px !important;
+    }
+
+    .errorText {
+        font-size: 12px !important;
+    }
+
+    .cardCvcElement {
+        font-size: 12px;
+    }
+}
