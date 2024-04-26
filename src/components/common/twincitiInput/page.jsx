@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import { Form, Input } from 'antd';
 import {
-    EyeInvisibleOutlined,
     EyeOutlined,
     EditOutlined,
+    EyeInvisibleOutlined,
 } from '@ant-design/icons';
 import './style.css';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
+import {} from '@ant-design/icons';
 import Image from 'next/image';
 
 import './style.css';
