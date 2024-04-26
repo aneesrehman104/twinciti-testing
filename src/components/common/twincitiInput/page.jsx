@@ -8,7 +8,6 @@ import {
 import './style.css';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import Image from 'next/image';
 
 import './style.css';
